@@ -174,6 +174,6 @@ class __TwigTemplate_51a20e6b7c96742f8131eb1f4084c215 extends Template
         {% endif %}
     </div>
 {% endblock %}
-", "@WebProfiler/Profiler/open.html.twig", "/Users/corentin/ProjetL3WebServer/development/vendor/symfony/web-profiler-bundle/Resources/views/Profiler/open.html.twig");
+", "@WebProfiler/Profiler/open.html.twig", "/Users/corentin/ProjetL3Symfony/vendor/symfony/web-profiler-bundle/Resources/views/Profiler/open.html.twig");
     }
 }
