@@ -64,11 +64,25 @@ class __TwigTemplate_6bc9a9867b96688b2dc37173756fa065 extends Template
         $this->displayBlock('javascripts', $context, $blocks);
         // line 15
         echo "    </head>
+    <a href=\"";
+        // line 16
+        echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_register");
+        echo "\">Inscription</a>
+    <a href=\"";
+        // line 17
+        echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_login");
+        echo "\">Connexion</a>
+    <a href=\"";
+        // line 18
+        echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_index");
+        echo "\">Index</a>
+
+
     <body>
         ";
-        // line 17
+        // line 22
         $this->displayBlock('body', $context, $blocks);
-        // line 18
+        // line 23
         echo "    </body>
 </html>
 ";
@@ -90,7 +104,7 @@ class __TwigTemplate_6bc9a9867b96688b2dc37173756fa065 extends Template
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "title"));
 
-        echo "Welcome!";
+        echo "Event!";
         
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->leave($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof);
 
@@ -145,7 +159,7 @@ class __TwigTemplate_6bc9a9867b96688b2dc37173756fa065 extends Template
 
     }
 
-    // line 17
+    // line 22
     public function block_body($context, array $blocks = [])
     {
         $macros = $this->macros;
@@ -168,9 +182,14 @@ class __TwigTemplate_6bc9a9867b96688b2dc37173756fa065 extends Template
         return "base.html.twig";
     }
 
+    public function isTraitable()
+    {
+        return false;
+    }
+
     public function getDebugInfo()
     {
-        return array (  149 => 17,  136 => 13,  126 => 12,  113 => 9,  103 => 8,  84 => 5,  72 => 18,  70 => 17,  66 => 15,  64 => 12,  61 => 11,  58 => 8,  53 => 5,  47 => 1,);
+        return array (  163 => 22,  150 => 13,  140 => 12,  127 => 9,  117 => 8,  98 => 5,  86 => 23,  84 => 22,  77 => 18,  73 => 17,  69 => 16,  66 => 15,  64 => 12,  61 => 11,  58 => 8,  53 => 5,  47 => 1,);
     }
 
     public function getSourceContext()
@@ -179,7 +198,7 @@ class __TwigTemplate_6bc9a9867b96688b2dc37173756fa065 extends Template
 <html>
     <head>
         <meta charset=\"UTF-8\">
-        <title>{% block title %}Welcome!{% endblock %}</title>
+        <title>{% block title %}Event!{% endblock %}</title>
         <link rel=\"icon\" href=\"data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>\">
         {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
         {% block stylesheets %}
@@ -190,6 +209,11 @@ class __TwigTemplate_6bc9a9867b96688b2dc37173756fa065 extends Template
             {{ encore_entry_script_tags('app') }}
         {% endblock %}
     </head>
+    <a href=\"{{ path('app_register') }}\">Inscription</a>
+    <a href=\"{{ path('app_login') }}\">Connexion</a>
+    <a href=\"{{ path('app_index') }}\">Index</a>
+
+
     <body>
         {% block body %}{% endblock %}
     </body>

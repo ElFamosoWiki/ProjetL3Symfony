@@ -1,0 +1,4 @@
+/migration/
+/var/
+/vendor/
+.env.local.php
