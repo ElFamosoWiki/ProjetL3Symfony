@@ -38,12 +38,16 @@ return [
                         .'|(*:159)'
                     .')'
                 .')'
-                .'|/event/([^/]++)(?'
-                    .'|(*:187)'
-                    .'|/edit(*:200)'
-                    .'|(*:208)'
+                .'|/even(?'
+                    .'|t/([^/]++)(?'
+                        .'|(*:190)'
+                        .'|/edit(*:203)'
+                        .'|(*:211)'
+                    .')'
+                    .'|ement/([^/]++)(*:234)'
                 .')'
-                .'|/registration/([^/]++)(*:239)'
+                .'|/registration/([^/]++)(*:265)'
+                .'|/unreg/([^/]++)(*:288)'
             .')/?$}sDu',
     ],
     [ // $dynamicRoutes
@@ -54,11 +58,13 @@ return [
         136 => [[['_route' => '_profiler_exception', '_controller' => 'web_profiler.controller.exception_panel::body'], ['token'], null, null, false, false, null]],
         149 => [[['_route' => '_profiler_exception_css', '_controller' => 'web_profiler.controller.exception_panel::stylesheet'], ['token'], null, null, false, false, null]],
         159 => [[['_route' => '_profiler', '_controller' => 'web_profiler.controller.profiler::panelAction'], ['token'], null, null, false, true, null]],
-        187 => [[['_route' => 'app_event_show', '_controller' => 'App\\Controller\\EventController::show'], ['id'], ['GET' => 0], null, false, true, null]],
-        200 => [[['_route' => 'app_event_edit', '_controller' => 'App\\Controller\\EventController::edit'], ['id'], ['GET' => 0, 'POST' => 1], null, false, false, null]],
-        208 => [[['_route' => 'app_event_delete', '_controller' => 'App\\Controller\\EventController::delete'], ['id'], ['POST' => 0], null, false, true, null]],
-        239 => [
-            [['_route' => 'app_registration_event', '_controller' => 'App\\Controller\\IndexController::inscription'], ['id'], ['GET' => 0], null, true, true, null],
+        190 => [[['_route' => 'app_event_show', '_controller' => 'App\\Controller\\EventController::show'], ['id'], ['GET' => 0], null, false, true, null]],
+        203 => [[['_route' => 'app_event_edit', '_controller' => 'App\\Controller\\EventController::edit'], ['id'], ['GET' => 0, 'POST' => 1], null, false, false, null]],
+        211 => [[['_route' => 'app_event_delete', '_controller' => 'App\\Controller\\EventController::delete'], ['id'], ['POST' => 0], null, false, true, null]],
+        234 => [[['_route' => 'app_index_event_show', '_controller' => 'App\\Controller\\IndexController::show'], ['id'], ['GET' => 0], null, false, true, null]],
+        265 => [[['_route' => 'app_registration_event', '_controller' => 'App\\Controller\\IndexController::inscription'], ['id'], ['GET' => 0], null, true, true, null]],
+        288 => [
+            [['_route' => 'app_unreg_event', '_controller' => 'App\\Controller\\IndexController::desinscription'], ['id'], ['GET' => 0], null, true, true, null],
             [null, null, null, null, false, false, 0],
         ],
     ],

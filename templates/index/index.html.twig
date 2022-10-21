@@ -22,10 +22,10 @@
             <tr>
                 <td>{{ event.nomEvent }}</td>
                 <td>/</td>
-                <td> Nombre de place Place : {{ event.nbPlace }}</td>
+                <td> Nombre de place Place : {{ event.nbPlace - event.nbInscrit }}</td>
 
                 <td>
-                    <a href="{{ path('app_registration_event', {'id': event.id}) }}">Inscription</a>
+                    <a href="{{ path('app_index_event_show', {'id': event.id}) }}">Voir l'évènement</a>
                 </td>
             </tr>
         {% else %}

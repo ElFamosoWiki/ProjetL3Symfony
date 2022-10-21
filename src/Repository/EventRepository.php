@@ -39,6 +39,31 @@ class EventRepository extends ServiceEntityRepository
         }
     }
 
+
+    public function ckIfInscritExist(int $idUser,int $idEvent): bool
+    {
+        $query = $this->createQueryBuilder('e')
+        ->select('count(e.id)')
+        ->innerJoin('e.users', 'u', 'WITH', 'u.id = :idUser')
+        ->setParameter('idUser', $idUser)
+        ->andWhere('e.id = :idEvent')
+        ->setParameter('idEvent', $idEvent)
+        ->getQuery()
+        ->getSingleScalarResult();
+
+
+ //       $products = $query->getResult();
+
+        $ifInscritExist = false;
+        if($query !== 0){
+            $ifInscritExist = true;
+        }
+
+        return $ifInscritExist;
+
+    }
+
+
 //    /**
 //     * @return Event[] Returns an array of Event objects
 //     */
