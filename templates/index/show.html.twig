@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Event{% endblock %}
+
+{% block body %}
+    <h1>Event</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ event.id }}</td>
+            </tr>
+            <tr>
+                <th>NomEvent</th>
+                <td>{{ event.nomEvent }}</td>
+            </tr>
+            <tr>
+                <th>NbPlace</th>
+                <td>{{ event.nbPlace }}</td>
+            </tr>
+            <tr>
+                <th>NbInscrit</th>
+                <td>{{ event.nbInscrit }}</td>
+            </tr>
+
+            <tr>
+                <th>User id :</th>
+                <td>{{ idUser }}</td>
+            </tr>
+            <tr>
+                <th>NbInscrit</th>
+                <td>{{ idEvent }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_index') }}">Retourner à l'accueil </a>
+    {% if isInscrit == false %}
+    <a href="{{ path('app_registration_event', {'id': event.id}) }}">Inscription</a>
+    {% else %}
+        <a href="{{ path('app_unreg_event', {'id': event.id}) }}">Desinc</a>
+    {% endif %}
+{% endblock %}

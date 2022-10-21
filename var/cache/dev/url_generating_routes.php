@@ -23,6 +23,8 @@ return [
     'app_event_delete' => [['id'], ['_controller' => 'App\\Controller\\EventController::delete'], [], [['variable', '/', '[^/]++', 'id', true], ['text', '/event']], [], [], []],
     'app_index' => [[], ['_controller' => 'App\\Controller\\IndexController::index'], [], [['text', '/index']], [], [], []],
     'app_registration_event' => [['id'], ['_controller' => 'App\\Controller\\IndexController::inscription'], [], [['text', '/'], ['variable', '/', '[^/]++', 'id', true], ['text', '/registration']], [], [], []],
+    'app_unreg_event' => [['id'], ['_controller' => 'App\\Controller\\IndexController::desinscription'], [], [['text', '/'], ['variable', '/', '[^/]++', 'id', true], ['text', '/unreg']], [], [], []],
+    'app_index_event_show' => [['id'], ['_controller' => 'App\\Controller\\IndexController::show'], [], [['variable', '/', '[^/]++', 'id', true], ['text', '/evenement']], [], [], []],
     'app_register' => [[], ['_controller' => 'App\\Controller\\RegistrationController::register'], [], [['text', '/register']], [], [], []],
     'app_login' => [[], ['_controller' => 'App\\Controller\\SecurityController::login'], [], [['text', '/login']], [], [], []],
     'app_logout' => [[], ['_controller' => 'App\\Controller\\SecurityController::logout'], [], [['text', '/logout']], [], [], []],

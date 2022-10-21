@@ -41,18 +41,64 @@ class IndexController extends AbstractController
       $securityContext = $this->container->get('security.authorization_checker');
 
 
-        if($securityContext->isGranted('IS_AUTHENTICATED_REMEMBERED')){
-            $event->addUser($user);
-            $eventRepository->save($event, true);
-            return $this->redirectToRoute('app_index', [], Response::HTTP_SEE_OTHER);
 
-        }else{
+    
+        if($securityContext->isGranted('IS_AUTHENTICATED_REMEMBERED')){
+            if(!($eventRepository->ckIfInscritExist($user->getId(),$event->getId()))){
+            $event->addUser($user);
+            $event->setNbInscrit($event->getNbInscrit()+1);
+            $eventRepository->save($event, true);
+            return $this->redirectToRoute('app_index_event_show', ['id' => $event->getId()], Response::HTTP_SEE_OTHER);
+
+            }
+            return $this->redirectToRoute('app_index_event_show', ['id' => $event->getId()], Response::HTTP_SEE_OTHER);
+
+    }else{
             
             return $this->redirectToRoute('app_event', [], Response::HTTP_SEE_OTHER);
 
         }
+    }
+
+
+    #[Route('/unreg/{id}/', name: 'app_unreg_event', methods: ['GET'])]
+    public function desinscription(User $user, EventRepository $eventRepository, Event $event): Response
+    {
+     
+      $user = $this->security->getUser();
+      $securityContext = $this->container->get('security.authorization_checker');
+
+
+
+    
+        if($securityContext->isGranted('IS_AUTHENTICATED_REMEMBERED')){
+            if($eventRepository->ckIfInscritExist($user->getId(),$event->getId())){
+            $event->removeUser($user);
+            $event->setNbInscrit($event->getNbInscrit()-1);
+            $eventRepository->save($event, true);
+            return $this->redirectToRoute('app_index_event_show', ['id' => $event->getId()], Response::HTTP_SEE_OTHER);
+
+            }
+            return $this->redirectToRoute('app_index_event_show', ['id' => $event->getId()], Response::HTTP_SEE_OTHER);
+
+    }else{
+            
+            return $this->redirectToRoute('app_event', [], Response::HTTP_SEE_OTHER);
+
         
+        }
+    }
 
+    #[Route('/evenement/{id}', name: 'app_index_event_show', methods: ['GET'])]
+    public function show(User $user, EventRepository $eventRepository, Event $event): Response
+    {
+        $user = $this->security->getUser();
+        return $this->render('index/show.html.twig', [
+            'event' => $event,
+            'isInscrit' => $eventRepository->ckIfInscritExist($user->getId(),$event->getId()),
+            'idUser' => $user->getId(),
+            'idEvent' =>$event->getId(),
 
+        ]);
     }
 }
