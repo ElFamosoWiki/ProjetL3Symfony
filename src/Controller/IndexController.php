@@ -70,7 +70,7 @@ class IndexController extends AbstractController
 
 
 
-    
+    //pour vérifier si la personne est connectée
         if($securityContext->isGranted('IS_AUTHENTICATED_REMEMBERED')){
             if($eventRepository->ckIfInscritExist($user->getId(),$event->getId())){
             $event->removeUser($user);
