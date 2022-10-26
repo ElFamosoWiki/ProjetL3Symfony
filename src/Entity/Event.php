@@ -27,7 +27,16 @@ class Event
     #[ORM\ManyToMany(targetEntity: User::class, mappedBy: 'Inscrit')]
     private Collection $users;
 
-  
+    #[ORM\ManyToOne(inversedBy: 'events')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Categorie $idcategorie = null;
+
+    #[ORM\Column]
+    private ?bool $accept = null;
+
+    #[ORM\ManyToOne(inversedBy: 'events')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Lieu $Lieu = null;
     
 
   
@@ -104,7 +113,40 @@ class Event
         return $this;
     }
 
+    public function getIdcategorie(): ?Categorie
+    {
+        return $this->idcategorie;
+    }
 
+    public function setIdcategorie(?Categorie $idcategorie): self
+    {
+        $this->idcategorie = $idcategorie;
 
+        return $this;
+    }
+
+    public function isAccept(): ?bool
+    {
+        return $this->accept;
+    }
+
+    public function setAccept(bool $accept): self
+    {
+        $this->accept = $accept;
+
+        return $this;
+    }
+
+    public function getLieu(): ?Lieu
+    {
+        return $this->Lieu;
+    }
+
+    public function setLieu(?Categorie $Lieu): self
+    {
+        $this->Lieu = $Lieu;
+
+        return $this;
+    }
 
 }
