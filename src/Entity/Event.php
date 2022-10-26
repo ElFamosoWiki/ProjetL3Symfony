@@ -38,7 +38,9 @@ class Event
     #[ORM\JoinColumn(nullable: false)]
     private ?Lieu $Lieu = null;
     
-
+    /*#[ORM\ManyToOne(inversedBy: 'events')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Lieu $adresse =null;*/
   
     public function __construct()
     {
@@ -142,7 +144,7 @@ class Event
         return $this->Lieu;
     }
 
-    public function setLieu(?Categorie $Lieu): self
+    public function setLieu(?Lieu $Lieu): self
     {
         $this->Lieu = $Lieu;
 
