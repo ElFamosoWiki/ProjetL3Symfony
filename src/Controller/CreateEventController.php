@@ -12,10 +12,11 @@ use App\Repository\EventRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
-#[Security("is_granted('ROLE_ADMIN') and is_granted('ROLE_ORGANISATEUR')")]
+
 class CreateEventController extends AbstractController
 {
-
+    
+    #[IsGranted("ROLE_ORGANISATEUR")]
     #[Route('/create/event', name: 'app_create_event', methods: ['GET', 'POST'])]
     public function index(Request $request,EventRepository $eventRepository): Response
     {
