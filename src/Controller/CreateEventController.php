@@ -9,12 +9,18 @@ use App\Entity\Event;
 use Symfony\Component\HttpFoundation\Request;
 use App\Form\Type\EventType;
 use App\Repository\EventRepository;
+use App\Entity\User;
+use Symfony\Component\Security\Core\Security;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
 class CreateEventController extends AbstractController
 {
+
+    #[IsGranted("ROLE_ORGANISATEUR")]
     #[Route('/create/event', name: 'app_create_event', methods: ['GET', 'POST'])]
     public function index(Request $request,EventRepository $eventRepository): Response
     {
+       // $this->denyAccessUnlessGranted('ROLE_ORGANISATEUR');
 
         $event = new Event();
         
@@ -23,7 +29,7 @@ class CreateEventController extends AbstractController
             ->add('nomEvent')
             ->add('nbPlace')
             ->add('nbInscrit')
-            ->add('accept')
+            ->add('idcategorie')
             ->getForm();
 
             $form->handleRequest($request);
@@ -33,7 +39,6 @@ class CreateEventController extends AbstractController
 
             return $this->redirectToRoute('app_create_event', [], Response::HTTP_SEE_OTHER);
         }
-
             
 
         return $this->render('create_event/index.html.twig', [

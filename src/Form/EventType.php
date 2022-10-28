@@ -18,7 +18,7 @@ class EventType extends AbstractType
             ->add('nbInscrit')
             ->add('idcategorie')
             ->add('accept', CheckboxType::class, [
-                'label'    => 'Voulez vous le publiez?',
+                'label'    => 'Voulez vous valider la demande?',
                 'required' => false,
                 ])
             ->add('Lieu')
