@@ -32,10 +32,10 @@ class Event
     private ?Categorie $idcategorie = null;
 
     #[ORM\Column]
-    private ?bool $accept = null;
+    private ?bool $accept = false;
 
     #[ORM\ManyToOne(inversedBy: 'events')]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(nullable: true)]
     private ?Lieu $Lieu = null;
     
     /*#[ORM\ManyToOne(inversedBy: 'events')]
