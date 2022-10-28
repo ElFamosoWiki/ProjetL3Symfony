@@ -9,7 +9,6 @@ use App\Entity\Event;
 use Symfony\Component\HttpFoundation\Request;
 use App\Form\Type\EventType;
 use App\Repository\EventRepository;
-use App\Entity\User;
 use Symfony\Component\Security\Core\Security;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
