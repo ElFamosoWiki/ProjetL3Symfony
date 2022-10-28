@@ -9,9 +9,13 @@ use App\Entity\Event;
 use Symfony\Component\HttpFoundation\Request;
 use App\Form\Type\EventType;
 use App\Repository\EventRepository;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
+#[Security("is_granted('ROLE_ADMIN') and is_granted('ROLE_ORGANISATEUR')")]
 class CreateEventController extends AbstractController
 {
+
     #[Route('/create/event', name: 'app_create_event', methods: ['GET', 'POST'])]
     public function index(Request $request,EventRepository $eventRepository): Response
     {
