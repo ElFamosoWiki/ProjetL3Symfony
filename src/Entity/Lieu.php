@@ -24,9 +24,17 @@ class Lieu
     #[ORM\OneToMany(mappedBy: 'Lieu', targetEntity: Event::class)]
     private Collection $events;
 
+    #[ORM\OneToMany(mappedBy: 'adresse', targetEntity: Event::class)]
+    private Collection $event;
+
     public function __construct()
     {
         $this->events = new ArrayCollection();
+    }
+    
+    public function __construct2()
+    {
+        $this->event = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -82,6 +90,35 @@ class Lieu
             // set the owning side to null (unless already changed)
             if ($event->getLieu() === $this) {
                 $event->setLieu(null);
+            }
+        }
+
+        return $this;
+    }
+    public function __toString(){
+        return $this->nomLieu;
+    }
+    public function getEvent(): Collection
+    {
+        return $this->event;
+    }
+
+    public function addEvents(Event $events): self
+    {
+        if (!$this->event->contains($events)) {
+            $this->event->add($events);
+            $events->setLieu($this);
+        }
+
+        return $this;
+    }
+
+    public function removeEvents(Event $events): self
+    {
+        if ($this->event->removeElement($events)) {
+            // set the owning side to null (unless already changed)
+            if ($events->getLieu() === $this) {
+                $events->setLieu(null);
             }
         }
 
