@@ -21,9 +21,13 @@ class Categorie
     #[ORM\OneToMany(mappedBy: 'idcategorie', targetEntity: Event::class, orphanRemoval: true)]
     private Collection $events;
 
+    #[ORM\OneToMany(mappedBy: 'Categorie', targetEntity: SousCategorie::class)]
+    private Collection $sousCategories;
+
     public function __construct()
     {
         $this->events = new ArrayCollection();
+        $this->sousCategories = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -74,5 +78,35 @@ class Categorie
     }
     public function __toString(){
         return $this->nomCategorie;
+    }
+
+    /**
+     * @return Collection<int, SousCategorie>
+     */
+    public function getSousCategories(): Collection
+    {
+        return $this->sousCategories;
+    }
+
+    public function addSousCategory(SousCategorie $sousCategory): self
+    {
+        if (!$this->sousCategories->contains($sousCategory)) {
+            $this->sousCategories->add($sousCategory);
+            $sousCategory->setCategorie($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSousCategory(SousCategorie $sousCategory): self
+    {
+        if ($this->sousCategories->removeElement($sousCategory)) {
+            // set the owning side to null (unless already changed)
+            if ($sousCategory->getCategorie() === $this) {
+                $sousCategory->setCategorie(null);
+            }
+        }
+
+        return $this;
     }
 }
