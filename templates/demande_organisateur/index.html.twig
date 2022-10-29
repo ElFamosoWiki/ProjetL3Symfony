@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}DemandeOrganisateur index{% endblock %}
+
+{% block body %}
+    <h1>DemandeOrganisateur index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Cin</th>
+                <th>MotifDemande</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for demande_organisateur in demande_organisateurs %}
+            <tr>
+                <td>{{ demande_organisateur.id }}</td>
+                <td><img src="{{ asset('build/cni/' ~ demande_organisateur.cni) }}"> </td>
+                <td>{{ demande_organisateur.motifDemande }}</td>
+                <td>
+                    <a href="{{ path('app_demande_organisateur_show', {'id': demande_organisateur.id}) }}">show</a>
+                    <a href="{{ path('app_demande_organisateur_edit', {'id': demande_organisateur.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_demande_organisateur_new') }}">Create new</a>
+{% endblock %}
