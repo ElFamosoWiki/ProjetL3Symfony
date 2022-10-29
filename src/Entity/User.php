@@ -34,6 +34,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\ManyToMany(targetEntity: Event::class, inversedBy: 'users')]
     private Collection $Inscrit;
 
+    #[ORM\OneToOne(mappedBy: 'userId', cascade: ['persist', 'remove'])]
+    private ?DemandeOrganisateur $demandeOrganisateur = null;
+
     public function __construct()
     {
         $this->Inscrit = new ArrayCollection();
@@ -134,9 +137,28 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
+
+    public function getDemandeOrganisateur(): ?DemandeOrganisateur
+    {
+        return $this->demandeOrganisateur;
+    }
+
+    public function setDemandeOrganisateur(DemandeOrganisateur $demandeOrganisateur): self
+    {
+        // set the owning side of the relation if necessary
+        if ($demandeOrganisateur->getUserId() !== $this) {
+            $demandeOrganisateur->setUserId($this);
+        }
+
+        $this->demandeOrganisateur = $demandeOrganisateur;
+
+        return $this;
+    }
  
 
     
-  
+    public function __toString(){
+        return $this->email;
+    }  
 
 }
