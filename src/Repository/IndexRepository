@@ -1,0 +1,28 @@
+<?php
+
+namespace App\Repository;
+use App\Entity\ImageUser;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\Persistence\ManagerRegistry;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+
+class IndexRepository extends ServiceEntityRepository
+{
+
+    public function __construct(ManagerRegistry $registry)
+    {
+        parent::__construct($registry, ImageUser::class);
+    }
+
+#[IsGranted('ROLE_UTILISATEUR')]
+public function profil_pdp(ImageUser $pdp, ){
+
+
+}
+
+
+
+
+
+}
+?>

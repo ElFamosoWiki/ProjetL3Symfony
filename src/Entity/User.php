@@ -34,6 +34,19 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\ManyToMany(targetEntity: Event::class, inversedBy: 'users')]
     private Collection $Inscrit;
 
+    #[ORM\OneToOne(mappedBy: 'userId', cascade: ['persist', 'remove'])]
+    private ?DemandeOrganisateur $demandeOrganisateur = null;
+    
+    #[ORM\Column(length: 50)]
+    private ?string $prenom=null;
+
+    #[ORM\Column(length: 50)]
+    private ?string $nom=null;
+
+    #[ORM\Column(length: 50)]
+    private ?string $pseudo=null;
+
+
     public function __construct()
     {
         $this->Inscrit = new ArrayCollection();
@@ -134,9 +147,58 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
+
+    public function getDemandeOrganisateur(): ?DemandeOrganisateur
+    {
+        return $this->demandeOrganisateur;
+    }
+
+    public function setDemandeOrganisateur(DemandeOrganisateur $demandeOrganisateur): self
+    {
+        // set the owning side of the relation if necessary
+        if ($demandeOrganisateur->getUserId() !== $this) {
+            $demandeOrganisateur->setUserId($this);
+        }
+
+        $this->demandeOrganisateur = $demandeOrganisateur;
+
+        return $this;
+    }
  
 
     
-  
+    public function __toString(){
+        return $this->email;
+    }  
+    public function getPrenom(): ?string
+    {
+        return $this->prenom;
+    }
 
+    public function setPrenom(string $prenom): self
+    {
+        $this->prenom = $prenom;
+
+        return $this;
+    }public function getNom(): ?string
+    {
+        return $this->nom;
+    }
+
+    public function setNom(string $nom): self
+    {
+        $this->nom = $nom;
+
+        return $this;
+    }public function getPseudo(): ?string
+    {
+        return $this->pseudo;
+    }
+
+    public function setPseudo(string $pseudo): self
+    {
+        $this->pseudo = $pseudo;
+
+        return $this;
+    }
 }

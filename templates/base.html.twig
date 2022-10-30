@@ -13,9 +13,13 @@
             {{ encore_entry_script_tags('app') }}
         {% endblock %}
     </head>
+    {% if not is_granted('ROLE_ORGANISATEUR') %}   
+    <a href="{{ path('app_organisateur_application') }}">Devenir organisateur</a>
+    {% endif %}
     <a href="{{ path('app_register') }}">Inscription</a>
     <a href="{{ path('app_login') }}">Connexion</a>
     <a href="{{ path('app_index') }}">Index</a>
+    
 
 
     <body>

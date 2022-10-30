@@ -13,6 +13,7 @@ use Symfony\Component\Security\Core\Security;
 
 
 
+
 class IndexController extends AbstractController
 {
 
@@ -23,18 +24,30 @@ class IndexController extends AbstractController
         $this->security = $security;
     }
 
+
     #[Route('/index', name: 'app_index')]
     public function index(EventRepository $eventRepository): Response
     {
+
         return $this->render('index/index.html.twig', [
             'controller_name' => 'IndexController',
             'events' => $eventRepository->findAll(),
         ]);
     }
+    #[Route('/evenement/{id}', name: 'app_index_event_show', methods: ['GET'])]
+     public function show(EventRepository $eventRepository, Event $event, $id): Response
+     {
+        $user = $this->security->getUser();
 
+         return $this->render('index/show.html.twig', [
+             'event' => $event,
+             'isInscrit' => $eventRepository->ckIfInscritExist($user->getId(),$id),
+             
+         ]);
+     }
     
     #[Route('/registration/{id}/', name: 'app_registration_event', methods: ['GET'])]
-    public function inscription(User $user, EventRepository $eventRepository, Event $event): Response
+    public function inscription(EventRepository $eventRepository, Event $event): Response
     {
      
       $user = $this->security->getUser();
@@ -62,7 +75,7 @@ class IndexController extends AbstractController
 
 
     #[Route('/unreg/{id}/', name: 'app_unreg_event', methods: ['GET'])]
-    public function desinscription(User $user, EventRepository $eventRepository, Event $event): Response
+    public function desinscription(EventRepository $eventRepository, Event $event): Response
     {
      
       $user = $this->security->getUser();
@@ -89,16 +102,5 @@ class IndexController extends AbstractController
         }
     }
 
-    #[Route('/evenement/{id}', name: 'app_index_event_show', methods: ['GET'])]
-    public function show(User $user, EventRepository $eventRepository, Event $event): Response
-    {
-        $user = $this->security->getUser();
-        return $this->render('index/show.html.twig', [
-            'event' => $event,
-            'isInscrit' => $eventRepository->ckIfInscritExist($user->getId(),$event->getId()),
-            'idUser' => $user->getId(),
-            'idEvent' =>$event->getId(),
-
-        ]);
-    }
+    
 }
