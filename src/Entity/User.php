@@ -36,6 +36,16 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\OneToOne(mappedBy: 'userId', cascade: ['persist', 'remove'])]
     private ?DemandeOrganisateur $demandeOrganisateur = null;
+    
+    #[ORM\Column(length: 50)]
+    private ?string $prenom=null;
+
+    #[ORM\Column(length: 50)]
+    private ?string $nom=null;
+
+    #[ORM\Column(length: 50)]
+    private ?string $pseudo=null;
+
 
     public function __construct()
     {
@@ -160,5 +170,35 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function __toString(){
         return $this->email;
     }  
+    public function getPrenom(): ?string
+    {
+        return $this->prenom;
+    }
 
+    public function setPrenom(string $prenom): self
+    {
+        $this->prenom = $prenom;
+
+        return $this;
+    }public function getNom(): ?string
+    {
+        return $this->nom;
+    }
+
+    public function setNom(string $nom): self
+    {
+        $this->nom = $nom;
+
+        return $this;
+    }public function getPseudo(): ?string
+    {
+        return $this->pseudo;
+    }
+
+    public function setPseudo(string $pseudo): self
+    {
+        $this->pseudo = $pseudo;
+
+        return $this;
+    }
 }
