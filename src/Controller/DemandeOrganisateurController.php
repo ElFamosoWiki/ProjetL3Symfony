@@ -86,7 +86,7 @@ class DemandeOrganisateurController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_demande_organisateur_delete', methods: ['POST'])]
+    #[Route('/delete/{id}', name: 'app_demande_organisateur_delete', methods: ['POST'])]
     public function delete(Request $request, DemandeOrganisateur $demandeOrganisateur, DemandeOrganisateurRepository $demandeOrganisateurRepository): Response
     {
         if ($this->isCsrfTokenValid('delete'.$demandeOrganisateur->getId(), $request->request->get('_token'))) {

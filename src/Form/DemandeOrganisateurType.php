@@ -10,6 +10,7 @@ use Symfony\Component\Validator\Constraints\File;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 
 
+
 class DemandeOrganisateurType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
@@ -25,6 +26,7 @@ class DemandeOrganisateurType extends AbstractType
                         'maxSize' => '4096k',
                         'mimeTypes' => [
                             'image/png',
+                            'image/jpeg',
                         ],
                         'mimeTypesMessage' => 'Please upload a valid PNG document',
                     ])
