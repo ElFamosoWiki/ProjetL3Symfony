@@ -14,7 +14,7 @@ class DemandeOrganisateur
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\OneToOne(inversedBy: 'demandeOrganisateur', cascade: ['persist', 'remove'])]
+    #[ORM\OneToOne(inversedBy: 'demandeOrganisateur', cascade: ['persist'])]
     #[ORM\JoinColumn(nullable: false)]
     private ?User $userId = null;
 
