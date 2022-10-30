@@ -6,6 +6,7 @@ use App\Entity\DemandeOrganisateur;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
+
 /**
  * @extends ServiceEntityRepository<DemandeOrganisateur>
  *
@@ -37,6 +38,28 @@ class DemandeOrganisateurRepository extends ServiceEntityRepository
         if ($flush) {
             $this->getEntityManager()->flush();
         }
+    }
+
+
+    public function ckIfDemande(int $idUser): bool
+    {
+        $query = $this->createQueryBuilder('d')
+        ->select('count(d.userId)')
+        ->Where('d.userId = :idUser')
+        ->setParameter('idUser', $idUser)   
+        ->getQuery()
+        ->getSingleScalarResult();
+
+
+ //       $products = $query->getResult();
+
+        $IfDemandeExist = false;
+        if($query !== 0){
+            $IfDemandeExist = true;
+        }
+
+        return $IfDemandeExist;
+
     }
 
 //    /**

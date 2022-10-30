@@ -32,7 +32,7 @@ security:
     # Note: Only the *first* access control that matches will be used
     access_control:
         - { path: ^/admin, roles: ROLE_ADMIN }
-        - { path: ^/organisateur, roles: ROLE_ORGANISATEUR }
+        - { path: ^/profile/organisateur, roles: ROLE_ORGANISATEUR }
         - { path: ^/profile, roles: ROLE_USER }
     role_hierarchy:
         ROLE_ORGANISATEUR: ROLE_USER
