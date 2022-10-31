@@ -12,6 +12,10 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\String\Slugger\SluggerInterface;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
+use App\Entity\User;
+use App\Repository\UserRepository;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\Persistence\ManagerRegistry;
 
 #[Route('/image/user')]
 class ImageUserController extends AbstractController
@@ -57,11 +61,14 @@ class ImageUserController extends AbstractController
         ]);
     }
 
-    #[Route('categorie/{id}', name: 'app_image_user_show', methods: ['GET'])]
-    public function show(ImageUser $imageUser): Response
+    #[Route('/{id}', name: 'app_image_user_show', methods: ['GET'])]    
+        public function show(ImageUser $imageUser, UserRepository $user): Response
     {
+       
+        $e = $imageUser->getUser();
         return $this->render('image_user/show.html.twig', [
             'image_user' => $imageUser,
+            'users' => $user->findByExampleField($e),
         ]);
     }
 
@@ -92,4 +99,5 @@ class ImageUserController extends AbstractController
 
         return $this->redirectToRoute('app_image_user_index', [], Response::HTTP_SEE_OTHER);
     }
+    
 }

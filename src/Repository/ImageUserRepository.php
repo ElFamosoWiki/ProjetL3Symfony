@@ -6,6 +6,7 @@ use App\Entity\ImageUser;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
+
 /**
  * @extends ServiceEntityRepository<ImageUser>
  *
@@ -38,6 +39,18 @@ class ImageUserRepository extends ServiceEntityRepository
             $this->getEntityManager()->flush();
         }
     }
+
+    public function findOneById(int $id): array
+    {
+        return $this->createQueryBuilder('i')
+            ->andWhere('i.user = :id')
+            ->setParameter('id', $id)
+            ->getQuery()
+            ->getResult();
+        
+        
+    }
+    
 
 //    /**
 //     * @return ImageUser[] Returns an array of ImageUser objects
