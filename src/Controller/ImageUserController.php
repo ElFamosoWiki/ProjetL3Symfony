@@ -73,14 +73,28 @@ class ImageUserController extends AbstractController
     }
 
     #[Route('/{id}/edit', name: 'app_image_user_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, ImageUser $imageUser, ImageUserRepository $imageUserRepository): Response
+    public function edit(Request $request, ImageUser $imageUser, ImageUserRepository $imageUserRepository, SluggerInterface $slugger): Response
     {
         $form = $this->createForm(ImageUserType::class, $imageUser);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $imageUserRepository->save($imageUser, true);
+            $pdp = $form->get('UrlImage')->getData();
+            if($pdp){
+                $originalFilename = pathinfo($pdp->getClientOriginalName(), PATHINFO_FILENAME);
+                $safeFilename = $slugger->slug($originalFilename);
+                $newFileName = $safeFilename.'-'.uniqid().'.'.$pdp->guessExtension();
+                try{
+                    $pdp->move(
+                        $this->getParameter('pdp_directory'),
+                        $newFileName
+                    );
+                } catch(FileExeception $e){
 
+                }
+                $imageUser->setUrlImage($newFileName);
+            }
+            $imageUserRepository->save($imageUser, true);
             return $this->redirectToRoute('app_image_user_index', [], Response::HTTP_SEE_OTHER);
         }
 

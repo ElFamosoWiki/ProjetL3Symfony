@@ -46,6 +46,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 50)]
     private ?string $pseudo=null;
 
+    #[Assert\Type(type: ImageUser::class)]
+    #[Assert\Valid]
+    protected ?string $image=null;
 
     public function __construct()
     {
@@ -200,5 +203,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->pseudo = $pseudo;
 
         return $this;
+    }
+    public function getImage(): ?ImageUser
+    {
+        return $this->image;
+    }
+
+    public function setImage(?ImageUser $category)
+    {
+        $this->image = $category;
     }
 }

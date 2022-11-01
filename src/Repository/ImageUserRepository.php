@@ -51,7 +51,26 @@ class ImageUserRepository extends ServiceEntityRepository
         
     }
     
+public function findByIdEntity(int $id): ?ImageUser
+{
+    $img = new ImageUser();
+    $this->createQueryBuilder('i')
+    ->andWhere('i.user = :id')
+    ->setParameter('id', $id)
+    ->getQuery()
+    ->getResult();
+    
 
+    }
+    public function findOneBySomeField($value): ?ImageUser
+    {
+        return $this->createQueryBuilder('i')
+            ->andWhere('i.user = :val')
+           ->setParameter('val', $value)
+         ->getQuery()
+            ->getOneOrNullResult()
+        ;
+    }
 //    /**
 //     * @return ImageUser[] Returns an array of ImageUser objects
 //     */
