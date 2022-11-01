@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} 
+{{ user.pseudo }}
+ {% endblock %}
+
+{% block body %}
+    
+
+    <table class="table">
+        <thead>
+        <p>Votre Profil</p>
+        </thead>
+        <tbody>
+       
+        <ul>
+        {% for image_user in image_users %}
+            <li><strong>Photo de profil:</strong> <img src="{{ asset('build/pdp/' ~ image_user.UrlImage) }}" height=50 width=50 border-radius=50%>&emsp;&emsp;Modifié</li>
+            {% endfor %}
+        <li><strong>Prénom:</strong> {{ user.prenom }}</li>
+        <li><strong>Nom:</strong> {{ user.nom }}</li>
+        <li><strong>Email:</strong> {{ user.email }}</li>
+       <li><strong>Pseudo:</strong> {{ user.pseudo }}</li>
+       
+        </ul>
+
+        </tbody>
+    </table>
+
+    
+{% endblock %}
