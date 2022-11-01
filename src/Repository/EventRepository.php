@@ -52,7 +52,7 @@ class EventRepository extends ServiceEntityRepository
         ->getSingleScalarResult();
 
 
- //       $products = $query->getResult();
+
 
         $ifInscritExist = false;
         if($query !== 0){
@@ -62,6 +62,21 @@ class EventRepository extends ServiceEntityRepository
         return $ifInscritExist;
 
     }
+
+    public function findEvent(int $idEvent): event
+    {
+        $query = $this->createQueryBuilder('e')
+        ->where('e.id = :idEvent')
+        ->setParameter('idEvent', $idEvent)
+        ->getQuery()
+        ->getArrayResult();
+
+ 
+
+        return $query;
+
+    }
+    
 
 
 //    /**

@@ -46,10 +46,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 50)]
     private ?string $pseudo=null;
 
+    #[ORM\OneToMany(mappedBy: 'adminEvent', targetEntity: Event::class, orphanRemoval: true)]
+    private Collection $events;
+
 
     public function __construct()
     {
         $this->Inscrit = new ArrayCollection();
+        $this->events = new ArrayCollection();
     }
 
    
@@ -198,6 +202,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setPseudo(string $pseudo): self
     {
         $this->pseudo = $pseudo;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Event>
+     */
+    public function getEvents(): Collection
+    {
+        return $this->events;
+    }
+
+    public function addEvent(Event $event): self
+    {
+        if (!$this->events->contains($event)) {
+            $this->events->add($event);
+            $event->setAdminEvent($this);
+        }
+
+        return $this;
+    }
+
+    public function removeEvent(Event $event): self
+    {
+        if ($this->events->removeElement($event)) {
+            // set the owning side to null (unless already changed)
+            if ($event->getAdminEvent() === $this) {
+                $event->setAdminEvent(null);
+            }
+        }
 
         return $this;
     }

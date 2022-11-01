@@ -37,6 +37,10 @@ class Event
     #[ORM\ManyToOne(inversedBy: 'events')]
     #[ORM\JoinColumn(nullable: true)]
     private ?Lieu $Lieu = null;
+
+    #[ORM\ManyToOne(inversedBy: 'events')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?User $adminEvent = null;
     
     /*#[ORM\ManyToOne(inversedBy: 'events')]
     #[ORM\JoinColumn(nullable: false)]
@@ -147,6 +151,18 @@ class Event
     public function setLieu(?Lieu $Lieu): self
     {
         $this->Lieu = $Lieu;
+
+        return $this;
+    }
+
+    public function getAdminEvent(): ?User
+    {
+        return $this->adminEvent;
+    }
+
+    public function setAdminEvent(?User $adminEvent): self
+    {
+        $this->adminEvent = $adminEvent;
 
         return $this;
     }
