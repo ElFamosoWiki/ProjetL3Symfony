@@ -8,7 +8,8 @@ use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\PasswordUpgraderInterface;
-
+use Doctrine\ORM\Query\Expr\Join;
+use App\Entity\ImageUser;
 /**
  * @extends ServiceEntityRepository<User>
  *
@@ -54,6 +55,35 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         $user->setPassword($newHashedPassword);
 
         $this->save($user, true);
+    }
+    public function findByExampleField(string $val): array
+   { 
+        
+        return $this->createQueryBuilder('u')
+            ->andWhere('u.email = :val')
+            ->setParameter('val', $val)
+            ->getQuery()
+            ->getResult();
+        
+   }
+
+   public function findByIdUser(int $id): array 
+   {
+
+    return $this->createQueryBuilder('i')
+        ->andWhere('i.id = :id')
+        ->setParameter('id', $id)
+        ->getQuery()
+        ->getResult();
+   }
+   public function findOneBySomeField(int $id): ?User
+    {
+        return $this->createQueryBuilder('u')
+            ->andWhere('u.id = :id')
+            ->setParameter('id', $id)
+            ->getQuery()
+            ->getOneOrNullResult()
+        ;
     }
 
     public function findInscrit(int $idEvent): array

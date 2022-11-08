@@ -13,13 +13,18 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Authentication\UserAuthenticatorInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
+use App\Entity\ImageUser;
+use App\Form\ImageUserType;
+use App\Repository\ImageUserRepository;
+
 
 class RegistrationController extends AbstractController
 {
     #[Route('/register', name: 'app_register')]
-    public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, UserAuthenticatorInterface $userAuthenticator, AuthAuthenticator $authenticator, EntityManagerInterface $entityManager): Response
+    public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, UserAuthenticatorInterface $userAuthenticator, AuthAuthenticator $authenticator, EntityManagerInterface $entityManager, ImageUserRepository $imageuser): Response
     {
         $user = new User();
+        $image = new ImageUser();
         $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);
 
@@ -34,6 +39,13 @@ class RegistrationController extends AbstractController
 
             $entityManager->persist($user);
             $entityManager->flush();
+            if(empty($imageuser->findOneById($user->getId()))){
+                $image = new ImageUser();
+                $image->setUser($user);
+                $image->setUrlImage("utilisateur.png");
+                $imageuser->save($image, true);
+                }
+
             // do anything else you need here, like send an email
 
             return $userAuthenticator->authenticateUser(
@@ -41,10 +53,12 @@ class RegistrationController extends AbstractController
                 $authenticator,
                 $request
             );
+    
         }
-
+        
         return $this->render('registration/register.html.twig', [
             'registrationForm' => $form->createView(),
         ]);
+       
     }
 }

@@ -14,6 +14,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 #[UniqueEntity(fields: ['email'], message: 'There is already an account with this email')]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
@@ -46,8 +47,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 50)]
     private ?string $pseudo=null;
 
+
+    #[ORM\OneToOne(mappedBy:'user', cascade: ['persist', 'remove'])]
+    private ?ImageUser $UrlImage = null;
+    
+
     #[ORM\OneToMany(mappedBy: 'adminEvent', targetEntity: Event::class, orphanRemoval: true)]
     private Collection $events;
+
 
 
     public function __construct()
@@ -206,6 +213,15 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
+    public function getUrlImage(): ?ImageUser
+    {
+        return $this->UrlImage;
+    }
+
+    public function setUrlImage(?ImageUser $category) : self
+    {
+        $this->UrlImage = $category;
+
     /**
      * @return Collection<int, Event>
      */
@@ -234,5 +250,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         }
 
         return $this;
+
     }
 }

@@ -24,6 +24,14 @@ class DemandeOrganisateur
     #[ORM\Column(type: Types::TEXT)]
     private ?string $motifDemande = null;
 
+    #[ORM\Column(length: 200, nullable :true)]
+    private ?string $Reponse = null;
+
+    #[ORM\Column]
+    private ?bool $Accept = null;
+
+    
+
     public function getId(): ?int
     {
         return $this->id;
@@ -64,4 +72,34 @@ class DemandeOrganisateur
 
         return $this;
     }
+
+    public function __ToString(){
+        return $this->motifDemande;
+    }
+
+    public function getReponse(): ?string
+    {
+        return $this->Reponse;
+    }
+
+    public function setReponse(string $Reponse): self
+    {
+        $this->Reponse = $Reponse;
+
+        return $this;
+    }
+
+    public function isAccept(): ?bool
+    {
+        return $this->Accept;
+    }
+
+    public function setAccept(bool $Accept): self
+    {
+        $this->Accept = $Accept;
+
+        return $this;
+    }
+
+    
 }
