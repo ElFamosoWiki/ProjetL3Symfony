@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\EventRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: EventRepository::class)]
@@ -22,7 +23,7 @@ class Event
     private ?int $nbPlace = null;
 
     #[ORM\Column]
-    private ?int $nbInscrit = null;
+    private ?int $nbInscrit = 0;
 
     #[ORM\ManyToMany(targetEntity: User::class, mappedBy: 'Inscrit')]
     private Collection $users;
@@ -34,18 +35,21 @@ class Event
     #[ORM\Column]
     private ?bool $accept = false;
 
-    #[ORM\ManyToOne(inversedBy: 'events')]
-    #[ORM\JoinColumn(nullable: true)]
-    private ?Lieu $Lieu = null;
 
     #[ORM\ManyToOne(inversedBy: 'events')]
     #[ORM\JoinColumn(nullable: false)]
     private ?User $adminEvent = null;
-    
-    /*#[ORM\ManyToOne(inversedBy: 'events')]
+
+    #[ORM\OneToOne(inversedBy: 'event', cascade: ['persist', 'remove'])]
     #[ORM\JoinColumn(nullable: false)]
-    private ?Lieu $adresse =null;*/
+    private ?Lieu $lieu = null;
+
+    #[ORM\Column(type: Types::TEXT, nullable: true)]
+    private ?string $description = null;
+
   
+    
+
     public function __construct()
     {
         $this->users = new ArrayCollection();
@@ -143,17 +147,6 @@ class Event
         return $this;
     }
 
-    public function getLieu(): ?Lieu
-    {
-        return $this->Lieu;
-    }
-
-    public function setLieu(?Lieu $Lieu): self
-    {
-        $this->Lieu = $Lieu;
-
-        return $this;
-    }
 
     public function getAdminEvent(): ?User
     {
@@ -166,5 +159,31 @@ class Event
 
         return $this;
     }
+
+    public function getLieu(): ?Lieu
+    {
+        return $this->lieu;
+    }
+
+    public function setLieu(Lieu $lieu): self
+    {
+        $this->lieu = $lieu;
+
+        return $this;
+    }
+
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+    public function setDescription(?string $description): self
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
+  
 
 }

@@ -25,7 +25,7 @@ class OrganisateurApplicationController extends AbstractController
         $this->security = $security;
     }
     
-    #[Route('/organisateur/application', name: 'app_organisateur_application', methods: ['GET', 'POST'])]
+    #[Route('/orga/application', name: 'app_organisateur_application', methods: ['GET', 'POST'])]
     public function index(Request $request,DemandeOrganisateurRepository $demandeOrganisateurRepository, SluggerInterface $slugger): Response
     {
         $demandeOrganisateur = new DemandeOrganisateur();
@@ -52,7 +52,7 @@ class OrganisateurApplicationController extends AbstractController
         ->getForm();
 
         $form->handleRequest($request);
-//////////
+//////////        
     if ($form->isSubmitted() && $form->isValid()) {
         $cniFile = $form->get('cni')->getData();
         if ($cniFile) {
