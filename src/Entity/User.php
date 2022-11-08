@@ -221,6 +221,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setUrlImage(?ImageUser $category) : self
     {
         $this->UrlImage = $category;
+    }    
 
     /**
      * @return Collection<int, Event>
