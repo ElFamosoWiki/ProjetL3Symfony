@@ -9,9 +9,11 @@ use App\Entity\Event;
 use Symfony\Component\HttpFoundation\Request;
 use App\Form\Type\EventType;
 use App\Repository\EventRepository;
+use App\Repository\LieuRepository;
 use App\Repository\UserRepository;
 use Symfony\Component\Security\Core\Security;
 use App\Entity\User;
+use App\Entity\Lieu;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
 class CreateEventController extends AbstractController
@@ -26,18 +28,19 @@ class CreateEventController extends AbstractController
 
     #[IsGranted("ROLE_ORGANISATEUR")]
     #[Route('/create/event', name: 'app_create_event', methods: ['GET', 'POST'])]
-    public function index(Request $request,EventRepository $eventRepository): Response
+    public function index(Request $request,EventRepository $eventRepository, LieuRepository $lieuRepository): Response
     {
        // $this->denyAccessUnlessGranted('ROLE_ORGANISATEUR');
 
         $event = new Event();
+        $lieu = new Lieu();
         $user = $this->security->getUser();
 
 
         $form = $this->createFormBuilder($event)
             ->add('nomEvent')
             ->add('nbPlace')
-            ->add('nbInscrit')
+            ->add('description')
             ->add('idcategorie')
             ->getForm();
 
@@ -46,8 +49,15 @@ class CreateEventController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
 
             $event->setAdminEvent($user);
+            $lieu->setVille($_COOKIE['city']);
+            $lieu->setRue($_COOKIE['rue']);
+            $lieu->setNumero($_COOKIE['numero']);
+            $lieu->setDepartement($_COOKIE['departement']);
+            $lieu->setRegion($_COOKIE['region']);
+            $lieu->setCodepostal($_COOKIE['codepostal']);
+            $event->setLieu($lieu);
             $eventRepository->save($event, true);
-
+            $lieuRepository->save($lieu, true);
             return $this->redirectToRoute('app_create_event', [], Response::HTTP_SEE_OTHER);
         }
             
@@ -57,6 +67,8 @@ class CreateEventController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
+
+
 
 
     #[IsGranted("ROLE_ORGANISATEUR")]

@@ -26,9 +26,7 @@ return [
         '/index' => [[['_route' => 'app_index', '_controller' => 'App\\Controller\\IndexController::index'], null, null, null, false, false, null]],
         '/jeu' => [[['_route' => 'app_jeu_index', '_controller' => 'App\\Controller\\JeuController::index'], null, ['GET' => 0], null, true, false, null]],
         '/jeu/new' => [[['_route' => 'app_jeu_new', '_controller' => 'App\\Controller\\JeuController::new'], null, ['GET' => 0, 'POST' => 1], null, false, false, null]],
-        '/lieu' => [[['_route' => 'app_lieu_index', '_controller' => 'App\\Controller\\LieuController::index'], null, ['GET' => 0], null, true, false, null]],
-        '/lieu/new' => [[['_route' => 'app_lieu_new', '_controller' => 'App\\Controller\\LieuController::new'], null, ['GET' => 0, 'POST' => 1], null, false, false, null]],
-        '/organisateur/application' => [[['_route' => 'app_organisateur_application', '_controller' => 'App\\Controller\\OrganisateurApplicationController::index'], null, ['GET' => 0, 'POST' => 1], null, false, false, null]],
+        '/orga/application' => [[['_route' => 'app_organisateur_application', '_controller' => 'App\\Controller\\OrganisateurApplicationController::index'], null, ['GET' => 0, 'POST' => 1], null, false, false, null]],
         '/register' => [[['_route' => 'app_register', '_controller' => 'App\\Controller\\RegistrationController::register'], null, null, null, false, false, null]],
         '/login' => [[['_route' => 'app_login', '_controller' => 'App\\Controller\\SecurityController::login'], null, null, null, false, false, null]],
         '/logout' => [[['_route' => 'app_logout', '_controller' => 'App\\Controller\\SecurityController::logout'], null, null, null, false, false, null]],
@@ -94,11 +92,6 @@ return [
                     .'|/edit(*:623)'
                     .'|(*:631)'
                 .')'
-                .'|/lieu/([^/]++)(?'
-                    .'|(*:657)'
-                    .'|/edit(*:670)'
-                    .'|(*:678)'
-                .')'
             .')/?$}sDu',
     ],
     [ // $dynamicRoutes
@@ -130,11 +123,8 @@ return [
         586 => [[['_route' => 'app_unreg_event', '_controller' => 'App\\Controller\\IndexController::desinscription'], ['id'], ['GET' => 0], null, true, true, null]],
         610 => [[['_route' => 'app_jeu_show', '_controller' => 'App\\Controller\\JeuController::show'], ['id'], ['GET' => 0], null, false, true, null]],
         623 => [[['_route' => 'app_jeu_edit', '_controller' => 'App\\Controller\\JeuController::edit'], ['id'], ['GET' => 0, 'POST' => 1], null, false, false, null]],
-        631 => [[['_route' => 'app_jeu_delete', '_controller' => 'App\\Controller\\JeuController::delete'], ['id'], ['POST' => 0], null, false, true, null]],
-        657 => [[['_route' => 'app_lieu_show', '_controller' => 'App\\Controller\\LieuController::show'], ['id'], ['GET' => 0], null, false, true, null]],
-        670 => [[['_route' => 'app_lieu_edit', '_controller' => 'App\\Controller\\LieuController::edit'], ['id'], ['GET' => 0, 'POST' => 1], null, false, false, null]],
-        678 => [
-            [['_route' => 'app_lieu_delete', '_controller' => 'App\\Controller\\LieuController::delete'], ['id'], ['POST' => 0], null, false, true, null],
+        631 => [
+            [['_route' => 'app_jeu_delete', '_controller' => 'App\\Controller\\JeuController::delete'], ['id'], ['POST' => 0], null, false, true, null],
             [null, null, null, null, false, false, 0],
         ],
     ],

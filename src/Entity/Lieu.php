@@ -3,8 +3,6 @@
 namespace App\Entity;
 
 use App\Repository\LieuRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: LieuRepository::class)]
@@ -15,112 +13,119 @@ class Lieu
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 50)]
-    private ?string $nomLieu = null;
 
-    #[ORM\Column(length: 50)]
-    private ?string $adresseLieu = null;
+    #[ORM\Column(length: 255)]
+    private ?string $ville = null;
 
-    #[ORM\OneToMany(mappedBy: 'Lieu', targetEntity: Event::class)]
-    private Collection $events;
+    #[ORM\OneToOne(mappedBy: 'lieu', cascade: ['persist', 'remove'])]
+    private ?Event $event = null;
 
-    #[ORM\OneToMany(mappedBy: 'adresse', targetEntity: Event::class)]
-    private Collection $event;
+    #[ORM\Column(length: 10)]
+    private ?string $numero = null;
 
-    public function __construct()
-    {
-        $this->events = new ArrayCollection();
-    }
-    
-    public function __construct2()
-    {
-        $this->event = new ArrayCollection();
-    }
+    #[ORM\Column(length: 255)]
+    private ?string $rue = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $departement = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $region = null;
+
+    #[ORM\Column(length: 10)]
+    private ?string $codepostal = null;
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getNomLieu(): ?string
+
+    public function getVille(): ?string
     {
-        return $this->nomLieu;
+        return $this->ville;
     }
 
-    public function setNomLieu(string $nomLieu): self
+    public function setVille(string $ville): self
     {
-        $this->nomLieu = $nomLieu;
+        $this->ville = $ville;
 
         return $this;
     }
 
-    public function getAdresseLieu(): ?string
-    {
-        return $this->adresseLieu;
-    }
-
-    public function setAdresseLieu(string $adresseLieu): self
-    {
-        $this->adresseLieu = $adresseLieu;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, Event>
-     */
-    public function getEvents(): Collection
-    {
-        return $this->events;
-    }
-
-    public function addEvent(Event $event): self
-    {
-        if (!$this->events->contains($event)) {
-            $this->events->add($event);
-            $event->setLieu($this);
-        }
-
-        return $this;
-    }
-
-    public function removeEvent(Event $event): self
-    {
-        if ($this->events->removeElement($event)) {
-            // set the owning side to null (unless already changed)
-            if ($event->getLieu() === $this) {
-                $event->setLieu(null);
-            }
-        }
-
-        return $this;
-    }
-    public function __toString(){
-        return $this->nomLieu;
-    }
-    public function getEvent(): Collection
+    public function getEvent(): ?Event
     {
         return $this->event;
     }
 
-    public function addEvents(Event $events): self
+    public function setEvent(Event $event): self
     {
-        if (!$this->event->contains($events)) {
-            $this->event->add($events);
-            $events->setLieu($this);
+        // set the owning side of the relation if necessary
+        if ($event->getLieu() !== $this) {
+            $event->setLieu($this);
         }
+
+        $this->event = $event;
 
         return $this;
     }
 
-    public function removeEvents(Event $events): self
+    public function getNumero(): ?string
     {
-        if ($this->event->removeElement($events)) {
-            // set the owning side to null (unless already changed)
-            if ($events->getLieu() === $this) {
-                $events->setLieu(null);
-            }
-        }
+        return $this->numero;
+    }
+
+    public function setNumero(string $numero): self
+    {
+        $this->numero = $numero;
+
+        return $this;
+    }
+
+    public function getRue(): ?string
+    {
+        return $this->rue;
+    }
+
+    public function setRue(string $rue): self
+    {
+        $this->rue = $rue;
+
+        return $this;
+    }
+
+    public function getDepartement(): ?string
+    {
+        return $this->departement;
+    }
+
+    public function setDepartement(string $departement): self
+    {
+        $this->departement = $departement;
+
+        return $this;
+    }
+
+    public function getRegion(): ?string
+    {
+        return $this->region;
+    }
+
+    public function setRegion(string $region): self
+    {
+        $this->region = $region;
+
+        return $this;
+    }
+
+    public function getCodepostal(): ?string
+    {
+        return $this->codepostal;
+    }
+
+    public function setCodepostal(string $codepostal): self
+    {
+        $this->codepostal = $codepostal;
 
         return $this;
     }

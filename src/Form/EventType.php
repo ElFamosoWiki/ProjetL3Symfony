@@ -21,7 +21,7 @@ class EventType extends AbstractType
                 'label'    => 'Voulez vous valider la demande?',
                 'required' => false,
                 ])
-            ->add('Lieu')
+
         ;
     }
 
