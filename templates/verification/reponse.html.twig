@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit ImageUser{% endblock %}
+
+{% block body %}
+    <h1>Répondre à cette demande</h1>
+
+    {{ include('verification/_form.html.twig', {'button_label': 'Finir'}) }}
+
+    <a href="{{ path('app_verif_index') }}">back to list</a>
+{% endblock %}

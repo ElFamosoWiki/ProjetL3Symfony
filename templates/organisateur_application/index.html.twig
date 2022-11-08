@@ -15,8 +15,11 @@
     {{ form_widget(form) }}
     <button class="btn">{{ button_label|default('Save') }}</button>
     {{ form_end(form) }}
+    {% elseif demande.Reponse != "" and demande.Accept==0 %}
+    <p> Votre demande a été refusé voici le motif :</p>
+    {{ demande.Reponse }}
     {% else %}
-       <p> Demande deja en cours </p>
+    <p> Demande deja en cours </p>
     {% endif %}
     
     
