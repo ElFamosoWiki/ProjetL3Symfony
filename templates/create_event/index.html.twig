@@ -16,6 +16,10 @@
 
 {{ form_start(form) }}
     {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
+    <div id="autocomplete" class="autocomplete-container"></div>
+    <input id="valid" type="submit" name="button" value="enter"/>
+    
 {{ form_end(form) }}
+
+
 {% endblock %}

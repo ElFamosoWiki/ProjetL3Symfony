@@ -15,22 +15,23 @@
             {{ encore_entry_script_tags('app') }}
         {% endblock %}
     </head>
+
      {% if app.user %}
         <img src="{{ asset('build/pdp/' ~ app.user.UrlImage) }}" height=50 width=50>
         <a href="{{ path('app_profil_show', {'id': app.user.id}) }}">Profil</a>
         {% endif %}
-    {% if not app.user%}
-    <a href="{{ path('app_login') }}">Devenir organisateur</a>
-    {% endif %}
-    {% if app.user %}
+    {% if app.user %}   
     {% if not is_granted('ROLE_ORGANISATEUR') %}   
     <a href="{{ path('app_organisateur_application') }}">Devenir organisateur</a>
     {% endif %}
+    {% else %}
+    <a href="{{ path('app_login') }}">Devenir organisateur</a>
     {% endif %}
     {% if app.user %}
     <a href="{{ path('app_logout') }}">Déconnexion</a>
     {% endif %}
     {% if not app.user %}
+
     <a href="{{ path('app_register') }}">Inscription</a>
     <a href="{{ path('app_login') }}">Connexion</a>
     {% endif %}
