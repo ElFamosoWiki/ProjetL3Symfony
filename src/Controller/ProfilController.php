@@ -28,7 +28,7 @@ class ProfilController extends AbstractController{
     #[Route('/', name: 'app_profil_show', methods: ['GET'])]
     public function index(User $user, ImageUserRepository $ImageRepository, $id): Response
     {
-        
+
         return $this->render('profil/pdp.html.twig', [
             'user' => $user,
             'image_users' => $ImageRepository->findOneById($id),
@@ -56,7 +56,8 @@ class ProfilController extends AbstractController{
                     new File([
                         'maxSize' => '1024k',
                         'mimeTypes' => [
-                            'image/png'
+                            'image/png',
+                            'image/jpeg'
                         ],
                         'mimeTypesMessage' => 'Merci de mettre une image en format PNG'
                     ])
@@ -81,14 +82,19 @@ class ProfilController extends AbstractController{
                      }
                      $image->setUrlImage($newFileName);
                  }
-                }
-            $users->save($user, true);
+                 $users->save($user, true);
             $imageUserRepository->save($image, true);
+            return $this->redirectToRoute('app_profil_show', ['id' => $user->getId()], Response::HTTP_SEE_OTHER);
+                }
+            
+
+            
 
             return $this->renderForm('profil/modif.html.twig', [
                 'user' => $user,
                 'form' => $form,
             ]);
+            
     
 }
 

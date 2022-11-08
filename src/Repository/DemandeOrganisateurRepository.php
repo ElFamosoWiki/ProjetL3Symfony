@@ -62,6 +62,26 @@ class DemandeOrganisateurRepository extends ServiceEntityRepository
 
     }
 
+    
+    public function findByd(int $id): ?DemandeOrganisateur
+    {
+        return $this->createQueryBuilder('d')
+            ->andWhere('d.userId = :id')
+            ->setParameter('id', $id)
+            ->getQuery()
+            ->getOneOrNullResult()
+        ;
+   }
+
+    public function findByInn() : array
+    {
+        return $this->createQueryBuilder('d')
+        ->join('d.userId', 'u')
+        ->addSelect('u')
+        ->getQuery()
+        ->getResult();
+    }
+
 //    /**
 //     * @return DemandeOrganisateur[] Returns an array of DemandeOrganisateur objects
 //     */

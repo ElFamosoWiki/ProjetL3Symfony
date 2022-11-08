@@ -23,6 +23,7 @@ class ImageUserController extends AbstractController
     #[Route('/', name: 'app_image_user_index', methods: ['GET'])]
     public function index(ImageUserRepository $imageUserRepository): Response
     {
+        
         return $this->render('image_user/index.html.twig', [
             'image_users' => $imageUserRepository->findAll(),
         ]);
@@ -52,6 +53,7 @@ class ImageUserController extends AbstractController
                 }
                 $imageUser->setUrlImage($newFileName);
             }
+            
             $imageUserRepository->save($imageUser, true);
             return $this->redirectToRoute('app_image_user_index', [], Response::HTTP_SEE_OTHER);
         }
@@ -64,7 +66,7 @@ class ImageUserController extends AbstractController
     #[Route('/{id}', name: 'app_image_user_show', methods: ['GET'])]    
         public function show(ImageUser $imageUser, UserRepository $user): Response
     {
-       
+        
         $e = $imageUser->getUser();
         return $this->render('image_user/show.html.twig', [
             'image_user' => $imageUser,
@@ -113,5 +115,12 @@ class ImageUserController extends AbstractController
 
         return $this->redirectToRoute('app_image_user_index', [], Response::HTTP_SEE_OTHER);
     }
-    
+    public function AvoirUrl($id): ?string
+    {
+        $imageUserRepository = new ImageUserRepository();
+        $this->container->get('templating');
+        $image= new ImageUser();
+        $image = $imageUserRepository->findOneBySomeField($id);
+        return $image->getUrlImage();
+    }
 }

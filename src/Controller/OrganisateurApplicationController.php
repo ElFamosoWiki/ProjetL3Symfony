@@ -25,9 +25,10 @@ class OrganisateurApplicationController extends AbstractController
         $this->security = $security;
     }
     
-    #[Route('/organisateur/application', name: 'app_organisateur_application', methods: ['GET', 'POST'])]
-    public function index(Request $request,DemandeOrganisateurRepository $demandeOrganisateurRepository, SluggerInterface $slugger): Response
+    #[Route('/orga/application', name: 'app_organisateur_application', methods: ['GET', 'POST'])]
+    public function index(Request $request,DemandeOrganisateurRepository $demandeOrganisateurRepository, SluggerInterface $slugger, DemandeOrganisateurRepository $demandeRepository): Response
     {
+        
         $demandeOrganisateur = new DemandeOrganisateur();
         $user = $this->security->getUser();
         $userId = $user->getId();
@@ -83,6 +84,7 @@ class OrganisateurApplicationController extends AbstractController
             'controller_name' => 'OrganisateurApplicationController',
             'form' => $form->createView(),
             'demand' => $demandeOrganisateurRepository->ckIfDemande($user->getId()),
+            'demande' => $demandeRepository->findByd($user->getId()),
         ]);
     }
 }

@@ -24,10 +24,9 @@ class IndexController extends AbstractController
         $this->security = $security;
     }
 
-
     #[Route('/index', name: 'app_index')]
     public function index(EventRepository $eventRepository): Response
-    {
+    {  
 
         return $this->render('index/index.html.twig', [
             'controller_name' => 'IndexController',
@@ -68,7 +67,7 @@ class IndexController extends AbstractController
 
     }else{
             
-            return $this->redirectToRoute('app_event', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_login', [], Response::HTTP_SEE_OTHER);
 
         }
     }
@@ -101,6 +100,5 @@ class IndexController extends AbstractController
         
         }
     }
-
     
 }
