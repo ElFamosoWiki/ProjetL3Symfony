@@ -138,6 +138,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @return Collection<int, Event>
      */
+
     public function getInscrit(): Collection
     {
         return $this->Inscrit;
@@ -221,10 +222,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setUrlImage(?ImageUser $category) : self
     {
         $this->UrlImage = $category;
+    }    
 
     /**
      * @return Collection<int, Event>
      */
+
     public function getEvents(): Collection
     {
         return $this->events;
