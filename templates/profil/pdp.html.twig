@@ -15,13 +15,13 @@
        
         <ul>
         {% for image_user in image_users %}
-            <li><strong>Photo de profil:</strong> <img src="{{ asset('build/pdp/' ~ image_user.UrlImage) }}" height=50 width=50 border-radius=50%>&emsp;&emsp;<a href="{{ path('app_profil_modifie', {'id': user.id}) }}">Modifie</a></li>
+            <li><strong>Photo de profil:</strong> <img src="{{ asset('build/pdp/' ~ image_user.UrlImage) }}" height=50 width=50 border-radius=50%>&emsp;&emsp;</li>
             {% endfor %}
         <li><strong>Prénom:</strong> {{ user.prenom }}</li>
         <li><strong>Nom:</strong> {{ user.nom }}</li>
         <li><strong>Email:</strong> {{ user.email }}</li>
        <li><strong>Pseudo:</strong> {{ user.pseudo }}</li>
-       
+       <li><a href="{{ path('app_profil_modifie', {'id': user.id}) }}">Modifie</a></li>
         </ul>
 
         </tbody>

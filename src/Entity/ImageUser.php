@@ -16,7 +16,7 @@ class ImageUser
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $UrlImage = null;
+    private ?string $UrlImage = "utilisateur.png";
 
     #[ORM\OneToOne(inversedBy: 'UrlImage', cascade: ['persist'])]
     #[ORM\JoinColumn(nullable: false)]
