@@ -57,46 +57,52 @@ return [
                     .'|/edit(*:204)'
                     .'|(*:212)'
                 .')'
+                .'|/d(?'
+                    .'|ashboard/orga/([^/]++)(*:248)'
+                    .'|emande/organisateur/(?'
+                        .'|([^/]++)(?'
+                            .'|(*:290)'
+                            .'|/edit(*:303)'
+                        .')'
+                        .'|delete/([^/]++)(*:327)'
+                    .')'
+                .')'
                 .'|/s(?'
-                    .'|how/inscrit/([^/]++)(*:246)'
+                    .'|how/inscrit/([^/]++)(*:362)'
                     .'|ous/categorie/([^/]++)(?'
-                        .'|(*:279)'
-                        .'|/edit(*:292)'
-                        .'|(*:300)'
+                        .'|(*:395)'
+                        .'|/edit(*:408)'
+                        .'|(*:416)'
                     .')'
                 .')'
-                .'|/demande/organisateur/(?'
-                    .'|([^/]++)(?'
-                        .'|(*:346)'
-                        .'|/edit(*:359)'
+                .'|/e(?'
+                    .'|dit/([^/]++)(*:443)'
+                    .'|ven(?'
+                        .'|t/([^/]++)(?'
+                            .'|(*:470)'
+                            .'|/edit(*:483)'
+                            .'|(*:491)'
+                        .')'
+                        .'|ement/([^/]++)(*:514)'
                     .')'
-                    .'|delete/([^/]++)(*:383)'
-                .')'
-                .'|/even(?'
-                    .'|t/([^/]++)(?'
-                        .'|(*:413)'
-                        .'|/edit(*:426)'
-                        .'|(*:434)'
-                    .')'
-                    .'|ement/([^/]++)(*:457)'
                 .')'
                 .'|/image/user/([^/]++)(?'
-                    .'|(*:489)'
-                    .'|/edit(*:502)'
-                    .'|(*:510)'
+                    .'|(*:547)'
+                    .'|/edit(*:560)'
+                    .'|(*:568)'
                 .')'
-                .'|/registration/([^/]++)(*:541)'
-                .'|/unreg/([^/]++)(*:564)'
+                .'|/registration/([^/]++)(*:599)'
+                .'|/unreg/([^/]++)(*:622)'
                 .'|/jeu/([^/]++)(?'
-                    .'|(*:588)'
-                    .'|/edit(*:601)'
-                    .'|(*:609)'
+                    .'|(*:646)'
+                    .'|/edit(*:659)'
+                    .'|(*:667)'
                 .')'
                 .'|/profil/([^/]++)(?'
-                    .'|(*:637)'
-                    .'|/modifie(*:653)'
+                    .'|(*:695)'
+                    .'|/modifie(*:711)'
                 .')'
-                .'|/verif/([^/]++)/repondre(*:686)'
+                .'|/verif/([^/]++)/repondre(*:744)'
             .')/?$}sDu',
     ],
     [ // $dynamicRoutes
@@ -110,28 +116,30 @@ return [
         191 => [[['_route' => 'app_categorie_show', '_controller' => 'App\\Controller\\CategorieController::show'], ['id'], ['GET' => 0], null, false, true, null]],
         204 => [[['_route' => 'app_categorie_edit', '_controller' => 'App\\Controller\\CategorieController::edit'], ['id'], ['GET' => 0, 'POST' => 1], null, false, false, null]],
         212 => [[['_route' => 'app_categorie_delete', '_controller' => 'App\\Controller\\CategorieController::delete'], ['id'], ['POST' => 0], null, false, true, null]],
-        246 => [[['_route' => 'app_show_inscrit', '_controller' => 'App\\Controller\\CreateEventController::showReg'], ['id'], ['GET' => 0], null, false, true, null]],
-        279 => [[['_route' => 'app_sous_categorie_show', '_controller' => 'App\\Controller\\SousCategorieController::show'], ['id'], ['GET' => 0], null, false, true, null]],
-        292 => [[['_route' => 'app_sous_categorie_edit', '_controller' => 'App\\Controller\\SousCategorieController::edit'], ['id'], ['GET' => 0, 'POST' => 1], null, false, false, null]],
-        300 => [[['_route' => 'app_sous_categorie_delete', '_controller' => 'App\\Controller\\SousCategorieController::delete'], ['id'], ['POST' => 0], null, false, true, null]],
-        346 => [[['_route' => 'app_demande_organisateur_show', '_controller' => 'App\\Controller\\DemandeOrganisateurController::show'], ['id'], ['GET' => 0], null, false, true, null]],
-        359 => [[['_route' => 'app_demande_organisateur_edit', '_controller' => 'App\\Controller\\DemandeOrganisateurController::edit'], ['id'], ['GET' => 0, 'POST' => 1], null, false, false, null]],
-        383 => [[['_route' => 'app_demande_organisateur_delete', '_controller' => 'App\\Controller\\DemandeOrganisateurController::delete'], ['id'], ['POST' => 0], null, false, true, null]],
-        413 => [[['_route' => 'app_event_show', '_controller' => 'App\\Controller\\EventController::show'], ['id'], ['GET' => 0], null, false, true, null]],
-        426 => [[['_route' => 'app_event_edit', '_controller' => 'App\\Controller\\EventController::edit'], ['id'], ['GET' => 0, 'POST' => 1], null, false, false, null]],
-        434 => [[['_route' => 'app_event_delete', '_controller' => 'App\\Controller\\EventController::delete'], ['id'], ['POST' => 0], null, false, true, null]],
-        457 => [[['_route' => 'app_index_event_show', '_controller' => 'App\\Controller\\IndexController::show'], ['id'], ['GET' => 0], null, false, true, null]],
-        489 => [[['_route' => 'app_image_user_show', '_controller' => 'App\\Controller\\ImageUserController::show'], ['id'], ['GET' => 0], null, false, true, null]],
-        502 => [[['_route' => 'app_image_user_edit', '_controller' => 'App\\Controller\\ImageUserController::edit'], ['id'], ['GET' => 0, 'POST' => 1], null, false, false, null]],
-        510 => [[['_route' => 'app_image_user_delete', '_controller' => 'App\\Controller\\ImageUserController::delete'], ['id'], ['POST' => 0], null, false, true, null]],
-        541 => [[['_route' => 'app_registration_event', '_controller' => 'App\\Controller\\IndexController::inscription'], ['id'], ['GET' => 0], null, true, true, null]],
-        564 => [[['_route' => 'app_unreg_event', '_controller' => 'App\\Controller\\IndexController::desinscription'], ['id'], ['GET' => 0], null, true, true, null]],
-        588 => [[['_route' => 'app_jeu_show', '_controller' => 'App\\Controller\\JeuController::show'], ['id'], ['GET' => 0], null, false, true, null]],
-        601 => [[['_route' => 'app_jeu_edit', '_controller' => 'App\\Controller\\JeuController::edit'], ['id'], ['GET' => 0, 'POST' => 1], null, false, false, null]],
-        609 => [[['_route' => 'app_jeu_delete', '_controller' => 'App\\Controller\\JeuController::delete'], ['id'], ['POST' => 0], null, false, true, null]],
-        637 => [[['_route' => 'app_profil_show', '_controller' => 'App\\Controller\\ProfilController::index'], ['id'], ['GET' => 0], null, true, true, null]],
-        653 => [[['_route' => 'app_profil_modifie', '_controller' => 'App\\Controller\\ProfilController::modifie'], ['id'], ['GET' => 0, 'POST' => 1], null, false, false, null]],
-        686 => [
+        248 => [[['_route' => 'app_dashboard_orga', '_controller' => 'App\\Controller\\DashboardOrgaController::index'], ['id'], null, null, false, true, null]],
+        290 => [[['_route' => 'app_demande_organisateur_show', '_controller' => 'App\\Controller\\DemandeOrganisateurController::show'], ['id'], ['GET' => 0], null, false, true, null]],
+        303 => [[['_route' => 'app_demande_organisateur_edit', '_controller' => 'App\\Controller\\DemandeOrganisateurController::edit'], ['id'], ['GET' => 0, 'POST' => 1], null, false, false, null]],
+        327 => [[['_route' => 'app_demande_organisateur_delete', '_controller' => 'App\\Controller\\DemandeOrganisateurController::delete'], ['id'], ['POST' => 0], null, false, true, null]],
+        362 => [[['_route' => 'app_show_inscrit', '_controller' => 'App\\Controller\\DashboardOrgaController::showReg'], ['id'], ['GET' => 0], null, false, true, null]],
+        395 => [[['_route' => 'app_sous_categorie_show', '_controller' => 'App\\Controller\\SousCategorieController::show'], ['id'], ['GET' => 0], null, false, true, null]],
+        408 => [[['_route' => 'app_sous_categorie_edit', '_controller' => 'App\\Controller\\SousCategorieController::edit'], ['id'], ['GET' => 0, 'POST' => 1], null, false, false, null]],
+        416 => [[['_route' => 'app_sous_categorie_delete', '_controller' => 'App\\Controller\\SousCategorieController::delete'], ['id'], ['POST' => 0], null, false, true, null]],
+        443 => [[['_route' => 'app_edit_event_orga', '_controller' => 'App\\Controller\\DashboardOrgaController::editEvent'], ['id'], ['GET' => 0, 'POST' => 1], null, false, true, null]],
+        470 => [[['_route' => 'app_event_show', '_controller' => 'App\\Controller\\EventController::show'], ['id'], ['GET' => 0], null, false, true, null]],
+        483 => [[['_route' => 'app_event_edit', '_controller' => 'App\\Controller\\EventController::edit'], ['id'], ['GET' => 0, 'POST' => 1], null, false, false, null]],
+        491 => [[['_route' => 'app_event_delete', '_controller' => 'App\\Controller\\EventController::delete'], ['id'], ['POST' => 0], null, false, true, null]],
+        514 => [[['_route' => 'app_index_event_show', '_controller' => 'App\\Controller\\IndexController::show'], ['id'], ['GET' => 0], null, false, true, null]],
+        547 => [[['_route' => 'app_image_user_show', '_controller' => 'App\\Controller\\ImageUserController::show'], ['id'], ['GET' => 0], null, false, true, null]],
+        560 => [[['_route' => 'app_image_user_edit', '_controller' => 'App\\Controller\\ImageUserController::edit'], ['id'], ['GET' => 0, 'POST' => 1], null, false, false, null]],
+        568 => [[['_route' => 'app_image_user_delete', '_controller' => 'App\\Controller\\ImageUserController::delete'], ['id'], ['POST' => 0], null, false, true, null]],
+        599 => [[['_route' => 'app_registration_event', '_controller' => 'App\\Controller\\IndexController::inscription'], ['id'], ['GET' => 0], null, true, true, null]],
+        622 => [[['_route' => 'app_unreg_event', '_controller' => 'App\\Controller\\IndexController::desinscription'], ['id'], ['GET' => 0], null, true, true, null]],
+        646 => [[['_route' => 'app_jeu_show', '_controller' => 'App\\Controller\\JeuController::show'], ['id'], ['GET' => 0], null, false, true, null]],
+        659 => [[['_route' => 'app_jeu_edit', '_controller' => 'App\\Controller\\JeuController::edit'], ['id'], ['GET' => 0, 'POST' => 1], null, false, false, null]],
+        667 => [[['_route' => 'app_jeu_delete', '_controller' => 'App\\Controller\\JeuController::delete'], ['id'], ['POST' => 0], null, false, true, null]],
+        695 => [[['_route' => 'app_profil_show', '_controller' => 'App\\Controller\\ProfilController::index'], ['id'], ['GET' => 0], null, true, true, null]],
+        711 => [[['_route' => 'app_profil_modifie', '_controller' => 'App\\Controller\\ProfilController::modifie'], ['id'], ['GET' => 0, 'POST' => 1], null, false, false, null]],
+        744 => [
             [['_route' => 'app_repondre', '_controller' => 'App\\Controller\\VerificationController::reponse'], ['id'], ['GET' => 0, 'POST' => 1], null, false, false, null],
             [null, null, null, null, false, false, 0],
         ],

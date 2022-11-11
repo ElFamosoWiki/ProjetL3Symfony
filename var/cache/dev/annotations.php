@@ -76,6 +76,10 @@ return [[
 '[C]App%5CController%5CCreateEventController%23showReg' => 1,
 'App%5CController%5CCreateEventController%24security' => 0,
 '[C]App%5CController%5CCreateEventController%24security' => 1,
+'App%5CController%5CDashboardOrgaController' => 0,
+'[C]App%5CController%5CDashboardOrgaController' => 1,
+'App%5CController%5CDashboardOrgaController%23index' => 0,
+'[C]App%5CController%5CDashboardOrgaController%23index' => 1,
 'App%5CController%5CDemandeOrganisateurController' => 0,
 '[C]App%5CController%5CDemandeOrganisateurController' => 1,
 'App%5CController%5CDemandeOrganisateurController%23index' => 0,
@@ -1064,6 +1068,6 @@ return [[
 ], [
 
 0 => [],
-1 => 1667943726,
+1 => 1668107282,
 
 ]];
