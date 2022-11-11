@@ -83,37 +83,7 @@ class CreateEventController extends AbstractController
             ->add('datefin', DateTimeType::class, array(
                 'input' => 'datetime_immutable'))
             ->getForm();
-            $formModifier = function (FormInterface $form, Categorie $categorie = null) {
-                $souscategorie = null === $categorie ? [] : $categorie->getAvaibleCaca();
-    
-                $form->add('souscategorie', EntityType::class, [
-                    'class' => SousCategorie::class,
-                    'placeholder' => '',
-                    'choices' => $souscategorie,
-                ]);
-            };
-            
-            $form->get('idcategorie')->addEventListener(
-                FormEvents::POST_SUBMIT,
-                function (FormEvent $event) use ($formModifier) {
-                    // It's important here to fetch $event->getForm()->getData(), as
-                    // $event->getData() will get you the client data (that is, the ID)
-                    $categorie = $event->getForm()->getData();
-    
-                    // since we've added the listener to the child, we'll have to pass on
-                    // the parent to the callback function!
-                    $formModifier($event->getForm()->getParent(), $categorie);
-                }
-            );
-           /* ->add('souscategorie', EntityType::class, [
-                'class' => SousCategorie::class,
-                'choice_label' => 'nomsousCategorie',
-                'disabled' => true,
-                'placeholder' => 'Please choose sous categorie',
-                'query_builder' => function(SousCategorieRepository $scat){
-                    return $scat->createQueryBuilder('c')->orderBy('c.Categorie', 'ASC');
-                }
-            ])*/
+           
              
             $form->handleRequest($request);
 

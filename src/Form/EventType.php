@@ -36,6 +36,7 @@ class EventType extends AbstractType
                 return $act->createQueryBuilder('c')->orderBy('c.souscategorie', 'ASC');
             }
                 ])
+
         ->add('datedebut', DateTimeType::class, array(
             'input' => 'datetime_immutable'))
         ->add('datefin', DateTimeType::class, array(
@@ -79,6 +80,7 @@ class EventType extends AbstractType
                 $formModifier($event->getForm()->getParent(), $categorie);
             }
         );
+
     }
 
     public function configureOptions(OptionsResolver $resolver): void

@@ -46,7 +46,6 @@ class Event
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $description = null;
-
     #[ORM\ManyToOne(inversedBy: 'events')]
     private ?Activite $activite = null;
 
@@ -61,8 +60,6 @@ class Event
 
     #[ORM\Column(length: 255)]
     private ?string $image = null;
-
-   
 
     public function __construct()
     {
@@ -257,13 +254,6 @@ class Event
 
         return $this;
     }
-
-    
-
-    
-
-   
-
   
 
 }
