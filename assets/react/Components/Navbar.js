@@ -43,6 +43,8 @@ function Navbar() {
         urlpdp =  JSON.stringify(urlpdp);
         urlpdp = urlpdp.replace(/"/g, '');
     let routeprofile = "/profil/" + userid;
+    let routedashboard = "/dashboard/orga/" + userid;
+
     let routepdp = "../../build/pdp/" + urlpdp;
         if ( isOrga == "true") {
         return (
@@ -60,6 +62,7 @@ function Navbar() {
                     </Dropdown.Toggle>
                     <Dropdown.Menu>
                         <Dropdown.Item href={routeprofile}>Mon Profile</Dropdown.Item>
+                        <Dropdown.Item href={routedashboard}>Dashboard</Dropdown.Item>
                         <Dropdown.Item href="/logout">Se deconnecter</Dropdown.Item>
                         </Dropdown.Menu>
                     </Dropdown>

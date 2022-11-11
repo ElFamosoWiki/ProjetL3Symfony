@@ -363,6 +363,14 @@
         <argument type="service" id=".service_locator.jIxfAsi.App\Controller\CreateEventController"/>
       </call>
     </service>
+    <service id="App\Controller\DashboardOrgaController" class="App\Controller\DashboardOrgaController" public="true" autowire="true" autoconfigure="true">
+      <tag name="controller.service_arguments"/>
+      <tag name="container.service_subscriber"/>
+      <argument type="service" id="security.helper"/>
+      <call method="setContainer">
+        <argument type="service" id=".service_locator.jIxfAsi.App\Controller\DashboardOrgaController"/>
+      </call>
+    </service>
     <service id="App\Controller\DemandeOrganisateurController" class="App\Controller\DemandeOrganisateurController" public="true" autowire="true" autoconfigure="true">
       <tag name="controller.service_arguments"/>
       <tag name="container.service_subscriber"/>
@@ -6233,6 +6241,9 @@
     <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\CreateEventController" class="App\Controller\CreateEventController" autowire="true" abstract="true"/>
     <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\CreateEventController" class="App\Controller\CreateEventController" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Controller\CreateEventController" class="App\Controller\CreateEventController" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\DashboardOrgaController" class="App\Controller\DashboardOrgaController" autowire="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\DashboardOrgaController" class="App\Controller\DashboardOrgaController" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Controller\DashboardOrgaController" class="App\Controller\DashboardOrgaController" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\DemandeOrganisateurController" class="App\Controller\DemandeOrganisateurController" autowire="true" abstract="true"/>
     <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\DemandeOrganisateurController" class="App\Controller\DemandeOrganisateurController" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Controller\DemandeOrganisateurController" class="App\Controller\DemandeOrganisateurController" autowire="true" autoconfigure="true" abstract="true"/>
@@ -6674,6 +6685,21 @@
         <argument key="userRepository" type="service_closure" id="App\Repository\UserRepository"/>
       </argument>
     </service>
+    <service id=".service_locator.WMrx.a8" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="eventRepository" type="service_closure" id="App\Repository\EventRepository"/>
+        <argument key="userRepository" type="service_closure" id="App\Repository\UserRepository"/>
+      </argument>
+    </service>
+    <service id=".service_locator.gaOl66k" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="event" type="service_closure" id=".errored..service_locator.gaOl66k.App\Entity\Event"/>
+        <argument key="eventRepository" type="service_closure" id="App\Repository\EventRepository"/>
+        <argument key="lieuRepository" type="service_closure" id="App\Repository\LieuRepository"/>
+      </argument>
+    </service>
     <service id=".service_locator.qBkSXit" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
@@ -6846,7 +6872,7 @@
         <argument key="verifRepo" type="service_closure" id="App\Repository\DemandeOrganisateurRepository"/>
       </argument>
     </service>
-    <service id=".service_locator.SU0XEwc" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.GtsHWAR" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="App\Controller\CategorieController::delete" type="service_closure" id=".service_locator.4oDAgEZ"/>
@@ -6856,6 +6882,9 @@
         <argument key="App\Controller\CategorieController::show" type="service_closure" id=".service_locator.uSGXe_N"/>
         <argument key="App\Controller\CreateEventController::index" type="service_closure" id=".service_locator.kql7h04"/>
         <argument key="App\Controller\CreateEventController::showReg" type="service_closure" id=".service_locator.2gwzzye"/>
+        <argument key="App\Controller\DashboardOrgaController::editEvent" type="service_closure" id=".service_locator.gaOl66k"/>
+        <argument key="App\Controller\DashboardOrgaController::index" type="service_closure" id=".service_locator.WMrx.a8"/>
+        <argument key="App\Controller\DashboardOrgaController::showReg" type="service_closure" id=".service_locator.2gwzzye"/>
         <argument key="App\Controller\DemandeOrganisateurController::delete" type="service_closure" id=".service_locator.5nd0y65"/>
         <argument key="App\Controller\DemandeOrganisateurController::edit" type="service_closure" id=".service_locator.5nd0y65"/>
         <argument key="App\Controller\DemandeOrganisateurController::index" type="service_closure" id=".service_locator.qBkSXit"/>
@@ -6906,6 +6935,9 @@
         <argument key="App\Controller\CategorieController:show" type="service_closure" id=".service_locator.uSGXe_N"/>
         <argument key="App\Controller\CreateEventController:index" type="service_closure" id=".service_locator.kql7h04"/>
         <argument key="App\Controller\CreateEventController:showReg" type="service_closure" id=".service_locator.2gwzzye"/>
+        <argument key="App\Controller\DashboardOrgaController:editEvent" type="service_closure" id=".service_locator.gaOl66k"/>
+        <argument key="App\Controller\DashboardOrgaController:index" type="service_closure" id=".service_locator.WMrx.a8"/>
+        <argument key="App\Controller\DashboardOrgaController:showReg" type="service_closure" id=".service_locator.2gwzzye"/>
         <argument key="App\Controller\DemandeOrganisateurController:delete" type="service_closure" id=".service_locator.5nd0y65"/>
         <argument key="App\Controller\DemandeOrganisateurController:edit" type="service_closure" id=".service_locator.5nd0y65"/>
         <argument key="App\Controller\DemandeOrganisateurController:index" type="service_closure" id=".service_locator.qBkSXit"/>
@@ -7493,6 +7525,12 @@
       <argument type="service" id="service_container"/>
       <factory service=".service_locator.jIxfAsi" method="withContext"/>
     </service>
+    <service id=".service_locator.jIxfAsi.App\Controller\DashboardOrgaController" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator_context" id="App\Controller\DashboardOrgaController"/>
+      <argument>App\Controller\DashboardOrgaController</argument>
+      <argument type="service" id="service_container"/>
+      <factory service=".service_locator.jIxfAsi" method="withContext"/>
+    </service>
     <service id=".service_locator.jIxfAsi.App\Controller\DemandeOrganisateurController" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator_context" id="App\Controller\DemandeOrganisateurController"/>
       <argument>App\Controller\DemandeOrganisateurController</argument>
@@ -7823,12 +7861,12 @@
       <argument type="service" id="security.token_storage"/>
     </service>
     <service id="debug.argument_resolver.service.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\ServiceValueResolver">
-      <argument type="service" id=".service_locator.SU0XEwc"/>
+      <argument type="service" id=".service_locator.GtsHWAR"/>
     </service>
     <service id="debug.argument_resolver.default.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\DefaultValueResolver"/>
     <service id="debug.argument_resolver.variadic.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\VariadicValueResolver"/>
     <service id="debug.argument_resolver.not_tagged_controller.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\NotTaggedControllerValueResolver">
-      <argument type="service" id=".service_locator.SU0XEwc"/>
+      <argument type="service" id=".service_locator.GtsHWAR"/>
     </service>
     <service id="debug.traced.messenger.bus.default.inner" class="Symfony\Component\Messenger\MessageBus">
       <argument type="iterator">
@@ -7860,6 +7898,7 @@
     <service id=".errored..service_locator.uSGXe_N.App\Entity\Categorie" class="App\Entity\Categorie"/>
     <service id=".errored..service_locator.4oDAgEZ.App\Entity\Categorie" class="App\Entity\Categorie"/>
     <service id=".errored..service_locator.2gwzzye.App\Entity\Event" class="App\Entity\Event"/>
+    <service id=".errored..service_locator.gaOl66k.App\Entity\Event" class="App\Entity\Event"/>
     <service id=".errored..service_locator.U8RxAMe.App\Entity\DemandeOrganisateur" class="App\Entity\DemandeOrganisateur"/>
     <service id=".errored..service_locator.5nd0y65.App\Entity\DemandeOrganisateur" class="App\Entity\DemandeOrganisateur"/>
     <service id=".errored..service_locator.wLYTQQR.App\Entity\Event" class="App\Entity\Event"/>
@@ -8797,7 +8836,7 @@
     <service id="Symfony\WebpackEncoreBundle\Asset\EntrypointLookupInterface" alias="webpack_encore.entrypoint_lookup[_default]"/>
     <service id="container.env_var_processors_locator" alias=".service_locator.gSv9zYw" public="true"/>
     <service id="twig.loader.filesystem" alias="twig.loader.native_filesystem"/>
-    <service id="argument_resolver.controller_locator" alias=".service_locator.SU0XEwc"/>
+    <service id="argument_resolver.controller_locator" alias=".service_locator.GtsHWAR"/>
     <service id="doctrine.id_generator_locator" alias=".service_locator.KLVvNIq"/>
     <service id="twig.loader" alias="twig.loader.native_filesystem"/>
     <service id="Psr\Log\LoggerInterface $requestLogger" alias="monolog.logger.request"/>
@@ -8820,13 +8859,15 @@
     <service id=".service_locator.XDGmiR3" alias=".1_ServiceLocator~NXklz5j"/>
     <service id=".service_locator.0GV1BZZ" alias=".service_locator.gSv9zYw"/>
     <service id=".service_locator.AZMNSOl" alias=".service_locator.2gwzzye"/>
+    <service id=".service_locator.QIDAQpv" alias=".service_locator.WMrx.a8"/>
+    <service id=".service_locator.iX5tGia" alias=".service_locator.gaOl66k"/>
     <service id=".service_locator.fFHahJ8" alias=".service_locator.QMXP_pG"/>
     <service id=".service_locator.4syrvZn" alias=".service_locator.H4lN5mG"/>
     <service id=".service_locator.2UNrPZE" alias=".service_locator.ZjduZC2"/>
     <service id=".service_locator.N47kXia" alias=".service_locator.OOouXHY"/>
     <service id=".service_locator.qOCE0t7" alias=".service_locator.Kv071AN"/>
     <service id=".service_locator.wCe1z5p" alias=".service_locator.Sthg2tf"/>
-    <service id=".service_locator.tysCCSh" alias=".service_locator.SU0XEwc"/>
+    <service id=".service_locator.25TW026" alias=".service_locator.GtsHWAR"/>
     <service id=".service_locator.wKF4yn1" alias=".service_locator.19_mNxd"/>
     <service id=".service_locator..1pIWv3" alias=".service_locator..bX8EHH"/>
     <service id=".service_locator.XW18Svm" alias=".service_locator.TcKhdzh"/>
@@ -8882,6 +8923,8 @@
     <service id=".service_locator.YRozg1z" alias=".service_locator.4oDAgEZ"/>
     <service id=".service_locator.d3RWG0z" alias=".service_locator.kql7h04"/>
     <service id=".service_locator.tbgr___" alias=".service_locator.2gwzzye"/>
+    <service id=".service_locator.44605Xc" alias=".service_locator.WMrx.a8"/>
+    <service id=".service_locator...qbkq6" alias=".service_locator.gaOl66k"/>
     <service id=".service_locator.0pa45QE" alias=".service_locator.qBkSXit"/>
     <service id=".service_locator.tHx574E" alias=".service_locator.iBsgFFO"/>
     <service id=".service_locator.XvUAyFN" alias=".service_locator.U8RxAMe"/>

@@ -53,7 +53,7 @@ class OrganisateurApplicationController extends AbstractController
         ->getForm();
 
         $form->handleRequest($request);
-//////////        
+       
     if ($form->isSubmitted() && $form->isValid()) {
         $cniFile = $form->get('cni')->getData();
         if ($cniFile) {
