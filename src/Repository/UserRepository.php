@@ -86,6 +86,19 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         ;
     }
 
+    public function findInscrit(int $idEvent): array
+    {
+        $query = $this->createQueryBuilder('u')
+        ->innerJoin('u.Inscrit', 'e', 'WITH', 'e.id = :idEvent')
+        ->setParameter('idEvent', $idEvent)
+        ->getQuery()
+        ->getResult();
+
+ 
+
+        return $query;
+
+    }
 //    /**
 //     * @return User[] Returns an array of User objects
 //     */

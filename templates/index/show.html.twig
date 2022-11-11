@@ -23,13 +23,21 @@
                 <th>NbInscrit</th>
                 <td>{{ event.nbInscrit }}</td>
             </tr>
+            <tr>
+                <th>Ville :</th>
+                <td>{{ event.lieu.ville }}</td>
+            </tr>
         </tbody>
     </table>
 
     <a href="{{ path('app_index') }}">Retourner à l'accueil </a>
+    {% if isConnected == true %}
     {% if isInscrit == false %}
     <a href="{{ path('app_registration_event', {'id': event.id}) }}">Inscription</a>
     {% else %}
         <a href="{{ path('app_unreg_event', {'id': event.id}) }}">Desinc</a>
     {% endif %}
+    {% endif %}
+
+
 {% endblock %}

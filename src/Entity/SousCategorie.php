@@ -22,12 +22,18 @@ class SousCategorie
     #[ORM\JoinColumn(nullable: false)]
     private ?Categorie $Categorie = null;
 
-    #[ORM\OneToMany(mappedBy: 'sousCategorie', targetEntity: Jeu::class)]
-    private Collection $jeus;
+    #[ORM\OneToMany(mappedBy: 'souscategorie', targetEntity: Activite::class)]
+    private Collection $activites;
+
+    #[ORM\OneToMany(mappedBy: 'souscategorie', targetEntity: Event::class)]
+    private Collection $events;
+
 
     public function __construct()
     {
         $this->jeus = new ArrayCollection();
+        $this->activites = new ArrayCollection();
+        $this->events = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -59,37 +65,68 @@ class SousCategorie
         return $this;
     }
 
-    /**
-     * @return Collection<int, Jeu>
-     */
-    public function getJeus(): Collection
-    {
-        return $this->jeus;
+    public function __toString(){
+        return $this->nomsousCategorie;
     }
 
-    public function addJeu(Jeu $jeu): self
+    /**
+     * @return Collection<int, Activite>
+     */
+    public function getActivites(): Collection
     {
-        if (!$this->jeus->contains($jeu)) {
-            $this->jeus->add($jeu);
-            $jeu->setSousCategorie($this);
+        return $this->activites;
+    }
+
+    public function addActivite(Activite $activite): self
+    {
+        if (!$this->activites->contains($activite)) {
+            $this->activites->add($activite);
+            $activite->setSouscategorie($this);
         }
 
         return $this;
     }
 
-    public function removeJeu(Jeu $jeu): self
+    public function removeActivite(Activite $activite): self
     {
-        if ($this->jeus->removeElement($jeu)) {
+        if ($this->activites->removeElement($activite)) {
             // set the owning side to null (unless already changed)
-            if ($jeu->getSousCategorie() === $this) {
-                $jeu->setSousCategorie(null);
+            if ($activite->getSouscategorie() === $this) {
+                $activite->setSouscategorie(null);
             }
         }
 
         return $this;
     }
-    public function __toString(){
-        return $this->nomsousCategorie;
+
+    /**
+     * @return Collection<int, Event>
+     */
+    public function getEvents(): Collection
+    {
+        return $this->events;
+    }
+
+    public function addEvent(Event $event): self
+    {
+        if (!$this->events->contains($event)) {
+            $this->events->add($event);
+            $event->setSouscategorie($this);
+        }
+
+        return $this;
+    }
+
+    public function removeEvent(Event $event): self
+    {
+        if ($this->events->removeElement($event)) {
+            // set the owning side to null (unless already changed)
+            if ($event->getSouscategorie() === $this) {
+                $event->setSouscategorie(null);
+            }
+        }
+
+        return $this;
     }
 
 }

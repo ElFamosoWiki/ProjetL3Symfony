@@ -37,12 +37,35 @@ class IndexController extends AbstractController
      public function show(EventRepository $eventRepository, Event $event, $id): Response
      {
         $user = $this->security->getUser();
+        $members=$event->getUsers();
+        $securityContext = $this->container->get('security.authorization_checker');
 
-         return $this->render('index/show.html.twig', [
-             'event' => $event,
-             'isInscrit' => $eventRepository->ckIfInscritExist($user->getId(),$id),
-             
-         ]);
+
+        if($securityContext->isGranted('IS_AUTHENTICATED_REMEMBERED')){
+            if (!($members->contains($this->getUser()))) {
+                return $this->render('index/show.html.twig', [
+                    'event' => $event,
+                    'isInscrit' => false,
+                    'isConnected' => true,
+                ]);
+            }else {
+                return $this->render('index/show.html.twig', [
+                    'event' => $event,
+                    'isInscrit' => true,
+                    'isConnected' => true,
+                ]);
+            }
+        }else {
+            return $this->render('index/show.html.twig', [
+                'event' => $event,
+                'isInscrit' => false,
+                'isConnected' => false,
+            ]);
+        }
+       
+        
+
+         
      }
     
     #[Route('/registration/{id}/', name: 'app_registration_event', methods: ['GET'])]
