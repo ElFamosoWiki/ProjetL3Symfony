@@ -48,12 +48,17 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?string $pseudo=null;
 
 
+
+
     #[ORM\OneToOne(mappedBy:'user', cascade: ['persist', 'remove'])]
     private ?ImageUser $UrlImage = null;
     
 
     #[ORM\OneToMany(mappedBy: 'adminEvent', targetEntity: Event::class, orphanRemoval: true)]
     private Collection $events;
+
+    #[ORM\Column(type: 'boolean')]
+    private $active;
 
 
 
@@ -63,6 +68,19 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->events = new ArrayCollection();
     }
 
+
+
+    public function getActive(): ?bool
+    {
+        return $this->active;
+    }
+
+    public function setActive(bool $active): self
+    {
+        $this->active = $active;
+
+        return $this;
+    }
    
 
     public function getId(): ?int
@@ -221,6 +239,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setUrlImage(?ImageUser $category) : self
     {
         $this->UrlImage = $category;
+
+        return $this;
     }    
 
     /**

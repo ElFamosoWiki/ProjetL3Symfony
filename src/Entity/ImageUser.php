@@ -2,10 +2,11 @@
 
 namespace App\Entity;
 
-use App\Repository\ImageUserRepository;
 use Doctrine\ORM\Mapping as ORM;
-use Doctrine\Common\Collections\ArrayCollection;
+use App\Repository\ImageUserRepository;
 use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 #[ORM\Entity(repositoryClass: ImageUserRepository::class)]
 class ImageUser 
@@ -21,6 +22,7 @@ class ImageUser
     #[ORM\OneToOne(inversedBy: 'UrlImage', cascade: ['persist'])]
     #[ORM\JoinColumn(nullable: false)]
     private ?User $user = null;
+
 
     public function getId(): ?int
     {
@@ -55,4 +57,5 @@ class ImageUser
     public function __toString(){
         return $this->UrlImage;
     }
+    
 }
