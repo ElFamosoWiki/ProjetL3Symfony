@@ -15,6 +15,16 @@ use Symfony\Component\Security\Core\Security;
 use App\Entity\User;
 use App\Entity\Lieu;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Symfony\Component\Form\FormEvents;
+use Symfony\Component\Form\FormEvent;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Form\FormInterface;
+use App\Entity\Categorie;
+use App\Form\CategorieType;
+use App\Repository\CategorieRepository;
+use App\Entity\SousCategorie;
+use App\Form\SousCategorieType;
+use App\Repository\SousCategorieRepository;
 
 class CreateEventController extends AbstractController
 {
@@ -28,7 +38,7 @@ class CreateEventController extends AbstractController
 
     #[IsGranted("ROLE_ORGANISATEUR")]
     #[Route('/create/event', name: 'app_create_event', methods: ['GET', 'POST'])]
-    public function index(Request $request,EventRepository $eventRepository, LieuRepository $lieuRepository): Response
+    public function index(Request $request,EventRepository $eventRepository, LieuRepository $lieuRepository, CategorieRepository $CateR, SousCategorieRepository $SousCater): Response
     {
        // $this->denyAccessUnlessGranted('ROLE_ORGANISATEUR');
 
@@ -36,14 +46,17 @@ class CreateEventController extends AbstractController
         $lieu = new Lieu();
         $user = $this->security->getUser();
 
-
-        $form = $this->createFormBuilder($event)
+        
+        $form = $this->createFormBuilder(['idcategorie' => $CateR->find(1)])
             ->add('nomEvent')
             ->add('nbPlace')
             ->add('description')
-            ->add('idcategorie')
+            ->add('idcategorie', EntityType::class, [
+                'class' => Categorie::class,
+                'choice_label' => 'nomCategorie',
+            
+            ])
             ->getForm();
-
             $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

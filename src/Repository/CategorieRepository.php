@@ -38,6 +38,15 @@ class CategorieRepository extends ServiceEntityRepository
             $this->getEntityManager()->flush();
         }
     }
+    public function findOneBySomeField(int $id): ?Categorie
+    {
+        return $this->createQueryBuilder('c')
+                    ->andWhere('c.id = :val')
+            ->setParameter('val', $id)
+            ->getQuery()
+            ->getOneOrNullResult()
+        ;
+    }
 
 //    /**
 //     * @return Categorie[] Returns an array of Categorie objects
