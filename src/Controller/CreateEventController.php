@@ -15,6 +15,13 @@ use Symfony\Component\Security\Core\Security;
 use App\Entity\User;
 use App\Entity\Lieu;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\String\Slugger\SluggerInterface;
+use Symfony\Component\Validator\Constraints\File;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
+
 
 class CreateEventController extends AbstractController
 {
@@ -28,7 +35,7 @@ class CreateEventController extends AbstractController
 
     #[IsGranted("ROLE_ORGANISATEUR")]
     #[Route('/create/event', name: 'app_create_event', methods: ['GET', 'POST'])]
-    public function index(Request $request,EventRepository $eventRepository, LieuRepository $lieuRepository): Response
+    public function index(Request $request,EventRepository $eventRepository, LieuRepository $lieuRepository, SluggerInterface $slugger,): Response
     {
        // $this->denyAccessUnlessGranted('ROLE_ORGANISATEUR');
 
@@ -42,11 +49,63 @@ class CreateEventController extends AbstractController
             ->add('nbPlace')
             ->add('description')
             ->add('idcategorie')
+            ->add('jeu')
+            ->add('datedebut',DateType::Class, array(
+                'input' => 'datetime_immutable',
+                'years' => range(date('Y'), date('Y')+2),
+                'months' => range(date('m'), 12),
+                'days' => range(date('d'), 31),))
+            ->add('datefin',DateType::Class, array(
+                'input' => 'datetime_immutable',
+                'years' => range(date('Y'), date('Y')+3),
+                'months' => range(date('m'), 12),
+                'days' => range(date('d'), 31),))
+            ->add('logoEv', FileType::class, [
+                'label' => 'Photo de profil',
+                'mapped' => false,
+                'required' => false,
+
+                'constraints' =>[
+                    new File([
+                        'maxSize' => '1024k',
+                        'mimeTypes' => [
+                            'image/png',
+                            'image/jpeg'
+                        ],
+                        'mimeTypesMessage' => 'Merci de mettre une image en format PNG/JPG'
+                    ])
+                ]
+            ])
             ->getForm();
 
             $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+
+            $logoEvFile = $form->get('logoEv')->getData();
+            if ($logoEvFile) {
+                $originalFilename = pathinfo($logoEvFile->getClientOriginalName(), PATHINFO_FILENAME);
+                $safeFilename = $slugger->slug($originalFilename);
+                $newFilename = $safeFilename.'-'.uniqid().'.'.$logoEvFile->guessExtension();
+    
+            try {
+                $logoEvFile->move(
+                $this->getParameter('logoEv_directory'),
+                $newFilename
+            );
+            } catch (FileException $e) {
+            // ... handle exception if something happens during file upload
+            }
+    
+        $event->setLogoEv($newFilename);
+    }
+
+
+
+
+
+
 
             $event->setAdminEvent($user);
             $lieu->setVille($_COOKIE['city']);
