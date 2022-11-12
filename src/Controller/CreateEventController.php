@@ -35,6 +35,7 @@ class CreateEventController extends AbstractController
 
     #[IsGranted("ROLE_ORGANISATEUR")]
     #[Route('/create/event', name: 'app_create_event', methods: ['GET', 'POST'])]
+
     public function index(Request $request,EventRepository $eventRepository, LieuRepository $lieuRepository, SluggerInterface $slugger,): Response
     {
        // $this->denyAccessUnlessGranted('ROLE_ORGANISATEUR');
@@ -43,8 +44,8 @@ class CreateEventController extends AbstractController
         $lieu = new Lieu();
         $user = $this->security->getUser();
 
-
-        $form = $this->createFormBuilder($event)
+        
+        $form = $this->createFormBuilder(['idcategorie' => $CateR->find(1)])
             ->add('nomEvent')
             ->add('nbPlace')
             ->add('description')
@@ -77,7 +78,6 @@ class CreateEventController extends AbstractController
                 ]
             ])
             ->getForm();
-
             $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

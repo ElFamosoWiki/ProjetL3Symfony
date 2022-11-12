@@ -50,8 +50,7 @@ class Event
     #[ORM\ManyToOne(inversedBy: 'events')]
     private ?SousCategorie $souscategorie = null;
 
-    #[ORM\ManyToOne(inversedBy: 'events')]
-    private ?Jeu $jeu = null;
+    
 
     #[ORM\Column(length: 255)]
     private ?string $logoEv = null;
@@ -211,17 +210,6 @@ class Event
         return $this;
     }
 
-    public function getJeu(): ?Jeu
-    {
-        return $this->jeu;
-    }
-
-    public function setJeu(?Jeu $jeu): self
-    {
-        $this->jeu = $jeu;
-
-        return $this;
-    }
 
     public function getLogoEv(): ?string
     {

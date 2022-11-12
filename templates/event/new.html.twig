@@ -5,7 +5,41 @@
 {% block body %}
     <h1>Create new Event</h1>
 
-    {{ include('event/_form.html.twig') }}
-
+    
+    {{ form_start(eventForm) }}
+         {{ form_row(eventForm.nomEvent) }}
+        {{ form_row(eventForm.idcategorie) }}
+        {{ form_row(eventForm.souscategorie) }}
+         {{ form_row(eventForm.accept) }}
+       
     <a href="{{ path('app_event_index') }}">back to list</a>
+{% endblock %}
+
+{% block javascripts %}
+<script>
+    window.onload = () => {
+        let categorie = document.querySelector("#event_idcategorie");
+
+        categorie.addEventListener("change", function(){
+            let form = this.closest("form");
+            let data = this.name + "=" + this.value;
+
+            fetch(form.action, {
+                method: form.getAttribute("method"),
+                body: data,
+                headers: {
+                    "Content-Type": "application/x-www-form-urlencoded; charset:UTF-8"
+                }
+            })
+            .then(response => response.text())
+            .then(html => {
+                let content = document.createElement("html");
+                content.innerHTML = html;
+                let nouveau = content.querySelector("#event_souscategorie");
+                document.querySelector("#event_souscategorie").replaceWith(nouveau);
+            })
+        });
+    }
+    </script>
+    
 {% endblock %}

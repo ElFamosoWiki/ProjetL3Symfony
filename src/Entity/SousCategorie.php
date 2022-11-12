@@ -22,15 +22,11 @@ class SousCategorie
     #[ORM\JoinColumn(nullable: false)]
     private ?Categorie $Categorie = null;
 
-    #[ORM\OneToMany(mappedBy: 'sousCategorie', targetEntity: Jeu::class)]
-    private Collection $jeus;
-
     #[ORM\OneToMany(mappedBy: 'souscategorie', targetEntity: Event::class)]
     private Collection $events;
 
     public function __construct()
     {
-        $this->jeus = new ArrayCollection();
         $this->events = new ArrayCollection();
     }
 
@@ -63,35 +59,6 @@ class SousCategorie
         return $this;
     }
 
-    /**
-     * @return Collection<int, Jeu>
-     */
-    public function getJeus(): Collection
-    {
-        return $this->jeus;
-    }
-
-    public function addJeu(Jeu $jeu): self
-    {
-        if (!$this->jeus->contains($jeu)) {
-            $this->jeus->add($jeu);
-            $jeu->setSousCategorie($this);
-        }
-
-        return $this;
-    }
-
-    public function removeJeu(Jeu $jeu): self
-    {
-        if ($this->jeus->removeElement($jeu)) {
-            // set the owning side to null (unless already changed)
-            if ($jeu->getSousCategorie() === $this) {
-                $jeu->setSousCategorie(null);
-            }
-        }
-
-        return $this;
-    }
     public function __toString(){
         return $this->nomsousCategorie;
     }
