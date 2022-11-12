@@ -47,6 +47,21 @@ class Event
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $description = null;
 
+    #[ORM\ManyToOne(inversedBy: 'events')]
+    private ?SousCategorie $souscategorie = null;
+
+    #[ORM\ManyToOne(inversedBy: 'events')]
+    private ?Jeu $jeu = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $logoEv = null;
+
+    #[ORM\Column]
+    private ?\DateTimeImmutable $datedebut = null;
+
+    #[ORM\Column]
+    private ?\DateTimeImmutable $datefin = null;
+
   
     
 
@@ -180,6 +195,66 @@ class Event
     public function setDescription(?string $description): self
     {
         $this->description = $description;
+
+        return $this;
+    }
+
+    public function getSouscategorie(): ?SousCategorie
+    {
+        return $this->souscategorie;
+    }
+
+    public function setSouscategorie(?SousCategorie $souscategorie): self
+    {
+        $this->souscategorie = $souscategorie;
+
+        return $this;
+    }
+
+    public function getJeu(): ?Jeu
+    {
+        return $this->jeu;
+    }
+
+    public function setJeu(?Jeu $jeu): self
+    {
+        $this->jeu = $jeu;
+
+        return $this;
+    }
+
+    public function getLogoEv(): ?string
+    {
+        return $this->logoEv;
+    }
+
+    public function setLogoEv(string $logoEv): self
+    {
+        $this->logoEv = $logoEv;
+
+        return $this;
+    }
+
+    public function getDatedebut(): ?\DateTimeImmutable
+    {
+        return $this->datedebut;
+    }
+
+    public function setDatedebut(\DateTimeImmutable $datedebut): self
+    {
+        $this->datedebut = $datedebut;
+
+        return $this;
+    }
+
+    public function getDatefin(): ?\DateTimeImmutable
+    {
+        return $this->datefin;
+    }
+
+    public function setDatefin(\DateTimeImmutable $datefin): self
+    {
+        $this->datefin = $datefin;
 
         return $this;
     }
