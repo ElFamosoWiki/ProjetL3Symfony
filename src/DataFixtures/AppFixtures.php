@@ -4,6 +4,9 @@ namespace App\DataFixtures;
 
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
+use App\Entity\Categorie;
+use App\Entity\SousCategorie;
+
 
 class AppFixtures extends Fixture
 {
@@ -67,25 +70,13 @@ class AppFixtures extends Fixture
          $Bateau->setNomsousCategorie('Bateau');
          $Bateau->setCategorie($sportAuto);
  
-         $F1 = new Activite;
-         $F1->setNomActivite('F1');
-         $F1->setSouscategorie($Voiture);
-
-         $GpM = new Activite;
-         $GpM->setNomActivite('GP Moto');
-         $GpM->setSouscategorie($Voiture);
-
-         $Tour = new Activite;
-         $Tour->setNomActivite('Tour du globe');
-         $Tour->setSouscategorie($Voiture);
+         
 
          $manager->persist($sportAuto);
          $manager->persist($Voiture);
          $manager->persist($Moto);
          $manager->persist($Bateau);
-         $manager->persist($F1);
-         $manager->persist($GpM);
-         $manager->persist($Tour);
+        
 
         $manager->flush();
     }
