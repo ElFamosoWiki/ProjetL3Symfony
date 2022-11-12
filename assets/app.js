@@ -12,16 +12,6 @@ import './styles/app.css';
 import './bootstrap';
 
 
-import { createRoot } from 'react-dom/client';import React from 'react';
-import Affichenav from './react/afficheNav';
-
-
-
-const container = document.getElementById('root');
-const root = createRoot(container); // createRoot(container!) if you use TypeScript
-root.render(<Affichenav />);
-
-
 
 const myAPIKey = "359953300cb54dc2b26338a792c2d1b6";
 

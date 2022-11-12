@@ -22,7 +22,7 @@ use Symfony\Component\Form\CallbackTransformer;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 
-#[Route('/profil/{id}')]
+#[Route('/{id}/profil')]
 class ProfilController extends AbstractController{
 
     #[Route('/', name: 'app_profil_show', methods: ['GET'])]

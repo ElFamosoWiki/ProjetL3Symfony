@@ -75,7 +75,6 @@
     <parameter key="kernel.charset">UTF-8</parameter>
     <parameter key="kernel.container_class">App_KernelDevDebugContainer</parameter>
     <parameter key="cni_directory">/Users/corentin/ProjetL3Symfony/public/build/cni</parameter>
-    <parameter key="pdp_directory">/Users/corentin/ProjetL3Symfony/assets/upload/pdp</parameter>
     <parameter key="event_dispatcher.event_aliases" type="collection">
       <parameter key="Symfony\Component\Console\Event\ConsoleCommandEvent">console.command</parameter>
       <parameter key="Symfony\Component\Console\Event\ConsoleErrorEvent">console.error</parameter>
@@ -399,26 +398,12 @@
         <argument type="service" id=".service_locator.jIxfAsi.App\Controller\JeuController"/>
       </call>
     </service>
-    <service id="App\Controller\MapController" class="App\Controller\MapController" public="true" autowire="true" autoconfigure="true">
-      <tag name="controller.service_arguments"/>
-      <tag name="container.service_subscriber"/>
-      <call method="setContainer">
-        <argument type="service" id=".service_locator.jIxfAsi.App\Controller\MapController"/>
-      </call>
-    </service>
     <service id="App\Controller\OrganisateurApplicationController" class="App\Controller\OrganisateurApplicationController" public="true" autowire="true" autoconfigure="true">
       <tag name="controller.service_arguments"/>
       <tag name="container.service_subscriber"/>
       <argument type="service" id="security.helper"/>
       <call method="setContainer">
         <argument type="service" id=".service_locator.jIxfAsi.App\Controller\OrganisateurApplicationController"/>
-      </call>
-    </service>
-    <service id="App\Controller\ProfilController" class="App\Controller\ProfilController" public="true" autowire="true" autoconfigure="true">
-      <tag name="controller.service_arguments"/>
-      <tag name="container.service_subscriber"/>
-      <call method="setContainer">
-        <argument type="service" id=".service_locator.jIxfAsi.App\Controller\ProfilController"/>
       </call>
     </service>
     <service id="App\Controller\RegistrationController" class="App\Controller\RegistrationController" public="true" autowire="true" autoconfigure="true">
@@ -440,13 +425,6 @@
       <tag name="container.service_subscriber"/>
       <call method="setContainer">
         <argument type="service" id=".service_locator.jIxfAsi.App\Controller\SousCategorieController"/>
-      </call>
-    </service>
-    <service id="App\Controller\VerificationController" class="App\Controller\VerificationController" public="true" autowire="true" autoconfigure="true">
-      <tag name="controller.service_arguments"/>
-      <tag name="container.service_subscriber"/>
-      <call method="setContainer">
-        <argument type="service" id=".service_locator.jIxfAsi.App\Controller\VerificationController"/>
       </call>
     </service>
     <service id="App\Form\CategorieType" class="App\Form\CategorieType" autowire="true" autoconfigure="true">
@@ -505,7 +483,6 @@
     <service id="App\Security\AuthAuthenticator" class="App\Security\AuthAuthenticator" autowire="true" autoconfigure="true">
       <argument type="service" id="router.default"/>
     </service>
-    <service id="App\Service\ImageService" class="App\Service\ImageService" autowire="true" autoconfigure="true"/>
     <service id="argument_metadata_factory" class="Symfony\Component\HttpKernel\ControllerMetadata\ArgumentMetadataFactory"/>
     <service id="response_listener" class="Symfony\Component\HttpKernel\EventListener\ResponseListener">
       <tag name="kernel.event_subscriber"/>
@@ -5774,7 +5751,7 @@
     <service id="security.logout.listener.default.main" class="Symfony\Component\Security\Http\EventListener\DefaultLogoutListener">
       <tag name="kernel.event_subscriber" dispatcher="security.event_dispatcher.main"/>
       <argument type="service" id="security.http_utils"/>
-      <argument>app_index</argument>
+      <argument>/</argument>
     </service>
     <service id="security.logout.listener.session.main" class="Symfony\Component\Security\Http\EventListener\SessionLogoutListener">
       <tag name="kernel.event_subscriber" dispatcher="security.event_dispatcher.main"/>
@@ -6248,15 +6225,9 @@
     <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\JeuController" class="App\Controller\JeuController" autowire="true" abstract="true"/>
     <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\JeuController" class="App\Controller\JeuController" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Controller\JeuController" class="App\Controller\JeuController" autowire="true" autoconfigure="true" abstract="true"/>
-    <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\MapController" class="App\Controller\MapController" autowire="true" abstract="true"/>
-    <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\MapController" class="App\Controller\MapController" autowire="true" abstract="true"/>
-    <service id=".abstract.instanceof.App\Controller\MapController" class="App\Controller\MapController" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\OrganisateurApplicationController" class="App\Controller\OrganisateurApplicationController" autowire="true" abstract="true"/>
     <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\OrganisateurApplicationController" class="App\Controller\OrganisateurApplicationController" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Controller\OrganisateurApplicationController" class="App\Controller\OrganisateurApplicationController" autowire="true" autoconfigure="true" abstract="true"/>
-    <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\ProfilController" class="App\Controller\ProfilController" autowire="true" abstract="true"/>
-    <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\ProfilController" class="App\Controller\ProfilController" autowire="true" abstract="true"/>
-    <service id=".abstract.instanceof.App\Controller\ProfilController" class="App\Controller\ProfilController" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\RegistrationController" class="App\Controller\RegistrationController" autowire="true" abstract="true"/>
     <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\RegistrationController" class="App\Controller\RegistrationController" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Controller\RegistrationController" class="App\Controller\RegistrationController" autowire="true" autoconfigure="true" abstract="true"/>
@@ -6266,9 +6237,6 @@
     <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\SousCategorieController" class="App\Controller\SousCategorieController" autowire="true" abstract="true"/>
     <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\SousCategorieController" class="App\Controller\SousCategorieController" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Controller\SousCategorieController" class="App\Controller\SousCategorieController" autowire="true" autoconfigure="true" abstract="true"/>
-    <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\VerificationController" class="App\Controller\VerificationController" autowire="true" abstract="true"/>
-    <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\VerificationController" class="App\Controller\VerificationController" autowire="true" abstract="true"/>
-    <service id=".abstract.instanceof.App\Controller\VerificationController" class="App\Controller\VerificationController" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Symfony\Component\Form\FormTypeInterface.0.App\Form\CategorieType" class="App\Form\CategorieType" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Form\CategorieType" class="App\Form\CategorieType" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Symfony\Component\Form\FormTypeInterface.0.App\Form\DemandeOrganisateurType" class="App\Form\DemandeOrganisateurType" autowire="true" abstract="true"/>
@@ -6725,19 +6693,10 @@
         <argument key="slugger" type="service_closure" id="slugger"/>
       </argument>
     </service>
-    <service id=".service_locator.otUSV57" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.b9NNwBb" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
-        <argument key="imageUser" type="service_closure" id=".errored..service_locator.otUSV57.App\Entity\ImageUser"/>
-        <argument key="user" type="service_closure" id="App\Repository\UserRepository"/>
-      </argument>
-    </service>
-    <service id=".service_locator.pdtD_GB" class="Symfony\Component\DependencyInjection\ServiceLocator">
-      <tag name="container.service_locator"/>
-      <argument type="collection">
-        <argument key="imageUser" type="service_closure" id=".errored..service_locator.pdtD_GB.App\Entity\ImageUser"/>
-        <argument key="imageUserRepository" type="service_closure" id="App\Repository\ImageUserRepository"/>
-        <argument key="slugger" type="service_closure" id="slugger"/>
+        <argument key="imageUser" type="service_closure" id=".errored..service_locator.b9NNwBb.App\Entity\ImageUser"/>
       </argument>
     </service>
     <service id=".service_locator.cemrLIZ" class="Symfony\Component\DependencyInjection\ServiceLocator">
@@ -6773,36 +6732,11 @@
         <argument key="jeuRepository" type="service_closure" id="App\Repository\JeuRepository"/>
       </argument>
     </service>
-    <service id=".service_locator.H4lN5mG" class="Symfony\Component\DependencyInjection\ServiceLocator">
-      <tag name="container.service_locator"/>
-      <argument type="collection">
-        <argument key="demandeOrganisateurRepository" type="service_closure" id="App\Repository\DemandeOrganisateurRepository"/>
-        <argument key="demandeRepository" type="service_closure" id="App\Repository\DemandeOrganisateurRepository"/>
-        <argument key="slugger" type="service_closure" id="slugger"/>
-      </argument>
-    </service>
-    <service id=".service_locator.ZjduZC2" class="Symfony\Component\DependencyInjection\ServiceLocator">
-      <tag name="container.service_locator"/>
-      <argument type="collection">
-        <argument key="ImageRepository" type="service_closure" id="App\Repository\ImageUserRepository"/>
-        <argument key="user" type="service_closure" id=".errored..service_locator.ZjduZC2.App\Entity\User"/>
-      </argument>
-    </service>
-    <service id=".service_locator.OOouXHY" class="Symfony\Component\DependencyInjection\ServiceLocator">
-      <tag name="container.service_locator"/>
-      <argument type="collection">
-        <argument key="imageUserRepository" type="service_closure" id="App\Repository\ImageUserRepository"/>
-        <argument key="slugger" type="service_closure" id="slugger"/>
-        <argument key="user" type="service_closure" id=".errored..service_locator.OOouXHY.App\Entity\User"/>
-        <argument key="users" type="service_closure" id="App\Repository\UserRepository"/>
-      </argument>
-    </service>
-    <service id=".service_locator.Kv071AN" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.YlW7lH6" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="authenticator" type="service_closure" id="App\Security\AuthAuthenticator"/>
         <argument key="entityManager" type="service_closure" id="doctrine.orm.default_entity_manager"/>
-        <argument key="imageuser" type="service_closure" id="App\Repository\ImageUserRepository"/>
         <argument key="userAuthenticator" type="service_closure" id="security.user_authenticator"/>
         <argument key="userPasswordHasher" type="service_closure" id="security.user_password_hasher"/>
       </argument>
@@ -6832,21 +6766,7 @@
         <argument key="sousCategorieRepository" type="service_closure" id="App\Repository\SousCategorieRepository"/>
       </argument>
     </service>
-    <service id=".service_locator.j.rAnae" class="Symfony\Component\DependencyInjection\ServiceLocator">
-      <tag name="container.service_locator"/>
-      <argument type="collection">
-        <argument key="verifRepo" type="service_closure" id="App\Repository\DemandeOrganisateurRepository"/>
-      </argument>
-    </service>
-    <service id=".service_locator.Sthg2tf" class="Symfony\Component\DependencyInjection\ServiceLocator">
-      <tag name="container.service_locator"/>
-      <argument type="collection">
-        <argument key="demande" type="service_closure" id=".errored..service_locator.Sthg2tf.App\Entity\DemandeOrganisateur"/>
-        <argument key="users" type="service_closure" id="App\Repository\UserRepository"/>
-        <argument key="verifRepo" type="service_closure" id="App\Repository\DemandeOrganisateurRepository"/>
-      </argument>
-    </service>
-    <service id=".service_locator.SU0XEwc" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.Rd2ULwb" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="App\Controller\CategorieController::delete" type="service_closure" id=".service_locator.4oDAgEZ"/>
@@ -6867,10 +6787,10 @@
         <argument key="App\Controller\EventController::new" type="service_closure" id=".service_locator.Qim_sWz"/>
         <argument key="App\Controller\EventController::show" type="service_closure" id=".service_locator.wLYTQQR"/>
         <argument key="App\Controller\ImageUserController::delete" type="service_closure" id=".service_locator.cemrLIZ"/>
-        <argument key="App\Controller\ImageUserController::edit" type="service_closure" id=".service_locator.pdtD_GB"/>
+        <argument key="App\Controller\ImageUserController::edit" type="service_closure" id=".service_locator.cemrLIZ"/>
         <argument key="App\Controller\ImageUserController::index" type="service_closure" id=".service_locator.JIkuSEd"/>
         <argument key="App\Controller\ImageUserController::new" type="service_closure" id=".service_locator.TWl5muW"/>
-        <argument key="App\Controller\ImageUserController::show" type="service_closure" id=".service_locator.otUSV57"/>
+        <argument key="App\Controller\ImageUserController::show" type="service_closure" id=".service_locator.b9NNwBb"/>
         <argument key="App\Controller\IndexController::desinscription" type="service_closure" id=".service_locator.QMXP_pG"/>
         <argument key="App\Controller\IndexController::index" type="service_closure" id=".service_locator.Qim_sWz"/>
         <argument key="App\Controller\IndexController::inscription" type="service_closure" id=".service_locator.QMXP_pG"/>
@@ -6880,19 +6800,14 @@
         <argument key="App\Controller\JeuController::index" type="service_closure" id=".service_locator.rLdBCqg"/>
         <argument key="App\Controller\JeuController::new" type="service_closure" id=".service_locator.rLdBCqg"/>
         <argument key="App\Controller\JeuController::show" type="service_closure" id=".service_locator.H_fF5vi"/>
-        <argument key="App\Controller\MapController::index" type="service_closure" id=".service_locator.JIkuSEd"/>
-        <argument key="App\Controller\OrganisateurApplicationController::index" type="service_closure" id=".service_locator.H4lN5mG"/>
-        <argument key="App\Controller\ProfilController::index" type="service_closure" id=".service_locator.ZjduZC2"/>
-        <argument key="App\Controller\ProfilController::modifie" type="service_closure" id=".service_locator.OOouXHY"/>
-        <argument key="App\Controller\RegistrationController::register" type="service_closure" id=".service_locator.Kv071AN"/>
+        <argument key="App\Controller\OrganisateurApplicationController::index" type="service_closure" id=".service_locator.iBsgFFO"/>
+        <argument key="App\Controller\RegistrationController::register" type="service_closure" id=".service_locator.YlW7lH6"/>
         <argument key="App\Controller\SecurityController::login" type="service_closure" id=".service_locator.zFcJjKU"/>
         <argument key="App\Controller\SousCategorieController::delete" type="service_closure" id=".service_locator.2M7rLHR"/>
         <argument key="App\Controller\SousCategorieController::edit" type="service_closure" id=".service_locator.2M7rLHR"/>
         <argument key="App\Controller\SousCategorieController::index" type="service_closure" id=".service_locator.4xYgvp0"/>
         <argument key="App\Controller\SousCategorieController::new" type="service_closure" id=".service_locator.4xYgvp0"/>
         <argument key="App\Controller\SousCategorieController::show" type="service_closure" id=".service_locator.F.S2d8P"/>
-        <argument key="App\Controller\VerificationController::index" type="service_closure" id=".service_locator.j.rAnae"/>
-        <argument key="App\Controller\VerificationController::reponse" type="service_closure" id=".service_locator.Sthg2tf"/>
         <argument key="App\Kernel::loadRoutes" type="service_closure" id=".service_locator.xUrKPVU"/>
         <argument key="App\Kernel::registerContainerConfiguration" type="service_closure" id=".service_locator.xUrKPVU"/>
         <argument key="App\Kernel::terminate" type="service_closure" id=".service_locator.bRdave9"/>
@@ -6917,10 +6832,10 @@
         <argument key="App\Controller\EventController:new" type="service_closure" id=".service_locator.Qim_sWz"/>
         <argument key="App\Controller\EventController:show" type="service_closure" id=".service_locator.wLYTQQR"/>
         <argument key="App\Controller\ImageUserController:delete" type="service_closure" id=".service_locator.cemrLIZ"/>
-        <argument key="App\Controller\ImageUserController:edit" type="service_closure" id=".service_locator.pdtD_GB"/>
+        <argument key="App\Controller\ImageUserController:edit" type="service_closure" id=".service_locator.cemrLIZ"/>
         <argument key="App\Controller\ImageUserController:index" type="service_closure" id=".service_locator.JIkuSEd"/>
         <argument key="App\Controller\ImageUserController:new" type="service_closure" id=".service_locator.TWl5muW"/>
-        <argument key="App\Controller\ImageUserController:show" type="service_closure" id=".service_locator.otUSV57"/>
+        <argument key="App\Controller\ImageUserController:show" type="service_closure" id=".service_locator.b9NNwBb"/>
         <argument key="App\Controller\IndexController:desinscription" type="service_closure" id=".service_locator.QMXP_pG"/>
         <argument key="App\Controller\IndexController:index" type="service_closure" id=".service_locator.Qim_sWz"/>
         <argument key="App\Controller\IndexController:inscription" type="service_closure" id=".service_locator.QMXP_pG"/>
@@ -6930,19 +6845,14 @@
         <argument key="App\Controller\JeuController:index" type="service_closure" id=".service_locator.rLdBCqg"/>
         <argument key="App\Controller\JeuController:new" type="service_closure" id=".service_locator.rLdBCqg"/>
         <argument key="App\Controller\JeuController:show" type="service_closure" id=".service_locator.H_fF5vi"/>
-        <argument key="App\Controller\MapController:index" type="service_closure" id=".service_locator.JIkuSEd"/>
-        <argument key="App\Controller\OrganisateurApplicationController:index" type="service_closure" id=".service_locator.H4lN5mG"/>
-        <argument key="App\Controller\ProfilController:index" type="service_closure" id=".service_locator.ZjduZC2"/>
-        <argument key="App\Controller\ProfilController:modifie" type="service_closure" id=".service_locator.OOouXHY"/>
-        <argument key="App\Controller\RegistrationController:register" type="service_closure" id=".service_locator.Kv071AN"/>
+        <argument key="App\Controller\OrganisateurApplicationController:index" type="service_closure" id=".service_locator.iBsgFFO"/>
+        <argument key="App\Controller\RegistrationController:register" type="service_closure" id=".service_locator.YlW7lH6"/>
         <argument key="App\Controller\SecurityController:login" type="service_closure" id=".service_locator.zFcJjKU"/>
         <argument key="App\Controller\SousCategorieController:delete" type="service_closure" id=".service_locator.2M7rLHR"/>
         <argument key="App\Controller\SousCategorieController:edit" type="service_closure" id=".service_locator.2M7rLHR"/>
         <argument key="App\Controller\SousCategorieController:index" type="service_closure" id=".service_locator.4xYgvp0"/>
         <argument key="App\Controller\SousCategorieController:new" type="service_closure" id=".service_locator.4xYgvp0"/>
         <argument key="App\Controller\SousCategorieController:show" type="service_closure" id=".service_locator.F.S2d8P"/>
-        <argument key="App\Controller\VerificationController:index" type="service_closure" id=".service_locator.j.rAnae"/>
-        <argument key="App\Controller\VerificationController:reponse" type="service_closure" id=".service_locator.Sthg2tf"/>
         <argument key="kernel:loadRoutes" type="service_closure" id=".service_locator.xUrKPVU"/>
         <argument key="kernel:registerContainerConfiguration" type="service_closure" id=".service_locator.xUrKPVU"/>
         <argument key="kernel:terminate" type="service_closure" id=".service_locator.bRdave9"/>
@@ -7523,21 +7433,9 @@
       <argument type="service" id="service_container"/>
       <factory service=".service_locator.jIxfAsi" method="withContext"/>
     </service>
-    <service id=".service_locator.jIxfAsi.App\Controller\MapController" class="Symfony\Component\DependencyInjection\ServiceLocator">
-      <tag name="container.service_locator_context" id="App\Controller\MapController"/>
-      <argument>App\Controller\MapController</argument>
-      <argument type="service" id="service_container"/>
-      <factory service=".service_locator.jIxfAsi" method="withContext"/>
-    </service>
     <service id=".service_locator.jIxfAsi.App\Controller\OrganisateurApplicationController" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator_context" id="App\Controller\OrganisateurApplicationController"/>
       <argument>App\Controller\OrganisateurApplicationController</argument>
-      <argument type="service" id="service_container"/>
-      <factory service=".service_locator.jIxfAsi" method="withContext"/>
-    </service>
-    <service id=".service_locator.jIxfAsi.App\Controller\ProfilController" class="Symfony\Component\DependencyInjection\ServiceLocator">
-      <tag name="container.service_locator_context" id="App\Controller\ProfilController"/>
-      <argument>App\Controller\ProfilController</argument>
       <argument type="service" id="service_container"/>
       <factory service=".service_locator.jIxfAsi" method="withContext"/>
     </service>
@@ -7556,12 +7454,6 @@
     <service id=".service_locator.jIxfAsi.App\Controller\SousCategorieController" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator_context" id="App\Controller\SousCategorieController"/>
       <argument>App\Controller\SousCategorieController</argument>
-      <argument type="service" id="service_container"/>
-      <factory service=".service_locator.jIxfAsi" method="withContext"/>
-    </service>
-    <service id=".service_locator.jIxfAsi.App\Controller\VerificationController" class="Symfony\Component\DependencyInjection\ServiceLocator">
-      <tag name="container.service_locator_context" id="App\Controller\VerificationController"/>
-      <argument>App\Controller\VerificationController</argument>
       <argument type="service" id="service_container"/>
       <factory service=".service_locator.jIxfAsi" method="withContext"/>
     </service>
@@ -7823,12 +7715,12 @@
       <argument type="service" id="security.token_storage"/>
     </service>
     <service id="debug.argument_resolver.service.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\ServiceValueResolver">
-      <argument type="service" id=".service_locator.SU0XEwc"/>
+      <argument type="service" id=".service_locator.Rd2ULwb"/>
     </service>
     <service id="debug.argument_resolver.default.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\DefaultValueResolver"/>
     <service id="debug.argument_resolver.variadic.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\VariadicValueResolver"/>
     <service id="debug.argument_resolver.not_tagged_controller.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\NotTaggedControllerValueResolver">
-      <argument type="service" id=".service_locator.SU0XEwc"/>
+      <argument type="service" id=".service_locator.Rd2ULwb"/>
     </service>
     <service id="debug.traced.messenger.bus.default.inner" class="Symfony\Component\Messenger\MessageBus">
       <argument type="iterator">
@@ -7863,17 +7755,13 @@
     <service id=".errored..service_locator.U8RxAMe.App\Entity\DemandeOrganisateur" class="App\Entity\DemandeOrganisateur"/>
     <service id=".errored..service_locator.5nd0y65.App\Entity\DemandeOrganisateur" class="App\Entity\DemandeOrganisateur"/>
     <service id=".errored..service_locator.wLYTQQR.App\Entity\Event" class="App\Entity\Event"/>
-    <service id=".errored..service_locator.otUSV57.App\Entity\ImageUser" class="App\Entity\ImageUser"/>
-    <service id=".errored..service_locator.pdtD_GB.App\Entity\ImageUser" class="App\Entity\ImageUser"/>
+    <service id=".errored..service_locator.b9NNwBb.App\Entity\ImageUser" class="App\Entity\ImageUser"/>
     <service id=".errored..service_locator.cemrLIZ.App\Entity\ImageUser" class="App\Entity\ImageUser"/>
     <service id=".errored..service_locator.QMXP_pG.App\Entity\Event" class="App\Entity\Event"/>
     <service id=".errored..service_locator.H_fF5vi.App\Entity\Jeu" class="App\Entity\Jeu"/>
     <service id=".errored..service_locator.xsaPadp.App\Entity\Jeu" class="App\Entity\Jeu"/>
-    <service id=".errored..service_locator.ZjduZC2.App\Entity\User" class="App\Entity\User"/>
-    <service id=".errored..service_locator.OOouXHY.App\Entity\User" class="App\Entity\User"/>
     <service id=".errored..service_locator.F.S2d8P.App\Entity\SousCategorie" class="App\Entity\SousCategorie"/>
     <service id=".errored..service_locator.2M7rLHR.App\Entity\SousCategorie" class="App\Entity\SousCategorie"/>
-    <service id=".errored..service_locator.Sthg2tf.App\Entity\DemandeOrganisateur" class="App\Entity\DemandeOrganisateur"/>
     <service id=".console.command.about.lazy" class="Symfony\Component\Console\Command\LazyCommand">
       <argument>about</argument>
       <argument type="collection"/>
@@ -8797,7 +8685,7 @@
     <service id="Symfony\WebpackEncoreBundle\Asset\EntrypointLookupInterface" alias="webpack_encore.entrypoint_lookup[_default]"/>
     <service id="container.env_var_processors_locator" alias=".service_locator.gSv9zYw" public="true"/>
     <service id="twig.loader.filesystem" alias="twig.loader.native_filesystem"/>
-    <service id="argument_resolver.controller_locator" alias=".service_locator.SU0XEwc"/>
+    <service id="argument_resolver.controller_locator" alias=".service_locator.Rd2ULwb"/>
     <service id="doctrine.id_generator_locator" alias=".service_locator.KLVvNIq"/>
     <service id="twig.loader" alias="twig.loader.native_filesystem"/>
     <service id="Psr\Log\LoggerInterface $requestLogger" alias="monolog.logger.request"/>
@@ -8821,12 +8709,8 @@
     <service id=".service_locator.0GV1BZZ" alias=".service_locator.gSv9zYw"/>
     <service id=".service_locator.AZMNSOl" alias=".service_locator.2gwzzye"/>
     <service id=".service_locator.fFHahJ8" alias=".service_locator.QMXP_pG"/>
-    <service id=".service_locator.4syrvZn" alias=".service_locator.H4lN5mG"/>
-    <service id=".service_locator.2UNrPZE" alias=".service_locator.ZjduZC2"/>
-    <service id=".service_locator.N47kXia" alias=".service_locator.OOouXHY"/>
-    <service id=".service_locator.qOCE0t7" alias=".service_locator.Kv071AN"/>
-    <service id=".service_locator.wCe1z5p" alias=".service_locator.Sthg2tf"/>
-    <service id=".service_locator.tysCCSh" alias=".service_locator.SU0XEwc"/>
+    <service id=".service_locator.cnsq7i3" alias=".service_locator.YlW7lH6"/>
+    <service id=".service_locator.34ybcYH" alias=".service_locator.Rd2ULwb"/>
     <service id=".service_locator.wKF4yn1" alias=".service_locator.19_mNxd"/>
     <service id=".service_locator..1pIWv3" alias=".service_locator..bX8EHH"/>
     <service id=".service_locator.XW18Svm" alias=".service_locator.TcKhdzh"/>
@@ -8890,23 +8774,17 @@
     <service id=".service_locator.uHuTfZX" alias=".service_locator.wLYTQQR"/>
     <service id=".service_locator.WJ8oC8." alias=".service_locator.JIkuSEd"/>
     <service id=".service_locator.PJ0fDkd" alias=".service_locator.TWl5muW"/>
-    <service id=".service_locator.vGjqJ_f" alias=".service_locator.otUSV57"/>
-    <service id=".service_locator.ori9ddS" alias=".service_locator.pdtD_GB"/>
+    <service id=".service_locator.g4nFzLH" alias=".service_locator.b9NNwBb"/>
     <service id=".service_locator.xyoCyZE" alias=".service_locator.cemrLIZ"/>
     <service id=".service_locator.x9qUgaW" alias=".service_locator.QMXP_pG"/>
     <service id=".service_locator.xg1q_II" alias=".service_locator.rLdBCqg"/>
     <service id=".service_locator.7bMrVE_" alias=".service_locator.H_fF5vi"/>
     <service id=".service_locator.BaJ0d5S" alias=".service_locator.xsaPadp"/>
-    <service id=".service_locator.5Kq1crU" alias=".service_locator.H4lN5mG"/>
-    <service id=".service_locator.Xd_8rej" alias=".service_locator.ZjduZC2"/>
-    <service id=".service_locator.kuWBZGS" alias=".service_locator.OOouXHY"/>
-    <service id=".service_locator.Im4vQjs" alias=".service_locator.Kv071AN"/>
+    <service id=".service_locator.OwZdl4q" alias=".service_locator.YlW7lH6"/>
     <service id=".service_locator.URfgn8g" alias=".service_locator.zFcJjKU"/>
     <service id=".service_locator.I4hd9fH" alias=".service_locator.4xYgvp0"/>
     <service id=".service_locator.BwM8Lo5" alias=".service_locator.F.S2d8P"/>
     <service id=".service_locator..KVl_MY" alias=".service_locator.2M7rLHR"/>
-    <service id=".service_locator.5YRLfvM" alias=".service_locator.j.rAnae"/>
-    <service id=".service_locator.K5EYGur" alias=".service_locator.Sthg2tf"/>
     <service id=".service_locator.eAaUVIw" alias=".service_locator.jIxfAsi"/>
     <service id=".service_locator.u6DWx23" alias=".service_locator.cXsfP3P"/>
     <service id=".service_locator.pFwChgS" alias=".service_locator.UkE3SaZ"/>
