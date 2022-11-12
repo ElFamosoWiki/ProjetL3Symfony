@@ -138,7 +138,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @return Collection<int, Event>
      */
-
     public function getInscrit(): Collection
     {
         return $this->Inscrit;
@@ -227,7 +226,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @return Collection<int, Event>
      */
-
     public function getEvents(): Collection
     {
         return $this->events;

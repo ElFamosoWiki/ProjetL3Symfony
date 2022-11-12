@@ -27,7 +27,7 @@ class DemandeOrganisateur
     #[ORM\Column(length: 200, nullable :true)]
     private ?string $Reponse = null;
 
-    #[ORM\Column(nullable :true)]
+    #[ORM\Column]
     private ?bool $Accept = null;
 
     

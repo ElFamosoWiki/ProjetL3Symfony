@@ -24,8 +24,7 @@ class ImageUserType extends AbstractType
                     new File([
                         'maxSize' => '1024k',
                         'mimeTypes' => [
-                            'image/png',
-                            'image/jpeg'
+                            'image/png'
                         ],
                         'mimeTypesMessage' => 'Merci de mettre une image en format PNG'
                     ])

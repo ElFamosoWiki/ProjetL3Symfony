@@ -9,9 +9,6 @@ if (!Encore.isRuntimeEnvironmentConfigured()) {
 Encore
     // directory where compiled assets will be stored
     .setOutputPath('public/build/')
-    .copyFiles({
-            from: './assets/upload',
-        })
     // public path used by the web server to access the output path
     .setPublicPath('/build')
     // only needed for CDN's or subdirectory deploy
@@ -65,7 +62,8 @@ Encore
     // uncomment if you use TypeScript
     //.enableTypeScriptLoader()
 
-    .enableReactPreset()
+    // uncomment if you use React
+    //.enableReactPreset()
 
     // uncomment to get integrity="..." attributes on your script & link tags
     // requires WebpackEncoreBundle 1.4 or higher
