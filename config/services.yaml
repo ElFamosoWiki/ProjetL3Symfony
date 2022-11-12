@@ -6,6 +6,8 @@
 parameters:
     cni_directory: '%kernel.project_dir%/public/build/cni'
     pdp_directory: '%kernel.project_dir%/assets/upload/pdp'
+    logoEv_directory: '%kernel.project_dir%/assets/upload/logoev'
+
 
 
 services:
