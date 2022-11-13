@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}ImageUser{% endblock %}
+
+{% block body %}
+    <h1>ImageUser</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+            {% for user in users %}
+            <td>{{ user.prenom }}</td>
+            <td> {{ user.nom }}</td>
+            {% endfor %}
+                <th>Id</th>
+                <td>{{ image_user.id}}</td>
+            </tr>
+            <tr>
+           {{ image_user.user }}
+            </tr>
+                <th>UrlImage</th>
+                <td><img src="{{ asset('build/pdp/' ~ image_user.UrlImage) }}" height=50 width=50 border-radius=50%></td>
+            </tr>
+            <tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_image_user_index') }}">back to list</a>
+
+    <a href="{{ path('app_image_user_edit', {'id': image_user.id}) }}">edit</a>
+
+    {{ include('image_user/_delete_form.html.twig') }}
+{% endblock %}

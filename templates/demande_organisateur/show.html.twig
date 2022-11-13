@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}DemandeOrganisateur{% endblock %}
+
+{% block body %}
+    <h1>DemandeOrganisateur</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ demande_organisateur.id }}</td>
+            </tr>
+            <tr>
+                <th>Cin</th>
+                <td>{{ demande_organisateur.cni }}</td>
+            </tr>
+            <tr>
+                <th>MotifDemande</th>
+                <td>{{ demande_organisateur.motifDemande }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_demande_organisateur_index') }}">back to list</a>
+
+    <a href="{{ path('app_demande_organisateur_edit', {'id': demande_organisateur.id}) }}">edit</a>
+
+    {{ include('demande_organisateur/_delete_form.html.twig') }}
+{% endblock %}

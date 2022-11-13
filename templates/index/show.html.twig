@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Event{% endblock %}
+
+{% block body %}
+<div class="montre">
+            
+            
+            <div class="titreevent"> {{ event.nomEvent }}      </div>
+            <img src="{{ asset('build/logoev/' ~ event.logoev) }}" class="eventimg" ></img>
+            <div class="desc">Description: </div>
+            <div class="descevent"> {{ event.description }}</div>
+            <div class="dated">Date de debut :  {{ event.datedebut|date('d-m-Y') }}  </div>
+            <div class="datef">Date de fin : {{ event.datefin|date('d-m-Y') }}  </div>
+
+               
+            <div class="adresse"> Adresse : {{ event.lieu.numero }} {{ event.lieu.rue }} {{ event.lieu.ville }}, {{ event.lieu.codePostal }}       </div>
+                
+    {% if isConnected == true %}
+    {% if isInscrit == false %}
+    <a href="{{ path('app_registration_event', {'id': event.id}) }}">S'inscrire</a>
+    {% else %}
+        <a href="{{ path('app_unreg_event', {'id': event.id}) }}">Se desincrire</a>
+    {% endif %}
+    {% endif %}
+</div>
+
+{% endblock %}

@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+    <h1>Dashboard</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>NomEvent</th>
+                <th>NbPlace</th>
+                <th>NbInscrit</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for event in events %}
+            <tr>
+                <td>{{ event.nomEvent }}</td>
+                <td>{{ event.nbPlace }}</td>
+                <td>{{ event.nbInscrit }}</td>
+                <td>
+                    <a href="{{ path('app_show_inscrit', {'id': event.id}) }}">Voir inscrit</a>
+                    <a href="{{ path('app_edit_event_orga', {'id': event.id}) }}">Modif</a>
+
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

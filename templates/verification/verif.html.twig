@@ -1,0 +1,58 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Verification organisateur{% endblock %}
+
+{% block body %}
+    <h1>Liste des demandes</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Prénom</th>
+                <th>Nom</th>
+                <th>Pseudo</th>
+                <th>Email</th>
+                <th>carte identité</th>
+                <th>Motif</th>
+                <th>Réponse à la demande :</th>
+                <th>Etat</th>
+                
+            </tr>
+        </thead>
+        <tbody>
+        {% for demande in demandes %}
+            <tr>
+                <td>{{ demande.userId.prenom }}</td>
+                <td>{{ demande.userId.nom }}</td>
+                <td>{{ demande.userId.pseudo }}</td>
+                <td>{{ demande.userId.email }}</td>
+                <td><img src="{{ asset('build/cni/' ~ demande.cni) }}" height=50 width=50 border-radius=50%></td>
+                <td>{{ demande.motifDemande }}</td>
+                 {% if demande.Reponse!="" %}
+                <td>{{ demande.Reponse }}</td>
+                 {% endif %}
+                 {% if demande.Reponse != "" and demande.Accept == 0 %}
+                 <td>Refusée</td>
+                {% elseif demande.Accept == 1 %}
+                
+                <td>Acceptée</td>
+                 {% else %}
+                 <td></td>
+                 <td> En attente d'une réponse</td>
+                 {% endif %}
+                {% if demande.Reponse=="" and demande.Accept != 1 %}
+                 <td>
+                    <a href="{{ path('app_repondre', {'id': demande.id}) }}">Répondre</a>
+                </td>
+                {% endif %}
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+   
+{% endblock %}
