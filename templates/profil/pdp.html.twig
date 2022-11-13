@@ -6,26 +6,31 @@
 
 {% block body %}
     
-
-    <table class="table">
-        <thead>
-        <p>Votre Profil</p>
-        </thead>
-        <tbody>
-       
-        <ul>
+<head>
+</head>
+        <table class="profil" cellspacing="20">
         {% for image_user in image_users %}
-            <li><strong>Photo de profil:</strong> <img src="{{ asset('build/pdp/' ~ image_user.UrlImage) }}" height=50 width=50 border-radius=50%>&emsp;&emsp;</li>
+            <tr class="marge">
+            <td><img class="profilpdp"src="{{ asset('build/pdp/' ~ image_user.UrlImage) }}">&emsp;&emsp;</td>
+            </tr>
             {% endfor %}
-        <li><strong>Prénom:</strong> {{ user.prenom }}</li>
-        <li><strong>Nom:</strong> {{ user.nom }}</li>
-        <li><strong>Email:</strong> {{ user.email }}</li>
-       <li><strong>Pseudo:</strong> {{ user.pseudo }}</li>
-       <li><a href="{{ path('app_profil_modifie', {'id': user.id}) }}">Modifie</a></li>
-        </ul>
-
+        <tr><td><strong>Prénom:</strong> {{ user.prenom }}</td></tr>
+        <tr><td><strong>Nom:</strong> {{ user.nom }}</td></tr>
+        <tr><td><strong>Email:</strong> {{ user.email }}</td></tr>
+       <tr><td><strong>Pseudo:</strong> {{ user.pseudo }}</td></tr>
+       {% if app.user.id == user.id %}
+       <tr><td><a class="changement" href="{{ path('app_profil_modifie', {'id': user.id}) }}">Modifier</a></td></tr>
+        {% endif %}
+        </tables>
+        
+        <table class="evenement" cellspacing="20">
+        <tr><td><strong><u><p class="savoir">Vos événements :</p></u></strong></td></tr>
+        {% for event in events %}
+        <tr><td><a class="voir" href="{{ path('app_index_event_show', {'id':event.id}) }}"</a>{{ event.nomEvent }}</td></tr>
+        {% endfor %}
+        </table>
         </tbody>
-    </table>
+    
 
     
 {% endblock %}
