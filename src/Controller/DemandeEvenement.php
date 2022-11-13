@@ -2,49 +2,60 @@
 
 namespace App\Controller;
 
+use App\Entity\Event;
+use App\Form\EventType;
+use App\Repository\EventRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use App\Entity\Event;
-use Symfony\Component\HttpFoundation\Request;
-use App\Form\Type\EventType;
-use App\Repository\EventRepository;
-use App\Repository\LieuRepository;
-use App\Repository\UserRepository;
+use Symfony\Component\Form\FormView;
 use Symfony\Component\Security\Core\Security;
-use App\Entity\User;
-use App\Entity\Lieu;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\String\Slugger\SluggerInterface;
 use Symfony\Component\Validator\Constraints\File;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Form;
 
-
-class CreateEventController extends AbstractController
+#[Route('/demande/event')]
+class DemandeEvenement extends AbstractController
 {
-
     private $security;
 
     public function __construct(Security $security)
     {
         $this->security = $security;
     }
-
-    #[IsGranted("ROLE_ORGANISATEUR")]
-    #[Route('/create/event', name: 'app_create_event', methods: ['GET', 'POST'])]
-
-    public function index(Request $request,EventRepository $eventRepository, LieuRepository $lieuRepository, SluggerInterface $slugger,): Response
+    #[IsGranted("ROLE_ADMIN")]
+    #[Route('/', name: 'app_demande_event', methods: ['GET', 'POST'])]
+    public function indexdemandeEv(EventRepository $eventRepository): Response
     {
-       // $this->denyAccessUnlessGranted('ROLE_ORGANISATEUR');
-
-        $event = new Event();
-        $lieu = new Lieu();
-        $user = $this->security->getUser();
-
-        
+        return $this->render('demande_event/index.html.twig', [
+            'events' => $eventRepository->findEventDemande(),
+        ]); 
+    }
+    #[IsGranted("ROLE_ADMIN")]
+    #[Route('/montrer/{id}', name: 'app_montre_event', methods: ['GET', 'POST'])]
+    public function voirdemandeEv(EventRepository $eventRepository, $id): Response
+    {
+        return $this->render('demande_event/montrer.html.twig', [
+            'event' => $eventRepository->findEventDemandeMontrer($id),
+        ]); 
+    }
+    #[IsGranted("ROLE_ADMIN")]
+    #[Route('/{id}', name: 'app_accept_event', methods: ['GET', 'POST'])]
+    public function AcceptedemandeEV(Request $request, Event $event, EventRepository $eventRepository): Response
+    {
+        $event->setAccept(1);
+        $eventRepository->save($event, true);
+        return $this->redirectToRoute('app_demande_event', [], Response::HTTP_SEE_OTHER);
+    }
+    #[IsGranted("ROLE_ADMIN")]
+    #[Route('/{id}/edit', name: 'app_demande_edit', methods: ['GET', 'POST'])]
+    public function editDemandeEv(Request $request, Event $event, EventRepository $eventRepository): Response
+    {
         $form = $this->createFormBuilder($event)
             ->add('nomEvent')
             ->add('nbPlace')
@@ -102,42 +113,15 @@ class CreateEventController extends AbstractController
     }
 
 
-            $event->setAdminEvent($user);
-            $lieu->setVille($_COOKIE['city']);
-            $lieu->setRue($_COOKIE['rue']);
-            $lieu->setNumero($_COOKIE['numero']);
-            $lieu->setDepartement($_COOKIE['departement']);
-            $lieu->setRegion($_COOKIE['region']);
-            $lieu->setCodepostal($_COOKIE['codepostal']);
-            $event->setLieu($lieu);
+        
             $eventRepository->save($event, true);
-            $lieuRepository->save($lieu, true);
-            return $this->redirectToRoute('app_create_event', [], Response::HTTP_SEE_OTHER);
+           
+            return $this->redirectToRoute('app_montre_event',['id' => $event->getId() ], Response::HTTP_SEE_OTHER);
         }
             
 
-        return $this->render('create_event/index.html.twig', [
-            'controller_name' => 'CreateEventController',
+        return $this->render('demande_event/edit.html.twig', [
             'form' => $form->createView(),
-        ]);
-    }
-
-
-
-
-    #[IsGranted("ROLE_ORGANISATEUR")]
-    #[Route('/show/inscrit/{id}', name: 'app_show_inscrit', methods: ['GET'])]
-    public function showReg(Request $request,UserRepository $userRepository,EventRepository $eventRepository,Event $event, $id): Response
-    {
-
-        
-
-        if ($event->getAdminEvent() !== $this->getUser()) {
-            throw $this->createAccessDeniedException();
-        }
-
-        return $this->render('create_event/showRegister.html.twig', [
-            'users' => $userRepository->findInscrit($id) ,
         ]);
     }
 }

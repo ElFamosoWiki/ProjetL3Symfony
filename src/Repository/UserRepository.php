@@ -99,6 +99,14 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         return $query;
 
     }
+    public function findByInn(int $id) : array
+    {
+        return $this->createQueryBuilder('u')
+        ->innerJoin('u.Inscrit', 'e', 'WITH', 'e.users = :id')
+        ->setParameter('id', $id)
+        ->getQuery()
+        ->getResult();
+    }
 //    /**
 //     * @return User[] Returns an array of User objects
 //     */

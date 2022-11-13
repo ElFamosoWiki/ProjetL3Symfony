@@ -62,7 +62,32 @@ class EventRepository extends ServiceEntityRepository
         return $ifInscritExist;
 
     }
+    public function findEventDemande(): array
+    {
+        return $this->createQueryBuilder('e')
+        ->where('e.accept = 0')
+        ->getQuery()
+        ->getResult();
 
+    }
+    public function findEventDemandeMontrer($id): event
+    {
+        return $this->createQueryBuilder('e')
+        ->where('e.accept = 0')
+        ->andWhere('e.id = :id')
+        ->setParameter('id', $id)
+        ->getQuery()
+        ->getOneOrNullResult();
+
+    }
+    public function findEventAcc(): array
+    {
+        return $this->createQueryBuilder('e')
+        ->where('e.accept = 1')
+        ->getQuery()
+        ->getResult();
+
+    }
     public function findEvent(int $idEvent): event
     {
         $query = $this->createQueryBuilder('e')

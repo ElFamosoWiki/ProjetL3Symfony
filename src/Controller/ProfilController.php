@@ -21,15 +21,20 @@ use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\CallbackTransformer;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
+
+#[IsGranted("ROLE_USER")]
 #[Route('/profil/{id}')]
 class ProfilController extends AbstractController{
 
     #[Route('/', name: 'app_profil_show', methods: ['GET'])]
-    public function index(User $user, ImageUserRepository $ImageRepository, $id): Response
+    public function index(User $user, ImageUserRepository $ImageRepository, UserRepository $usere, $id): Response
     {
 
+
         return $this->render('profil/pdp.html.twig', [
+            'events' => $user->getInscrit(),
             'user' => $user,
             'image_users' => $ImageRepository->findOneById($id),
         ]);
@@ -43,12 +48,17 @@ class ProfilController extends AbstractController{
             $image=$imageUserRepository->findOneBySomeField($id);
             
          $form = $this->createFormBuilder($user)
-            ->add('prenom')
-            ->add('nom')
-            ->add('pseudo')
-            ->add('email')
+            ->add('prenom', TextType::class, [
+                'label' => "Prénom  "
+            ])
+            ->add('nom', TextType::class, [
+                'label' => "Nom  "
+            ])
+            ->add('pseudo', TextType::class, [
+                'label' => "Pseudo  "
+            ])
             ->add('image', FileType::class, [
-                'label' => 'Photo de profil',
+                'label' => 'Photo de profil ',
                 'mapped' => false,
                 'required' => false,
 
@@ -90,9 +100,9 @@ class ProfilController extends AbstractController{
 
             
 
-            return $this->renderForm('profil/modif.html.twig', [
+            return $this->render('profil/modif.html.twig', [
                 'user' => $user,
-                'form' => $form,
+                'modifForm' => $form->createView(),
             ]);
             
     
