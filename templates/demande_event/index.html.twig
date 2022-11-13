@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}DemandeOrganisateur index{% endblock %}
+
+{% block body %}
+    
+    
+    <table class="demandevent" cellspacing="35">
+    <caption class="hui"> Demande Evénement :</caption>
+        <thead>
+            <tr>
+                <th class="logo">Logo</th>
+                <th class="nom">Nom</th>
+                <th class="nbplace">Nombre Place</th>
+                <th class="descr">Description</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for event in events %}
+            <tr class="diff">
+                <td ><img src="{{ asset('build/logoev/' ~ event.logoEv) }}" height=100 width=100> </td>
+                <td>{{ event.nomEvent }}</td>
+                <td>{{ event.nbPlace }}</td>
+                <td>{{ event.description }}</td>
+                <td>
+                    <a class="get" href="{{ path('app_montre_event', {'id': event.id}) }}">voir</a>
+                </td>
+            </tr>
+            
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Demande Choix{% endblock %}
+
+{% block body %}
+    
+
+    <table class="montre" cellspacing="35">
+    <caption class="ttremontre"> Demande choix :</caption>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ event.id }}</td>
+            </tr>
+            <tr>
+                <th>NomCategorie</th>
+                <td>{{ event.nomEvent }}</td>
+            </tr>
+             <tr>
+                <th>Nombre de place</th>
+                <td>{{ event.nbPlace }}</td>
+            </tr>
+             <tr>
+                <th>Description</th>
+                <td>{{ event.description }}</td>
+            </tr>
+             <tr>
+                <th>Catégorie</th>
+                <td>{{ event.idcategorie }}</td>
+            </tr>
+             <tr>
+                <th>Sous Catégorie</th>
+                <td>{{ event.souscategorie }}</td>
+            </tr>
+            <tr> 
+                <td><a href="{{ path('app_accept_event', {'id': event.id}) }}">Accepter</a></td>
+                <td>{{ include('event/_delete_form.html.twig') }}</td>
+                <td><a href="{{ path('app_demande_edit', {'id': event.id}) }}">edit</a></td>
+                <td><a href="{{ path('app_demande_event') }}">retour</td>
+                </div>
+            </tr>    
+        </tbody>
+    </table>
+
+     
+
+    
+{% endblock %}

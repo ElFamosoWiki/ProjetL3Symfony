@@ -335,4 +335,170 @@ section{
 
     
 }
+table.profil{
+    background-color: whitesmoke;
+    box-shadow: 3px 3px rgb(90, 89, 89), -1em 0 .4em rgb(90, 89, 89);
+    float:left;
+    margin-left:450px;
+    margin-top:100px;
+    width: 22em;
+    
+}
+.marge{
+    align: right;
+}
+.profilpdp{
+    clip-path:ellipse(37% 50%);
+    height:75px; 
+    width:100px;
+}
+table.evenement{
+    
+    background-color: whitesmoke;
+    box-shadow: 3px 3px rgb(90, 89, 89), -1em 0 .4em rgb(90, 89, 89);
+    float:right;
+    margin-right:350px;
+    margin-top:100px;
+    width: 30em;
+}
+.formodif{
+    background-color: whitesmoke;
+    box-shadow: 3px 3px rgb(90, 89, 89), -1em 0 .4em rgb(90, 89, 89);
+    margin-left: auto;
+    margin-right: auto;
+    margin-top:100px;
+    width: 30em;
+    text-decoration: none;
+}
+.titre{
+    margin-left: 80px;
+    margin-top:100px;
+}
+.savoir{
+    font-size: 25px;
+}
+.changement{
+    color: black;
+    
+}
+.changement:hover{
+    color:white;
+    background-color: rgb(90, 89, 89);
+    border-radius:5%;
+   
+}
+.voir{
+    color: black;
+    text-decoration: none;
+}
+.voir:hover{
+    color:white;
+    background-color: rgb(90, 89, 89);
+    border-radius:5%;
+   
+}
+.prenom{
+    padding-top:25px;
+    padding-left: 85px;
 
+}
+.nom{
+    padding-top:25px;
+    padding-left: 85px;
+   
+}
+.pseudo{
+    padding-top:25px;
+    padding-left: 85px;
+    
+}
+.image{
+    padding-top:25px;
+    padding-left: 85px;
+   
+}
+.modif{
+    padding-top:25px;
+    padding-left: 85px;
+    
+}
+.back{
+    padding-top:25px;
+}
+
+.demandevent{
+    background-color: whitesmoke;
+    box-shadow: 3px 3px rgb(90, 89, 89), -1em 0 .4em rgb(90, 89, 89);
+    margin-left: auto;
+    margin-right: auto;
+    margin-top:75px;
+    width: 30em;
+    text-decoration: none;
+    
+}
+.diff{
+   border-bottom: solid black;
+   border-left: solid black;
+   border-top:  solid black;
+
+}
+
+.hui{
+    font-weight: bold;
+    font-size:x-large;
+    margin-bottom:40px;
+}
+.diffr{
+    border-bottom: solid black;
+    border-top:solid black;
+}
+.diffe{
+
+}
+.diffs{
+    border-bottom: solid black;
+    border-top:solid black;
+
+}
+
+.logo {
+    border:solid rgb(90, 89, 89);
+    border-radius: 10%;
+}
+.nom{
+    border:solid rgb(90, 89, 89);
+    border-radius: 10%;
+    padding-right: 85px;
+    padding-bottom: 5px;
+}
+.nbplace{
+    border:solid rgb(90, 89, 89);
+    border-radius: 10%;
+}
+.descr{
+    border:solid rgb(90, 89, 89);
+    border-radius: 10%;
+}
+.get{
+    text-decoration: none;
+    color: rgb(90, 89, 89);
+}
+.get:hover{
+    color:white;
+    background-color: rgb(90, 89, 89);
+    border-radius:5%;
+}
+.montre{
+    background-color: whitesmoke;
+    box-shadow: 3px 3px rgb(90, 89, 89), -1em 0 .4em rgb(90, 89, 89);
+    margin-left: auto;
+    margin-right: auto;
+    margin-top:75px;
+    width: 30em;
+    text-decoration: none;
+}
+.ttremontre{
+    font-weight: bold;
+    font-size:x-large;
+    margin-bottom:40px;
+}
