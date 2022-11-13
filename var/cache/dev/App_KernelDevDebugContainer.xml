@@ -76,6 +76,7 @@
     <parameter key="kernel.container_class">App_KernelDevDebugContainer</parameter>
     <parameter key="cni_directory">/Users/corentin/ProjetL3Symfony/public/build/cni</parameter>
     <parameter key="pdp_directory">/Users/corentin/ProjetL3Symfony/assets/upload/pdp</parameter>
+    <parameter key="logoEv_directory">/Users/corentin/ProjetL3Symfony/assets/upload/logoev</parameter>
     <parameter key="event_dispatcher.event_aliases" type="collection">
       <parameter key="Symfony\Component\Console\Event\ConsoleCommandEvent">console.command</parameter>
       <parameter key="Symfony\Component\Console\Event\ConsoleErrorEvent">console.error</parameter>
@@ -400,11 +401,11 @@
         <argument type="service" id=".service_locator.jIxfAsi.App\Controller\IndexController"/>
       </call>
     </service>
-    <service id="App\Controller\JeuController" class="App\Controller\JeuController" public="true" autowire="true" autoconfigure="true">
+    <service id="App\Controller\ListEventController" class="App\Controller\ListEventController" public="true" autowire="true" autoconfigure="true">
       <tag name="controller.service_arguments"/>
       <tag name="container.service_subscriber"/>
       <call method="setContainer">
-        <argument type="service" id=".service_locator.jIxfAsi.App\Controller\JeuController"/>
+        <argument type="service" id=".service_locator.jIxfAsi.App\Controller\ListEventController"/>
       </call>
     </service>
     <service id="App\Controller\MapController" class="App\Controller\MapController" public="true" autowire="true" autoconfigure="true">
@@ -457,6 +458,7 @@
         <argument type="service" id=".service_locator.jIxfAsi.App\Controller\VerificationController"/>
       </call>
     </service>
+    <service id="App\DataFixtures\AppFixtures" class="App\DataFixtures\AppFixtures" autowire="true" autoconfigure="true"/>
     <service id="App\Form\CategorieType" class="App\Form\CategorieType" autowire="true" autoconfigure="true">
       <tag name="form.type"/>
     </service>
@@ -467,9 +469,6 @@
       <tag name="form.type"/>
     </service>
     <service id="App\Form\ImageUserType" class="App\Form\ImageUserType" autowire="true" autoconfigure="true">
-      <tag name="form.type"/>
-    </service>
-    <service id="App\Form\JeuType" class="App\Form\JeuType" autowire="true" autoconfigure="true">
       <tag name="form.type"/>
     </service>
     <service id="App\Form\RegistrationFormType" class="App\Form\RegistrationFormType" autowire="true" autoconfigure="true">
@@ -491,10 +490,6 @@
       <argument type="service" id="doctrine"/>
     </service>
     <service id="App\Repository\ImageUserRepository" class="App\Repository\ImageUserRepository" autowire="true" autoconfigure="true">
-      <tag name="doctrine.repository_service"/>
-      <argument type="service" id="doctrine"/>
-    </service>
-    <service id="App\Repository\JeuRepository" class="App\Repository\JeuRepository" autowire="true" autoconfigure="true">
       <tag name="doctrine.repository_service"/>
       <argument type="service" id="doctrine"/>
     </service>
@@ -1321,7 +1316,6 @@
         <argument>App\Form\DemandeOrganisateurType</argument>
         <argument>App\Form\EventType</argument>
         <argument>App\Form\ImageUserType</argument>
-        <argument>App\Form\JeuType</argument>
         <argument>App\Form\RegistrationFormType</argument>
         <argument>App\Form\SousCategorieType</argument>
         <argument>Symfony\Component\Form\Extension\Core\Type\FormType</argument>
@@ -3346,7 +3340,7 @@
       <argument type="service" id="form.registry"/>
     </service>
     <service id="form.extension" class="Symfony\Component\Form\Extension\DependencyInjection\DependencyInjectionExtension">
-      <argument type="service" id=".service_locator..bX8EHH"/>
+      <argument type="service" id=".service_locator.dXuL3HW"/>
       <argument type="collection">
         <argument key="Symfony\Component\Form\Extension\Core\Type\FormType" type="iterator">
           <argument type="service" id="form.type_extension.form.transformation_failure_handling"/>
@@ -4249,7 +4243,7 @@
       <factory class="Doctrine\ORM\EntityManager" method="create"/>
     </service>
     <service id="doctrine.orm.container_repository_factory" class="Doctrine\Bundle\DoctrineBundle\Repository\ContainerRepositoryFactory">
-      <argument type="service" id=".service_locator.bCzs3Go"/>
+      <argument type="service" id=".service_locator.ajxlvPN"/>
     </service>
     <service id="doctrine.orm.manager_configurator.abstract" class="Doctrine\Bundle\DoctrineBundle\ManagerConfigurator" abstract="true">
       <argument type="collection"/>
@@ -6256,9 +6250,9 @@
     <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\IndexController" class="App\Controller\IndexController" autowire="true" abstract="true"/>
     <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\IndexController" class="App\Controller\IndexController" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Controller\IndexController" class="App\Controller\IndexController" autowire="true" autoconfigure="true" abstract="true"/>
-    <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\JeuController" class="App\Controller\JeuController" autowire="true" abstract="true"/>
-    <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\JeuController" class="App\Controller\JeuController" autowire="true" abstract="true"/>
-    <service id=".abstract.instanceof.App\Controller\JeuController" class="App\Controller\JeuController" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\ListEventController" class="App\Controller\ListEventController" autowire="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\ListEventController" class="App\Controller\ListEventController" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Controller\ListEventController" class="App\Controller\ListEventController" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\MapController" class="App\Controller\MapController" autowire="true" abstract="true"/>
     <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\MapController" class="App\Controller\MapController" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Controller\MapController" class="App\Controller\MapController" autowire="true" autoconfigure="true" abstract="true"/>
@@ -6288,8 +6282,6 @@
     <service id=".abstract.instanceof.App\Form\EventType" class="App\Form\EventType" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Symfony\Component\Form\FormTypeInterface.0.App\Form\ImageUserType" class="App\Form\ImageUserType" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Form\ImageUserType" class="App\Form\ImageUserType" autowire="true" autoconfigure="true" abstract="true"/>
-    <service id=".instanceof.Symfony\Component\Form\FormTypeInterface.0.App\Form\JeuType" class="App\Form\JeuType" autowire="true" abstract="true"/>
-    <service id=".abstract.instanceof.App\Form\JeuType" class="App\Form\JeuType" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Symfony\Component\Form\FormTypeInterface.0.App\Form\RegistrationFormType" class="App\Form\RegistrationFormType" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Form\RegistrationFormType" class="App\Form\RegistrationFormType" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Symfony\Component\Form\FormTypeInterface.0.App\Form\SousCategorieType" class="App\Form\SousCategorieType" autowire="true" abstract="true"/>
@@ -6302,8 +6294,6 @@
     <service id=".abstract.instanceof.App\Repository\EventRepository" class="App\Repository\EventRepository" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface.0.App\Repository\ImageUserRepository" class="App\Repository\ImageUserRepository" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Repository\ImageUserRepository" class="App\Repository\ImageUserRepository" autowire="true" autoconfigure="true" abstract="true"/>
-    <service id=".instanceof.Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface.0.App\Repository\JeuRepository" class="App\Repository\JeuRepository" autowire="true" abstract="true"/>
-    <service id=".abstract.instanceof.App\Repository\JeuRepository" class="App\Repository\JeuRepository" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface.0.App\Repository\LieuRepository" class="App\Repository\LieuRepository" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Repository\LieuRepository" class="App\Repository\LieuRepository" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface.0.App\Repository\SousCategorieRepository" class="App\Repository\SousCategorieRepository" autowire="true" abstract="true"/>
@@ -6670,11 +6660,12 @@
         <argument key="categorieRepository" type="service_closure" id="App\Repository\CategorieRepository"/>
       </argument>
     </service>
-    <service id=".service_locator.kql7h04" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.rFvTaFR" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="eventRepository" type="service_closure" id="App\Repository\EventRepository"/>
         <argument key="lieuRepository" type="service_closure" id="App\Repository\LieuRepository"/>
+        <argument key="slugger" type="service_closure" id="slugger"/>
       </argument>
     </service>
     <service id=".service_locator.2gwzzye" class="Symfony\Component\DependencyInjection\ServiceLocator">
@@ -6780,25 +6771,6 @@
         <argument key="eventRepository" type="service_closure" id="App\Repository\EventRepository"/>
       </argument>
     </service>
-    <service id=".service_locator.rLdBCqg" class="Symfony\Component\DependencyInjection\ServiceLocator">
-      <tag name="container.service_locator"/>
-      <argument type="collection">
-        <argument key="jeuRepository" type="service_closure" id="App\Repository\JeuRepository"/>
-      </argument>
-    </service>
-    <service id=".service_locator.H_fF5vi" class="Symfony\Component\DependencyInjection\ServiceLocator">
-      <tag name="container.service_locator"/>
-      <argument type="collection">
-        <argument key="jeu" type="service_closure" id=".errored..service_locator.H_fF5vi.App\Entity\Jeu"/>
-      </argument>
-    </service>
-    <service id=".service_locator.xsaPadp" class="Symfony\Component\DependencyInjection\ServiceLocator">
-      <tag name="container.service_locator"/>
-      <argument type="collection">
-        <argument key="jeu" type="service_closure" id=".errored..service_locator.xsaPadp.App\Entity\Jeu"/>
-        <argument key="jeuRepository" type="service_closure" id="App\Repository\JeuRepository"/>
-      </argument>
-    </service>
     <service id=".service_locator.H4lN5mG" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
@@ -6872,7 +6844,7 @@
         <argument key="verifRepo" type="service_closure" id="App\Repository\DemandeOrganisateurRepository"/>
       </argument>
     </service>
-    <service id=".service_locator.GtsHWAR" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.eJA6abR" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="App\Controller\CategorieController::delete" type="service_closure" id=".service_locator.4oDAgEZ"/>
@@ -6880,7 +6852,7 @@
         <argument key="App\Controller\CategorieController::index" type="service_closure" id=".service_locator.NeFqQFj"/>
         <argument key="App\Controller\CategorieController::new" type="service_closure" id=".service_locator.NeFqQFj"/>
         <argument key="App\Controller\CategorieController::show" type="service_closure" id=".service_locator.uSGXe_N"/>
-        <argument key="App\Controller\CreateEventController::index" type="service_closure" id=".service_locator.kql7h04"/>
+        <argument key="App\Controller\CreateEventController::index" type="service_closure" id=".service_locator.rFvTaFR"/>
         <argument key="App\Controller\CreateEventController::showReg" type="service_closure" id=".service_locator.2gwzzye"/>
         <argument key="App\Controller\DashboardOrgaController::editEvent" type="service_closure" id=".service_locator.gaOl66k"/>
         <argument key="App\Controller\DashboardOrgaController::index" type="service_closure" id=".service_locator.WMrx.a8"/>
@@ -6904,11 +6876,7 @@
         <argument key="App\Controller\IndexController::index" type="service_closure" id=".service_locator.Qim_sWz"/>
         <argument key="App\Controller\IndexController::inscription" type="service_closure" id=".service_locator.QMXP_pG"/>
         <argument key="App\Controller\IndexController::show" type="service_closure" id=".service_locator.QMXP_pG"/>
-        <argument key="App\Controller\JeuController::delete" type="service_closure" id=".service_locator.xsaPadp"/>
-        <argument key="App\Controller\JeuController::edit" type="service_closure" id=".service_locator.xsaPadp"/>
-        <argument key="App\Controller\JeuController::index" type="service_closure" id=".service_locator.rLdBCqg"/>
-        <argument key="App\Controller\JeuController::new" type="service_closure" id=".service_locator.rLdBCqg"/>
-        <argument key="App\Controller\JeuController::show" type="service_closure" id=".service_locator.H_fF5vi"/>
+        <argument key="App\Controller\ListEventController::index" type="service_closure" id=".service_locator.Qim_sWz"/>
         <argument key="App\Controller\MapController::index" type="service_closure" id=".service_locator.JIkuSEd"/>
         <argument key="App\Controller\OrganisateurApplicationController::index" type="service_closure" id=".service_locator.H4lN5mG"/>
         <argument key="App\Controller\ProfilController::index" type="service_closure" id=".service_locator.ZjduZC2"/>
@@ -6933,7 +6901,7 @@
         <argument key="App\Controller\CategorieController:index" type="service_closure" id=".service_locator.NeFqQFj"/>
         <argument key="App\Controller\CategorieController:new" type="service_closure" id=".service_locator.NeFqQFj"/>
         <argument key="App\Controller\CategorieController:show" type="service_closure" id=".service_locator.uSGXe_N"/>
-        <argument key="App\Controller\CreateEventController:index" type="service_closure" id=".service_locator.kql7h04"/>
+        <argument key="App\Controller\CreateEventController:index" type="service_closure" id=".service_locator.rFvTaFR"/>
         <argument key="App\Controller\CreateEventController:showReg" type="service_closure" id=".service_locator.2gwzzye"/>
         <argument key="App\Controller\DashboardOrgaController:editEvent" type="service_closure" id=".service_locator.gaOl66k"/>
         <argument key="App\Controller\DashboardOrgaController:index" type="service_closure" id=".service_locator.WMrx.a8"/>
@@ -6957,11 +6925,7 @@
         <argument key="App\Controller\IndexController:index" type="service_closure" id=".service_locator.Qim_sWz"/>
         <argument key="App\Controller\IndexController:inscription" type="service_closure" id=".service_locator.QMXP_pG"/>
         <argument key="App\Controller\IndexController:show" type="service_closure" id=".service_locator.QMXP_pG"/>
-        <argument key="App\Controller\JeuController:delete" type="service_closure" id=".service_locator.xsaPadp"/>
-        <argument key="App\Controller\JeuController:edit" type="service_closure" id=".service_locator.xsaPadp"/>
-        <argument key="App\Controller\JeuController:index" type="service_closure" id=".service_locator.rLdBCqg"/>
-        <argument key="App\Controller\JeuController:new" type="service_closure" id=".service_locator.rLdBCqg"/>
-        <argument key="App\Controller\JeuController:show" type="service_closure" id=".service_locator.H_fF5vi"/>
+        <argument key="App\Controller\ListEventController:index" type="service_closure" id=".service_locator.Qim_sWz"/>
         <argument key="App\Controller\MapController:index" type="service_closure" id=".service_locator.JIkuSEd"/>
         <argument key="App\Controller\OrganisateurApplicationController:index" type="service_closure" id=".service_locator.H4lN5mG"/>
         <argument key="App\Controller\ProfilController:index" type="service_closure" id=".service_locator.ZjduZC2"/>
@@ -7144,14 +7108,13 @@
       <argument type="service" id="debug.argument_resolver.not_tagged_controller.inner"/>
       <argument type="service" id="debug.stopwatch"/>
     </service>
-    <service id=".service_locator..bX8EHH" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.dXuL3HW" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="App\Form\CategorieType" type="service_closure" id="App\Form\CategorieType"/>
         <argument key="App\Form\DemandeOrganisateurType" type="service_closure" id="App\Form\DemandeOrganisateurType"/>
         <argument key="App\Form\EventType" type="service_closure" id="App\Form\EventType"/>
         <argument key="App\Form\ImageUserType" type="service_closure" id="App\Form\ImageUserType"/>
-        <argument key="App\Form\JeuType" type="service_closure" id="App\Form\JeuType"/>
         <argument key="App\Form\RegistrationFormType" type="service_closure" id="App\Form\RegistrationFormType"/>
         <argument key="App\Form\SousCategorieType" type="service_closure" id="App\Form\SousCategorieType"/>
         <argument key="Symfony\Bridge\Doctrine\Form\Type\EntityType" type="service_closure" id="form.type.entity"/>
@@ -7238,14 +7201,13 @@
         <argument key="doctrine.orm.messenger.doctrine_schema_subscriber" type="service_closure" id="doctrine.orm.messenger.doctrine_schema_subscriber"/>
       </argument>
     </service>
-    <service id=".service_locator.bCzs3Go" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.ajxlvPN" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="App\Repository\CategorieRepository" type="service_closure" id="App\Repository\CategorieRepository"/>
         <argument key="App\Repository\DemandeOrganisateurRepository" type="service_closure" id="App\Repository\DemandeOrganisateurRepository"/>
         <argument key="App\Repository\EventRepository" type="service_closure" id="App\Repository\EventRepository"/>
         <argument key="App\Repository\ImageUserRepository" type="service_closure" id="App\Repository\ImageUserRepository"/>
-        <argument key="App\Repository\JeuRepository" type="service_closure" id="App\Repository\JeuRepository"/>
         <argument key="App\Repository\LieuRepository" type="service_closure" id="App\Repository\LieuRepository"/>
         <argument key="App\Repository\SousCategorieRepository" type="service_closure" id="App\Repository\SousCategorieRepository"/>
         <argument key="App\Repository\UserRepository" type="service_closure" id="App\Repository\UserRepository"/>
@@ -7555,9 +7517,9 @@
       <argument type="service" id="service_container"/>
       <factory service=".service_locator.jIxfAsi" method="withContext"/>
     </service>
-    <service id=".service_locator.jIxfAsi.App\Controller\JeuController" class="Symfony\Component\DependencyInjection\ServiceLocator">
-      <tag name="container.service_locator_context" id="App\Controller\JeuController"/>
-      <argument>App\Controller\JeuController</argument>
+    <service id=".service_locator.jIxfAsi.App\Controller\ListEventController" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator_context" id="App\Controller\ListEventController"/>
+      <argument>App\Controller\ListEventController</argument>
       <argument type="service" id="service_container"/>
       <factory service=".service_locator.jIxfAsi" method="withContext"/>
     </service>
@@ -7861,12 +7823,12 @@
       <argument type="service" id="security.token_storage"/>
     </service>
     <service id="debug.argument_resolver.service.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\ServiceValueResolver">
-      <argument type="service" id=".service_locator.GtsHWAR"/>
+      <argument type="service" id=".service_locator.eJA6abR"/>
     </service>
     <service id="debug.argument_resolver.default.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\DefaultValueResolver"/>
     <service id="debug.argument_resolver.variadic.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\VariadicValueResolver"/>
     <service id="debug.argument_resolver.not_tagged_controller.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\NotTaggedControllerValueResolver">
-      <argument type="service" id=".service_locator.GtsHWAR"/>
+      <argument type="service" id=".service_locator.eJA6abR"/>
     </service>
     <service id="debug.traced.messenger.bus.default.inner" class="Symfony\Component\Messenger\MessageBus">
       <argument type="iterator">
@@ -7906,8 +7868,6 @@
     <service id=".errored..service_locator.pdtD_GB.App\Entity\ImageUser" class="App\Entity\ImageUser"/>
     <service id=".errored..service_locator.cemrLIZ.App\Entity\ImageUser" class="App\Entity\ImageUser"/>
     <service id=".errored..service_locator.QMXP_pG.App\Entity\Event" class="App\Entity\Event"/>
-    <service id=".errored..service_locator.H_fF5vi.App\Entity\Jeu" class="App\Entity\Jeu"/>
-    <service id=".errored..service_locator.xsaPadp.App\Entity\Jeu" class="App\Entity\Jeu"/>
     <service id=".errored..service_locator.ZjduZC2.App\Entity\User" class="App\Entity\User"/>
     <service id=".errored..service_locator.OOouXHY.App\Entity\User" class="App\Entity\User"/>
     <service id=".errored..service_locator.F.S2d8P.App\Entity\SousCategorie" class="App\Entity\SousCategorie"/>
@@ -8836,7 +8796,7 @@
     <service id="Symfony\WebpackEncoreBundle\Asset\EntrypointLookupInterface" alias="webpack_encore.entrypoint_lookup[_default]"/>
     <service id="container.env_var_processors_locator" alias=".service_locator.gSv9zYw" public="true"/>
     <service id="twig.loader.filesystem" alias="twig.loader.native_filesystem"/>
-    <service id="argument_resolver.controller_locator" alias=".service_locator.GtsHWAR"/>
+    <service id="argument_resolver.controller_locator" alias=".service_locator.eJA6abR"/>
     <service id="doctrine.id_generator_locator" alias=".service_locator.KLVvNIq"/>
     <service id="twig.loader" alias="twig.loader.native_filesystem"/>
     <service id="Psr\Log\LoggerInterface $requestLogger" alias="monolog.logger.request"/>
@@ -8867,9 +8827,9 @@
     <service id=".service_locator.N47kXia" alias=".service_locator.OOouXHY"/>
     <service id=".service_locator.qOCE0t7" alias=".service_locator.Kv071AN"/>
     <service id=".service_locator.wCe1z5p" alias=".service_locator.Sthg2tf"/>
-    <service id=".service_locator.25TW026" alias=".service_locator.GtsHWAR"/>
+    <service id=".service_locator.iMM6ugN" alias=".service_locator.eJA6abR"/>
     <service id=".service_locator.wKF4yn1" alias=".service_locator.19_mNxd"/>
-    <service id=".service_locator..1pIWv3" alias=".service_locator..bX8EHH"/>
+    <service id=".service_locator.lek4Tcv" alias=".service_locator.dXuL3HW"/>
     <service id=".service_locator.XW18Svm" alias=".service_locator.TcKhdzh"/>
     <service id=".service_locator.O24_MAy" alias=".service_locator.yY.p4P7"/>
     <service id=".service_locator._eRAkJb" alias=".service_locator.jIxfAsi"/>
@@ -8921,7 +8881,7 @@
     <service id=".service_locator.fxk3idd" alias=".service_locator.NeFqQFj"/>
     <service id=".service_locator.qvlr_tn" alias=".service_locator.uSGXe_N"/>
     <service id=".service_locator.YRozg1z" alias=".service_locator.4oDAgEZ"/>
-    <service id=".service_locator.d3RWG0z" alias=".service_locator.kql7h04"/>
+    <service id=".service_locator.qHKnGkU" alias=".service_locator.rFvTaFR"/>
     <service id=".service_locator.tbgr___" alias=".service_locator.2gwzzye"/>
     <service id=".service_locator.44605Xc" alias=".service_locator.WMrx.a8"/>
     <service id=".service_locator...qbkq6" alias=".service_locator.gaOl66k"/>
@@ -8937,9 +8897,6 @@
     <service id=".service_locator.ori9ddS" alias=".service_locator.pdtD_GB"/>
     <service id=".service_locator.xyoCyZE" alias=".service_locator.cemrLIZ"/>
     <service id=".service_locator.x9qUgaW" alias=".service_locator.QMXP_pG"/>
-    <service id=".service_locator.xg1q_II" alias=".service_locator.rLdBCqg"/>
-    <service id=".service_locator.7bMrVE_" alias=".service_locator.H_fF5vi"/>
-    <service id=".service_locator.BaJ0d5S" alias=".service_locator.xsaPadp"/>
     <service id=".service_locator.5Kq1crU" alias=".service_locator.H4lN5mG"/>
     <service id=".service_locator.Xd_8rej" alias=".service_locator.ZjduZC2"/>
     <service id=".service_locator.kuWBZGS" alias=".service_locator.OOouXHY"/>

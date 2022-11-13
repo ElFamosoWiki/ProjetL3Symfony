@@ -52,8 +52,8 @@ function Navbar() {
             <header>
                 <a href="/index">  <img src="../../build/ressource/event-management.png" height="50" width = "50" ></img> </a>
                 <nav ref={navRef}>
-                    <a href="/#">Evenements</a>
-                    <a href="/#">Menu organisateur</a>
+                <a href="/index">Accueil</a>
+                    <a href="/list/event">Evenements</a>
                     
                     <div class="test">
 
@@ -84,7 +84,8 @@ function Navbar() {
             <header>
                 <a href="/index">  <img src="../../build/ressource/event-management.png" height="50" width = "50" ></img> </a>
                 <nav ref={navRef}>
-                    <a href="/#">Voir les évenements</a>
+                <a href="/index">Accueil</a>
+                    <a href="/list/event">Evenements</a>
                     <a href="/orga/application">Devenir organisateur</a>
                     
                     
@@ -119,10 +120,9 @@ function Navbar() {
             <header>
                 <a href="/index">  <img src="../../build/ressource/event-management.png" height="50" width = "50" ></img> </a>
                 <nav ref={navRef}>
-                    <a href={userid}>   Devenir organisateur</a>
-                    <a href="/#">My work</a>
-                    <a href="/#">Blog</a>
-                    <a href="/#">About me</a>
+                    <a href="/index">Accueil</a>
+                    <a href="/list/event">Evenements</a>
+                    <a href="/orga/application">   Devenir organisateur</a>
                     <div class="log">
                     <a href="/login">Se connecter </a>
                     <a href="/register">S'inscrire</a>

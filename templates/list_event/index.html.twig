@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ListEventController!{% endblock %}
+
+{% block body %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+</style>
+<div class="eventsort">
+<form>
+        <select name="sort">
+            <option value="popularity">Plus populaire</option>
+            <option value="ASC">Prochain à venir</option>
+        </select>
+        <input name="search" type="text" placeholder="Rechercher"/>
+        <input type="submit" value="Valider">
+    </form>
+</div>    
+<section>
+        {% for event in events %}
+           
+                <a class="lienevent" href="{{ path('app_index_event_show', {'id': event.id}) }} ">
+                <div class="eventcontainer">
+                <div class="eventitem"><img src="{{ asset('build/logoev/' ~ event.logoev) }}" class="eventitemimg" ></img></div>
+                <div ><div class="eventplace">Place restante : {{ event.nbPlace - event.nbInscrit }}</div></div>
+                <div class="eventtitre">{{ event.nomEvent }}</div>
+                <div class="bar"><hr></div>
+                <div class="eventitem"> {{ event.description|length > 50 ? event.description|slice(0, 50) ~ '...' : event.description }}</div>
+                </div>
+                </a>
+                
+        {% else %}
+            
+        {% endfor %}
+        </section>
+{% endblock %}

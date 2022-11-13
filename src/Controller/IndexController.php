@@ -30,7 +30,10 @@ class IndexController extends AbstractController
 
         return $this->render('index/index.html.twig', [
             'controller_name' => 'IndexController',
-            'events' => $eventRepository->findEventAcc(),
+
+            'eventspop' => $eventRepository->eventPop(),
+            'eventsProche' => $eventRepository->eventProche(),
+
         ]);
     }
     #[Route('/evenement/{id}', name: 'app_index_event_show', methods: ['GET'])]
