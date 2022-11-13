@@ -47,6 +47,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 50)]
     private ?string $pseudo=null;
 
+    #[ORM\Column(type: 'boolean')]
+    private $active;
+
+
 
     #[ORM\OneToOne(mappedBy:'user', cascade: ['persist', 'remove'])]
     private ?ImageUser $UrlImage = null;
@@ -81,6 +85,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
+
+    
 
     /**
      * A visual identifier that represents this user.
@@ -214,6 +220,19 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
+    
+    public function getActive(): ?bool
+    {
+        return $this->active;
+    }
+
+    public function setActive(bool $active): self
+    {
+        $this->active = $active;
+
+        return $this;
+    }
+
     public function getUrlImage(): ?ImageUser
     {
         return $this->UrlImage;
@@ -222,6 +241,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setUrlImage(?ImageUser $category) : self
     {
         $this->UrlImage = $category;
+        return $this;
     }    
 
     /**
