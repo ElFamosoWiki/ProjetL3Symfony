@@ -159,6 +159,10 @@ nav {
     padding-left: 4px;
 }
 
+.desc{
+    margin-top: 6px;
+}
+
 .dropdown-item {
     display: block;
     width: 100%;
@@ -236,6 +240,11 @@ section{
 .bar{
     padding: 5px;
 }
+.page{
+    margin-left: 15%;
+    margin-right: 15%;
+
+}
 
 .affichepop{
     margin-right: 5%;
@@ -261,7 +270,14 @@ section{
     border-top-right-radius: 5%;
     border-top-left-radius: 5%;
 }
-
+.titreevent{
+    font-size: 30px;
+    text-align: center;
+}
+.eventimg{
+    object-fit: cover;
+    width: 100%;
+}
 .lienevent{
     color: inherit;
 
@@ -335,6 +351,7 @@ section{
 
     
 }
+
 table.profil{
     background-color: whitesmoke;
     box-shadow: 3px 3px rgb(90, 89, 89), -1em 0 .4em rgb(90, 89, 89);
@@ -452,9 +469,7 @@ table.evenement{
     border-bottom: solid black;
     border-top:solid black;
 }
-.diffe{
 
-}
 .diffs{
     border-bottom: solid black;
     border-top:solid black;
@@ -496,6 +511,8 @@ table.evenement{
     margin-top:75px;
     width: 30em;
     text-decoration: none;
+    padding: 3%;
+    margin-bottom: 3%;
 }
 .ttremontre{
     font-weight: bold;

@@ -47,10 +47,7 @@ class UserCrudController extends AbstractCrudController
             BooleanField::new('Active')
             ->hideOnIndex(),
             ArrayField::new('roles'),
-            ArrayField::new('Inscrit')
-            ->HideOnIndex(),
-            ArrayField::new('events')
-            ->HideOnIndex(),
+            
 
         ];
     }
