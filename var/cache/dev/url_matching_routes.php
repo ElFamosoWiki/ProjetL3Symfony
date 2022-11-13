@@ -24,8 +24,7 @@ return [
         '/image/user' => [[['_route' => 'app_image_user_index', '_controller' => 'App\\Controller\\ImageUserController::index'], null, ['GET' => 0], null, true, false, null]],
         '/image/user/new' => [[['_route' => 'app_image_user_new', '_controller' => 'App\\Controller\\ImageUserController::new'], null, ['GET' => 0, 'POST' => 1], null, false, false, null]],
         '/index' => [[['_route' => 'app_index', '_controller' => 'App\\Controller\\IndexController::index'], null, null, null, false, false, null]],
-        '/jeu' => [[['_route' => 'app_jeu_index', '_controller' => 'App\\Controller\\JeuController::index'], null, ['GET' => 0], null, true, false, null]],
-        '/jeu/new' => [[['_route' => 'app_jeu_new', '_controller' => 'App\\Controller\\JeuController::new'], null, ['GET' => 0, 'POST' => 1], null, false, false, null]],
+        '/list/event' => [[['_route' => 'app_list_event', '_controller' => 'App\\Controller\\ListEventController::index'], null, ['GET' => 0], null, false, false, null]],
         '/map' => [[['_route' => 'app_map_test', '_controller' => 'App\\Controller\\MapController::index'], null, ['GET' => 0], null, true, false, null]],
         '/orga/application' => [[['_route' => 'app_organisateur_application', '_controller' => 'App\\Controller\\OrganisateurApplicationController::index'], null, ['GET' => 0, 'POST' => 1], null, false, false, null]],
         '/register' => [[['_route' => 'app_register', '_controller' => 'App\\Controller\\RegistrationController::register'], null, null, null, false, false, null]],
@@ -93,16 +92,11 @@ return [
                 .')'
                 .'|/registration/([^/]++)(*:599)'
                 .'|/unreg/([^/]++)(*:622)'
-                .'|/jeu/([^/]++)(?'
-                    .'|(*:646)'
-                    .'|/edit(*:659)'
-                    .'|(*:667)'
-                .')'
                 .'|/profil/([^/]++)(?'
-                    .'|(*:695)'
-                    .'|/modifie(*:711)'
+                    .'|(*:649)'
+                    .'|/modifie(*:665)'
                 .')'
-                .'|/verif/([^/]++)/repondre(*:744)'
+                .'|/verif/([^/]++)/repondre(*:698)'
             .')/?$}sDu',
     ],
     [ // $dynamicRoutes
@@ -134,12 +128,9 @@ return [
         568 => [[['_route' => 'app_image_user_delete', '_controller' => 'App\\Controller\\ImageUserController::delete'], ['id'], ['POST' => 0], null, false, true, null]],
         599 => [[['_route' => 'app_registration_event', '_controller' => 'App\\Controller\\IndexController::inscription'], ['id'], ['GET' => 0], null, true, true, null]],
         622 => [[['_route' => 'app_unreg_event', '_controller' => 'App\\Controller\\IndexController::desinscription'], ['id'], ['GET' => 0], null, true, true, null]],
-        646 => [[['_route' => 'app_jeu_show', '_controller' => 'App\\Controller\\JeuController::show'], ['id'], ['GET' => 0], null, false, true, null]],
-        659 => [[['_route' => 'app_jeu_edit', '_controller' => 'App\\Controller\\JeuController::edit'], ['id'], ['GET' => 0, 'POST' => 1], null, false, false, null]],
-        667 => [[['_route' => 'app_jeu_delete', '_controller' => 'App\\Controller\\JeuController::delete'], ['id'], ['POST' => 0], null, false, true, null]],
-        695 => [[['_route' => 'app_profil_show', '_controller' => 'App\\Controller\\ProfilController::index'], ['id'], ['GET' => 0], null, true, true, null]],
-        711 => [[['_route' => 'app_profil_modifie', '_controller' => 'App\\Controller\\ProfilController::modifie'], ['id'], ['GET' => 0, 'POST' => 1], null, false, false, null]],
-        744 => [
+        649 => [[['_route' => 'app_profil_show', '_controller' => 'App\\Controller\\ProfilController::index'], ['id'], ['GET' => 0], null, true, true, null]],
+        665 => [[['_route' => 'app_profil_modifie', '_controller' => 'App\\Controller\\ProfilController::modifie'], ['id'], ['GET' => 0, 'POST' => 1], null, false, false, null]],
+        698 => [
             [['_route' => 'app_repondre', '_controller' => 'App\\Controller\\VerificationController::reponse'], ['id'], ['GET' => 0, 'POST' => 1], null, false, false, null],
             [null, null, null, null, false, false, 0],
         ],

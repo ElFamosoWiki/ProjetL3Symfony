@@ -78,6 +78,50 @@ class EventRepository extends ServiceEntityRepository
     }
     
 
+    public function findAllWithFilters($filters): array
+  {
+    $qb = $this->createQueryBuilder('e');
+
+    if (array_key_exists('search', $filters)
+      && $filters['search'] !== ''){
+      $qb->andWhere('e.nomEvent LIKE :searchv OR e.description LIKE :searchv')
+        ->setParameter('searchv', '%'.$filters['search'].'%');
+    }
+    if (array_key_exists('sort', $filters)
+      && $filters['sort'] !== ''){
+    if ($filters['sort'] == 'popularity'){
+        $qb->orderBy('e.nbInscrit', 'DESC');
+    }
+    else{
+        $qb->orderBy('e.datedebut', $filters['sort']);
+    }
+    }
+    else{
+        $qb->orderBy('e.nbInscrit', 'DESC');
+    }
+    
+
+    return $qb->getQuery()->getResult();
+}
+public function eventPop(): array
+{
+  $qb = $this->createQueryBuilder('e');
+      $qb->orderBy('e.nbInscrit', 'DESC');
+      $qb->setMaxResults(6);
+
+
+
+  return $qb->getQuery()->getResult();
+}
+public function eventProche(): array
+{
+  $qb = $this->createQueryBuilder('e');
+  $qb->orderBy('e.datedebut', 'DESC');
+  $qb->setMaxResults(6);
+
+
+  return $qb->getQuery()->getResult();
+}
 
 //    /**
 //     * @return Event[] Returns an array of Event objects
