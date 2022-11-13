@@ -45,7 +45,7 @@ class CreateEventController extends AbstractController
         $user = $this->security->getUser();
 
         
-        $form = $this->createFormBuilder(['idcategorie' => $CateR->find(1)])
+        $form = $this->createFormBuilder($event)
             ->add('nomEvent')
             ->add('nbPlace')
             ->add('description')

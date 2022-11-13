@@ -55,12 +55,27 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(mappedBy: 'adminEvent', targetEntity: Event::class, orphanRemoval: true)]
     private Collection $events;
 
+    #[ORM\Column(type: 'boolean')]
+    private $active;
+
+
 
 
     public function __construct()
     {
         $this->Inscrit = new ArrayCollection();
         $this->events = new ArrayCollection();
+    }
+    public function getActive(): ?bool
+    {
+        return $this->active;
+    }
+
+    public function setActive(bool $active): self
+    {
+        $this->active = $active;
+
+        return $this;
     }
 
    
