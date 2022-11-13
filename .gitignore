@@ -8,6 +8,9 @@
 /var/
 /vendor/
 /migrations/
+/assets/logoev/
+/assets/cni/
+/assets/pdp/
 
 ###< symfony/framework-bundle ###
 

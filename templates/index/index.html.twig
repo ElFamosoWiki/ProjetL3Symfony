@@ -7,34 +7,48 @@
     .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
     .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
 </style>
+<div class="affichepop">
+<div class="eventpop">Les évènements populaires :</div>
+<div class="scrolling-wrapper">
+        {% for event in eventspop %}
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
-
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ '/Users/corentin/ProjetL3Symfony/src/Controller/IndexController.php'|file_link(0) }}">src/Controller/IndexController.php</a></code></li>
-    </ul>
-</div>
-
-
-<table class="table">
-{% for event in events %}
-            <tr>
-                <td>{{ event.nomEvent }}</td>
-                <td>/</td>
-                <td> Nombre de place Place : {{ event.nbPlace - event.nbInscrit }}</td>
-
-                <td>
-                    <a href="{{ path('app_index_event_show', {'id': event.id}) }}">Voir l'évènement</a>
-                </td>
-            </tr>
+                <a class="lienevent" href="{{ path('app_index_event_show', {'id': event.id}) }} ">
+                <div class="eventcontainerscroll">
+                <div class="eventitem"><img src="{{ asset('build/logoev/' ~ event.logoev) }}" class="eventitemimg" ></img></div>
+                <div ><div class="eventplace">Place restante : {{ event.nbPlace - event.nbInscrit }}</div></div>
+                <div class="eventtitre">{{ event.nomEvent }}</div>
+                <div class="bar"><hr></div>
+                <div class="eventitemdesc"> {{ event.description|length > 25 ? event.description|slice(0, 25) ~ '...' : event.description }}</div>
+                </div>
+                </a>
+                
         {% else %}
-            <tr>
-                <td colspan="5">Pas d'évenement</td>
-            </tr>
+            
         {% endfor %}
-</table>
+        </div>
+
+<div class="eventpop">Les évènements proche :</div>
+        <div class="scrolling-wrapper">
+
+        {% for event in eventsProche %}
+
+                <a class="lienevent" href="{{ path('app_index_event_show', {'id': event.id}) }} ">
+                <div class="eventcontainerscroll">
+                <div class="eventitem"><img src="{{ asset('build/logoev/' ~ event.logoev) }}" class="eventitemimg" ></img></div>
+                <div ><div class="eventplace">Place restante : {{ event.nbPlace - event.nbInscrit }}</div></div>
+                <div class="eventtitre">{{ event.nomEvent }}</div>
+                <div class="bar"><hr></div>
+                <div class="eventitemdesc"> {{ event.description|length > 25 ? event.description|slice(0, 25) ~ '...' : event.description }}</div>
+                </div>
+                </a>
+                
+        {% else %}
+            
+        {% endfor %}
+                </div>
+
+</div>
+</div>
 
 
 {% endblock %}
