@@ -13,6 +13,7 @@ use App\Repository\UserRepository;
 use App\Repository\LieuRepository;
 use App\Entity\Lieu;
 use Symfony\Component\HttpFoundation\Request;
+use App\Form\EventType;
 
 
 
@@ -67,17 +68,30 @@ class DashboardOrgaController extends AbstractController
         if ($event->getAdminEvent() !== $this->getUser()) {
             throw $this->createAccessDeniedException();
         }
+        $form = $this->createForm(EventType::class, $event);
 
-        $form = $this->createFormBuilder($event)
-        ->add('nomEvent')
-        ->add('nbPlace')
-        ->add('description')
-        ->add('idcategorie')
-        ->getForm();
+        
 
         $form->handleRequest($request);
         
         if ($form->isSubmitted() && $form->isValid()) {
+            $logoEvFile = $form->get('logoEv')->getData();
+            if ($logoEvFile) {
+                $originalFilename = pathinfo($logoEvFile->getClientOriginalName(), PATHINFO_FILENAME);
+                $safeFilename = $slugger->slug($originalFilename);
+                $newFilename = $safeFilename.'-'.uniqid().'.'.$logoEvFile->guessExtension();
+    
+            try {
+                $logoEvFile->move(
+                $this->getParameter('logoEv_directory'),
+                $newFilename
+            );
+            } catch (FileException $e) {
+            // ... handle exception if something happens during file upload
+            }
+    
+        $event->setLogoEv($newFilename);
+    }
 
             $event->setAdminEvent($user);
             $lieu->setVille($_COOKIE['city']);

@@ -2,13 +2,13 @@
 
 
 {% block body %}
+<div class="centre">
     <h1>Dashboard</h1>
 
     <table class="table">
         <thead>
             <tr>
                 <th>NomEvent</th>
-                <th>NbPlace</th>
                 <th>NbInscrit</th>
                 <th>actions</th>
             </tr>
@@ -17,7 +17,6 @@
         {% for event in events %}
             <tr>
                 <td>{{ event.nomEvent }}</td>
-                <td>{{ event.nbPlace }}</td>
                 <td>{{ event.nbInscrit }}</td>
                 <td>
                     <a href="{{ path('app_show_inscrit', {'id': event.id}) }}">Voir inscrit</a>
@@ -32,5 +31,5 @@
         {% endfor %}
         </tbody>
     </table>
-
+</div>
 {% endblock %}

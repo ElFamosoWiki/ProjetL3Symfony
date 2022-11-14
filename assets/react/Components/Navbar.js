@@ -63,6 +63,7 @@ function Navbar() {
                     <Dropdown.Menu>
                         <Dropdown.Item href={routeprofile}>Mon Profil</Dropdown.Item>
                         <Dropdown.Item href={routedashboard}>Dashboard</Dropdown.Item>
+                        <Dropdown.Item href="/create/event">Créer un évènement</Dropdown.Item>
                         <Dropdown.Item href="/logout">Se deconnecter</Dropdown.Item>
                         </Dropdown.Menu>
                     </Dropdown>

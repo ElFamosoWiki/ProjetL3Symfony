@@ -26,6 +26,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\String\Slugger\SluggerInterface;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Validator\Constraints\File;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 
@@ -92,11 +93,11 @@ class CreateEventController extends AbstractController
             $event->setLieu($lieu);
             $eventRepository->save($event, true);
             $lieuRepository->save($lieu, true);
-            return $this->redirectToRoute('app_create_event', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_index', [], Response::HTTP_SEE_OTHER);
         }
             
 
-        return $this->render('index/index.html.twig', [
+        return $this->render('create_event/index.html.twig', [
             'controller_name' => 'CreateEventController',
             'form' => $form->createView(),
         ]);
