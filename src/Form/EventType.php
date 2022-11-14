@@ -18,6 +18,10 @@ use Symfony\Component\Form\FormEvent;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormInterface;
+use Symfony\Component\Validator\Constraints\File;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
+
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 
 class EventType extends AbstractType
 {
@@ -34,11 +38,32 @@ class EventType extends AbstractType
             ->add('souscategorie', ChoiceType::class, [
                 'placeholder'=> 'Sous catégorie veuillez choisir d abord une catégorie',
             ])
-
-            ->add('accept', CheckboxType::class, [
-                'label'    => 'Voulez vous valider la demande?',
+            ->add('datedebut',DateType::Class, array(
+                'input' => 'datetime_immutable',
+                'years' => range(date('Y'), date('Y')+2),
+                'months' => range(date('m'), 12),
+                'days' => range(date('d'), 31),))
+            ->add('datefin',DateType::Class, array(
+                'input' => 'datetime_immutable',
+                'years' => range(date('Y'), date('Y')+3),
+                'months' => range(date('m'), 12),
+                'days' => range(date('d'), 31),))
+            ->add('logoEv', FileType::class, [
+                'label' => 'Photo de profil',
+                'mapped' => false,
                 'required' => false,
-            ]);
+
+                'constraints' =>[
+                    new File([
+                        'maxSize' => '1024k',
+                        'mimeTypes' => [
+                            'image/png',
+                            'image/jpeg'
+                        ],
+                        'mimeTypesMessage' => 'Merci de mettre une image en format PNG/JPG'
+                    ])
+                ]
+                    ]);
 
             $formModifier = function (FormInterface $form, Categorie $cate = null, SousCategorie $souscate = null){
                 $souscategorie = null === $cate ? [] : $cate->getSousCategories();

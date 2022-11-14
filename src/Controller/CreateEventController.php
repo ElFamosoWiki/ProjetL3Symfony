@@ -7,20 +7,28 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Event;
 use Symfony\Component\HttpFoundation\Request;
-use App\Form\Type\EventType;
+use App\Form\EventType;
 use App\Repository\EventRepository;
 use App\Repository\LieuRepository;
 use App\Repository\UserRepository;
 use Symfony\Component\Security\Core\Security;
 use App\Entity\User;
 use App\Entity\Lieu;
+use App\Entity\Categorie;
+use App\Form\CategorieType;
+use App\Repository\CategorieRepository;
+use App\Entity\SousCategorie;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use App\Form\SousCategorieType;
+use App\Repository\SousCategorieRepository;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\String\Slugger\SluggerInterface;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Validator\Constraints\File;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
-use Symfony\Component\Form\Extension\Core\Type\DateType;
 
 
 class CreateEventController extends AbstractController
@@ -44,40 +52,13 @@ class CreateEventController extends AbstractController
         $lieu = new Lieu();
         $user = $this->security->getUser();
 
-        
-        $form = $this->createFormBuilder($event)
-            ->add('nomEvent')
-            ->add('nbPlace')
-            ->add('description')
-            ->add('idcategorie')
-            
-            ->add('datedebut',DateType::Class, array(
-                'input' => 'datetime_immutable',
-                'years' => range(date('Y'), date('Y')+2),
-                'months' => range(date('m'), 12),
-                'days' => range(date('d'), 31),))
-            ->add('datefin',DateType::Class, array(
-                'input' => 'datetime_immutable',
-                'years' => range(date('Y'), date('Y')+3),
-                'months' => range(date('m'), 12),
-                'days' => range(date('d'), 31),))
-            ->add('logoEv', FileType::class, [
-                'label' => 'Photo de profil',
-                'mapped' => false,
-                'required' => false,
+        $form = $this->createForm(EventType::class, $event);
 
-                'constraints' =>[
-                    new File([
-                        'maxSize' => '1024k',
-                        'mimeTypes' => [
-                            'image/png',
-                            'image/jpeg'
-                        ],
-                        'mimeTypesMessage' => 'Merci de mettre une image en format PNG/JPG'
-                    ])
-                ]
-            ])
-            ->getForm();
+        
+                
+
+
+            
             $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
