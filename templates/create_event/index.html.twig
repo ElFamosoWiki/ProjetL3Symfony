@@ -1,0 +1,53 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Demande event{% endblock %}
+
+{% block body %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+</style>
+
+<div class="example-wrapper">
+    <h1>Entrez les informations concernant les evenements </h1>
+
+
+</div>
+
+{{ form_start(form) }}
+    {{ form_widget(form) }}
+    <div id="autocomplete" class="autocomplete-container"></div>
+    <input id="valid" type="submit" name="button" value="enter"/>
+    
+{{ form_end(form) }}
+
+{% block javascripts %}
+<script>
+    window.onload = () => {
+        let categorie = document.querySelector("#event_idcategorie");
+
+        categorie.addEventListener("change", function(){
+            let form = this.closest("form");
+            let data = this.name + "=" + this.value;
+
+            fetch(form.action, {
+                method: form.getAttribute("method"),
+                body: data,
+                headers: {
+                    "Content-Type": "application/x-www-form-urlencoded; charset:UTF-8"
+                }
+            })
+            .then(response => response.text())
+            .then(html => {
+                let content = document.createElement("html");
+                content.innerHTML = html;
+                let nouveau = content.querySelector("#event_souscategorie");
+                document.querySelector("#event_souscategorie").replaceWith(nouveau);
+            })
+        });
+    }
+    </script>
+    
+{% endblock %}
+
+{% endblock %}

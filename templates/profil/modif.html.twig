@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit profil{% endblock %}
+
+{% block body %}
+<div class="formodif">
+    <h1 class="titre">Modifier Mon Profil</h1>
+
+    {{ form_start(modifForm) }}
+        <div class="prenom"> {{ form_row(modifForm.prenom) }}</div>
+        <div class="nom">{{ form_row(modifForm.nom) }}</div>
+        <div class="pseudo">{{ form_row(modifForm.pseudo) }}</div>
+        <div class="image">{{ form_row(modifForm.image) }}</div>
+        <div class="modif"><button type="submit" class="btn">Modifier</button>
+    {{ form_end(modifForm) }}
+    <div class="back"> <a href="{{ path('app_profil_show', {'id': user.id}) }}">back to list</a></div>
+</div>
+{% endblock %}

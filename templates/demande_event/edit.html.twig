@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modifier Event{% endblock %}
+
+{% block body %}
+<div class="formodif">
+    <h1>Modifier Event</h1>
+
+    {{ form_start(form) }}
+    <div class="prenom"> {{ form_row(form.nomEvent) }}</div>
+        <div class="prenom">{{ form_row(form.nbPlace) }}</div>
+        <div class="pseudo">{{ form_row(form.description) }}</div>
+        <div class="image">{{ form_row(form.idcategorie) }}</div>
+        <div class="prenom">{{ form_row(form.datedebut) }}</div>
+        <div class="prenom">{{ form_row(form.datefin) }}</div>
+        <div class="prenom">{{ form_row(form.logoEv) }}</div>
+    <button class="btn">{{ button_label|default('Save') }}</button>
+    {{ form_end(form) }}
+
+    <a href="{{ path('app_event_index') }}">back to list</a>
+    </div>
+{% endblock %}

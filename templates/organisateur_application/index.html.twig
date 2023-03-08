@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello OrganisateurApplicationController!{% endblock %}
+
+{% block body %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+</style>
+
+<div class="example-wrapper">
+    {% if demand == false %}
+    {{ form_start(form) }}
+    {{ form_widget(form) }}
+    <button class="btn">{{ button_label|default('Save') }}</button>
+    {{ form_end(form) }}
+    {% elseif demande.Reponse != "" and demande.Accept==0 %}
+    <p> Votre demande a été refusé voici le motif :</p>
+    {{ demande.Reponse }}
+    {% else %}
+    <p> Demande deja en cours </p>
+    {% endif %}
+    
+    
+</div>
+{% endblock %}
